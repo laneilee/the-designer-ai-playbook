@@ -3,36 +3,73 @@ import { methods, categories, categoryImages } from "@/data/methods";
 import MethodDetail from "@/components/MethodDetail";
 import ToolsView from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
-import InteractiveDiamond from "@/components/InteractiveDiamond";
-import { Bot, User, ArrowLeft, Sparkles, ChevronRight, Users, SlidersHorizontal, Eye, Scale, RefreshCw } from "lucide-react";
+import { Bot, User, ArrowLeft, Sparkles, ChevronRight, ChevronDown, ArrowRight, Search, Microscope, Lightbulb, FlaskConical, Palette, Send } from "lucide-react";
+
+import phaseDiscovery from "@/assets/phase-discovery.jpg";
+import phaseIdeation from "@/assets/phase-ideation.jpg";
+import phaseTesting from "@/assets/phase-testing.jpg";
+import phaseDesign from "@/assets/phase-design.jpg";
+import phaseHandoff from "@/assets/phase-handoff.jpg";
 
 type ViewState =
   | { type: "home" }
   | { type: "method"; id: string }
   | { type: "tools" };
 
-const categoryDescriptions: Record<string, string> = {
-  Discovery: "Understand the problem space through research, interviews, and competitive analysis.",
-  Ideation: "Frame problems, define metrics, explore solutions, and build early prototypes.",
-  Testing: "Validate designs with real users through usability testing and feedback.",
-  Design: "Craft high-fidelity designs, ensure accessibility, and build realistic prototypes.",
-  Handoff: "Document components, finalize specs, and evaluate post-launch performance.",
-};
-
-const categoryColors: Record<string, string> = {
-  Discovery: "from-[hsl(200,98%,39%)] to-[hsl(200,80%,55%)]",
-  Ideation: "from-[hsl(28,60%,55%)] to-[hsl(35,70%,60%)]",
-  Testing: "from-[hsl(140,30%,40%)] to-[hsl(140,25%,55%)]",
-  Design: "from-[hsl(270,40%,50%)] to-[hsl(280,45%,60%)]",
-  Handoff: "from-[hsl(18,30%,55%)] to-[hsl(25,35%,65%)]",
-};
-
-const categoryAccents: Record<string, string> = {
-  Discovery: "border-l-[hsl(200,98%,39%)]",
-  Ideation: "border-l-[hsl(28,60%,55%)]",
-  Testing: "border-l-[hsl(140,30%,40%)]",
-  Design: "border-l-[hsl(270,40%,50%)]",
-  Handoff: "border-l-[hsl(18,30%,55%)]",
+const phaseData: Record<string, {
+  description: string;
+  image: string;
+  icon: React.ElementType;
+  color: string;
+  colorBg: string;
+  colorBorder: string;
+  cta: string;
+}> = {
+  Discovery: {
+    description: "Understand the problem space through research, interviews, and competitive analysis.",
+    image: phaseDiscovery,
+    icon: Search,
+    color: "hsl(200, 98%, 39%)",
+    colorBg: "hsl(200 98% 39% / 0.08)",
+    colorBorder: "hsl(200 98% 39% / 0.2)",
+    cta: "Start researching",
+  },
+  Ideation: {
+    description: "Frame problems, define metrics, explore solutions, and build early prototypes.",
+    image: phaseIdeation,
+    icon: Lightbulb,
+    color: "hsl(28, 60%, 55%)",
+    colorBg: "hsl(28 60% 55% / 0.08)",
+    colorBorder: "hsl(28 60% 55% / 0.2)",
+    cta: "Start ideating",
+  },
+  Testing: {
+    description: "Validate designs with real users through usability testing and feedback.",
+    image: phaseTesting,
+    icon: FlaskConical,
+    color: "hsl(140, 30%, 40%)",
+    colorBg: "hsl(140 30% 40% / 0.08)",
+    colorBorder: "hsl(140 30% 40% / 0.2)",
+    cta: "Start testing",
+  },
+  Design: {
+    description: "Craft high-fidelity designs, ensure accessibility, and build realistic prototypes.",
+    image: phaseDesign,
+    icon: Palette,
+    color: "hsl(270, 40%, 50%)",
+    colorBg: "hsl(270 40% 50% / 0.08)",
+    colorBorder: "hsl(270 40% 50% / 0.2)",
+    cta: "Start designing",
+  },
+  Handoff: {
+    description: "Document components, finalize specs, and evaluate post-launch performance.",
+    image: phaseHandoff,
+    icon: Send,
+    color: "hsl(18, 30%, 55%)",
+    colorBg: "hsl(18 30% 55% / 0.08)",
+    colorBorder: "hsl(18 30% 55% / 0.2)",
+    cta: "Start delivering",
+  },
 };
 
 const Index = () => {
