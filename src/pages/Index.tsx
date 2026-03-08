@@ -447,7 +447,8 @@ const Index = () => {
               </div>
             );
           })}
-        </div>
+      </div>
+
       {/* Feedback Section */}
       <FeedbackForm />
     </div>
