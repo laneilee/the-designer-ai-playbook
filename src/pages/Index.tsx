@@ -3,36 +3,73 @@ import { methods, categories, categoryImages } from "@/data/methods";
 import MethodDetail from "@/components/MethodDetail";
 import ToolsView from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
-import InteractiveDiamond from "@/components/InteractiveDiamond";
-import { Bot, User, ArrowLeft, Sparkles, ChevronRight, Users, SlidersHorizontal, Eye, Scale, RefreshCw } from "lucide-react";
+import { Bot, User, ArrowLeft, Sparkles, ChevronRight, ChevronDown, ArrowRight, Search, Microscope, Lightbulb, FlaskConical, Palette, Send } from "lucide-react";
+
+import phaseDiscovery from "@/assets/phase-discovery.jpg";
+import phaseIdeation from "@/assets/phase-ideation.jpg";
+import phaseTesting from "@/assets/phase-testing.jpg";
+import phaseDesign from "@/assets/phase-design.jpg";
+import phaseHandoff from "@/assets/phase-handoff.jpg";
 
 type ViewState =
   | { type: "home" }
   | { type: "method"; id: string }
   | { type: "tools" };
 
-const categoryDescriptions: Record<string, string> = {
-  Discovery: "Understand the problem space through research, interviews, and competitive analysis.",
-  Ideation: "Frame problems, define metrics, explore solutions, and build early prototypes.",
-  Testing: "Validate designs with real users through usability testing and feedback.",
-  Design: "Craft high-fidelity designs, ensure accessibility, and build realistic prototypes.",
-  Handoff: "Document components, finalize specs, and evaluate post-launch performance.",
-};
-
-const categoryColors: Record<string, string> = {
-  Discovery: "from-[hsl(200,98%,39%)] to-[hsl(200,80%,55%)]",
-  Ideation: "from-[hsl(28,60%,55%)] to-[hsl(35,70%,60%)]",
-  Testing: "from-[hsl(140,30%,40%)] to-[hsl(140,25%,55%)]",
-  Design: "from-[hsl(270,40%,50%)] to-[hsl(280,45%,60%)]",
-  Handoff: "from-[hsl(18,30%,55%)] to-[hsl(25,35%,65%)]",
-};
-
-const categoryAccents: Record<string, string> = {
-  Discovery: "border-l-[hsl(200,98%,39%)]",
-  Ideation: "border-l-[hsl(28,60%,55%)]",
-  Testing: "border-l-[hsl(140,30%,40%)]",
-  Design: "border-l-[hsl(270,40%,50%)]",
-  Handoff: "border-l-[hsl(18,30%,55%)]",
+const phaseData: Record<string, {
+  description: string;
+  image: string;
+  icon: React.ElementType;
+  color: string;
+  colorBg: string;
+  colorBorder: string;
+  cta: string;
+}> = {
+  Discovery: {
+    description: "Understand the problem space through research, interviews, and competitive analysis.",
+    image: phaseDiscovery,
+    icon: Search,
+    color: "hsl(200, 98%, 39%)",
+    colorBg: "hsl(200 98% 39% / 0.08)",
+    colorBorder: "hsl(200 98% 39% / 0.2)",
+    cta: "Start researching",
+  },
+  Ideation: {
+    description: "Frame problems, define metrics, explore solutions, and build early prototypes.",
+    image: phaseIdeation,
+    icon: Lightbulb,
+    color: "hsl(28, 60%, 55%)",
+    colorBg: "hsl(28 60% 55% / 0.08)",
+    colorBorder: "hsl(28 60% 55% / 0.2)",
+    cta: "Start ideating",
+  },
+  Testing: {
+    description: "Validate designs with real users through usability testing and feedback.",
+    image: phaseTesting,
+    icon: FlaskConical,
+    color: "hsl(140, 30%, 40%)",
+    colorBg: "hsl(140 30% 40% / 0.08)",
+    colorBorder: "hsl(140 30% 40% / 0.2)",
+    cta: "Start testing",
+  },
+  Design: {
+    description: "Craft high-fidelity designs, ensure accessibility, and build realistic prototypes.",
+    image: phaseDesign,
+    icon: Palette,
+    color: "hsl(270, 40%, 50%)",
+    colorBg: "hsl(270 40% 50% / 0.08)",
+    colorBorder: "hsl(270 40% 50% / 0.2)",
+    cta: "Start designing",
+  },
+  Handoff: {
+    description: "Document components, finalize specs, and evaluate post-launch performance.",
+    image: phaseHandoff,
+    icon: Send,
+    color: "hsl(18, 30%, 55%)",
+    colorBg: "hsl(18 30% 55% / 0.08)",
+    colorBorder: "hsl(18 30% 55% / 0.2)",
+    cta: "Start delivering",
+  },
 };
 
 const Index = () => {
@@ -221,175 +258,166 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Accordion Book Layout */}
+      {/* Playbook Phases */}
       <div className="px-4 sm:px-6 pb-16">
-        <div className="max-w-4xl mx-auto">
-          {/* Phase number track */}
-          <div className="space-y-0">
-            {categories.map((category, catIndex) => {
-              const isExpanded = expandedCategory === category;
-              const categoryMethods = methods.filter((m) => m.category === category);
+        <div className="max-w-4xl mx-auto space-y-6">
+          {categories.map((category, catIndex) => {
+            const phase = phaseData[category];
+            const isExpanded = expandedCategory === category;
+            const categoryMethods = methods.filter((m) => m.category === category);
+            const PhaseIcon = phase.icon;
+            const aiCount = categoryMethods.filter((m) => m.criticality === "ai-enhanced").length;
+            const humanCount = categoryMethods.length - aiCount;
 
-              return (
-                <div key={category} className="group">
-                  {/* Category Header - Accordion Trigger */}
-                  <button
-                    onClick={() =>
-                      setExpandedCategory(isExpanded ? null : category)
-                    }
-                    className={`w-full text-left transition-all duration-300 ${
-                      isExpanded
-                        ? "rounded-t-xl"
-                        : catIndex === 0
-                        ? "rounded-t-xl"
-                        : catIndex === categories.length - 1 && !isExpanded
-                        ? "rounded-b-xl"
-                        : ""
-                    }`}
-                  >
-                    <div
-                      className={`relative overflow-hidden px-5 sm:px-7 py-5 sm:py-6 border border-border transition-all duration-300 ${
-                        isExpanded
-                          ? `bg-gradient-to-r ${categoryColors[category]} border-transparent`
-                          : "bg-card hover:bg-accent"
-                      } ${catIndex > 0 ? "-mt-px" : ""} ${
-                        isExpanded ? "rounded-t-xl" : ""
-                      } ${
-                        catIndex === 0 && !isExpanded ? "rounded-t-xl" : ""
-                      } ${
-                        catIndex === categories.length - 1 && !isExpanded
-                          ? "rounded-b-xl"
-                          : ""
-                      }`}
-                    >
-                      <div className="flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-4 sm:gap-5">
-                          {/* Phase number */}
-                          <span
-                            className={`text-2xl sm:text-3xl font-display leading-none ${
-                              isExpanded
-                                ? "text-white/40"
-                                : "text-muted-foreground/30"
-                            }`}
-                          >
-                            {String(catIndex + 1).padStart(2, "0")}
-                          </span>
-                          <div>
-                            <h2
-                              className={`text-lg sm:text-xl font-display leading-tight ${
-                                isExpanded ? "text-white" : "text-foreground"
-                              }`}
-                            >
-                              {category}
-                            </h2>
-                            <p
-                              className={`text-xs sm:text-sm mt-0.5 font-body leading-relaxed ${
-                                isExpanded
-                                  ? "text-white/70"
-                                  : "text-muted-foreground"
-                              }`}
-                            >
-                              {categoryDescriptions[category]}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3 shrink-0">
-                          <span
-                            className={`text-xs font-body ${
-                              isExpanded
-                                ? "text-white/50"
-                                : "text-muted-foreground"
-                            }`}
-                          >
-                            {categoryMethods.length} methods
-                          </span>
-                          <ChevronRight
-                            className={`w-5 h-5 transition-transform duration-300 ${
-                              isExpanded
-                                ? "rotate-90 text-white/60"
-                                : "text-muted-foreground"
-                            }`}
-                          />
-                        </div>
+            return (
+              <div
+                key={category}
+                className="rounded-2xl overflow-hidden border border-border bg-card transition-all duration-300 hover:shadow-md"
+                style={{ borderColor: isExpanded ? phase.colorBorder : undefined }}
+              >
+                {/* Phase Card Header */}
+                <button
+                  onClick={() => setExpandedCategory(isExpanded ? null : category)}
+                  className="w-full text-left"
+                >
+                  <div className="flex flex-col sm:flex-row">
+                    {/* Image */}
+                    <div className="relative sm:w-48 lg:w-56 shrink-0 h-36 sm:h-auto overflow-hidden">
+                      <img
+                        src={phase.image}
+                        alt={category}
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Phase number overlay */}
+                      <div className="absolute top-3 left-3 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-display text-white/90 backdrop-blur-sm"
+                        style={{ background: `${phase.color}CC` }}
+                      >
+                        {catIndex + 1}
                       </div>
                     </div>
-                  </button>
 
-                  {/* Expanded Methods Panel */}
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                      isExpanded
-                        ? "max-h-[2000px] opacity-100"
-                        : "max-h-0 opacity-0"
-                    }`}
-                  >
-                    <div className="border border-t-0 border-border rounded-b-xl bg-card">
-                      <div className="p-4 sm:p-6 space-y-2">
-                        {categoryMethods.map((method, i) => (
-                          <button
-                            key={method.id}
-                            onClick={() =>
-                              setView({ type: "method", id: method.id })
-                            }
-                            className={`w-full text-left group/method rounded-lg p-4 border-l-4 transition-all duration-200 hover:bg-accent ${categoryAccents[category]}`}
-                          >
-                            <div className="flex items-start justify-between gap-3">
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 mb-1.5">
-                                  {method.criticality === "ai-enhanced" ? (
-                                    <span className="badge-ai text-[10px]">
-                                      <Bot className="w-2.5 h-2.5" /> AI-Enhanced
-                                    </span>
-                                  ) : (
-                                    <span className="badge-human text-[10px]">
-                                      <User className="w-2.5 h-2.5" /> Human-Critical
-                                    </span>
-                                  )}
-                                </div>
-                                <h3 className="text-sm sm:text-base font-display text-foreground group-hover/method:text-clay transition-colors leading-snug">
-                                  {method.title}
-                                </h3>
-                                <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-relaxed">
-                                  {method.description}
-                                </p>
-                              </div>
-
-                              {/* Tool logos */}
-                              <div className="flex items-center gap-1 shrink-0 mt-1">
-                                {[
-                                  ...method.aiTools,
-                                  ...method.traditionalTools,
-                                ]
-                                  .slice(0, 3)
-                                  .map((tool) => (
-                                    <ToolLogo
-                                      key={tool.name}
-                                      name={tool.name}
-                                      type={tool.type}
-                                      size="sm"
-                                    />
-                                  ))}
-                                {method.aiTools.length +
-                                  method.traditionalTools.length >
-                                  3 && (
-                                  <span className="text-[10px] text-muted-foreground ml-0.5">
-                                    +
-                                    {method.aiTools.length +
-                                      method.traditionalTools.length -
-                                      3}
-                                  </span>
-                                )}
-                              </div>
+                    {/* Content */}
+                    <div className="flex-1 p-5 sm:p-6 flex flex-col justify-center">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2.5 mb-2">
+                            <div
+                              className="w-7 h-7 rounded-lg flex items-center justify-center"
+                              style={{ background: phase.colorBg }}
+                            >
+                              <PhaseIcon className="w-4 h-4" style={{ color: phase.color }} />
                             </div>
-                          </button>
-                        ))}
+                            <h2 className="text-lg sm:text-xl font-display text-foreground leading-tight">
+                              {category}
+                            </h2>
+                          </div>
+                          <p className="text-xs sm:text-sm text-muted-foreground font-body leading-relaxed mb-3">
+                            {phase.description}
+                          </p>
+
+                          {/* Stats row */}
+                          <div className="flex items-center gap-3">
+                            <span className="text-[10px] sm:text-xs font-body text-muted-foreground bg-accent px-2 py-0.5 rounded-md">
+                              {categoryMethods.length} methods
+                            </span>
+                            {aiCount > 0 && (
+                              <span className="badge-ai text-[10px]">
+                                <Bot className="w-2.5 h-2.5" /> {aiCount} AI-enhanced
+                              </span>
+                            )}
+                            {humanCount > 0 && (
+                              <span className="badge-human text-[10px]">
+                                {humanCount} human-critical
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <ChevronDown
+                          className={`w-5 h-5 text-muted-foreground shrink-0 mt-1 transition-transform duration-300 ${
+                            isExpanded ? "rotate-180" : ""
+                          }`}
+                        />
                       </div>
                     </div>
                   </div>
+                </button>
+
+                {/* Expanded Methods */}
+                <div
+                  className={`transition-all duration-400 ease-in-out overflow-hidden ${
+                    isExpanded ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="border-t border-border px-4 sm:px-6 py-5 space-y-2">
+                    {categoryMethods.map((method) => (
+                      <button
+                        key={method.id}
+                        onClick={() => setView({ type: "method", id: method.id })}
+                        className="w-full text-left group/method rounded-xl p-4 transition-all duration-200 hover:bg-accent border border-transparent hover:border-border"
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              {method.criticality === "ai-enhanced" ? (
+                                <span className="badge-ai text-[10px]">
+                                  <Bot className="w-2.5 h-2.5" /> AI-Enhanced
+                                </span>
+                              ) : (
+                                <span className="badge-human text-[10px]">
+                                  <User className="w-2.5 h-2.5" /> Human-Critical
+                                </span>
+                              )}
+                            </div>
+                            <h3 className="text-sm sm:text-base font-display text-foreground group-hover/method:text-clay transition-colors leading-snug">
+                              {method.title}
+                            </h3>
+                            <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-relaxed">
+                              {method.description}
+                            </p>
+                          </div>
+
+                          {/* Tool logos + arrow */}
+                          <div className="flex items-center gap-2 shrink-0 mt-1">
+                            <div className="flex items-center gap-1">
+                              {[...method.aiTools, ...method.traditionalTools]
+                                .slice(0, 3)
+                                .map((tool) => (
+                                  <ToolLogo
+                                    key={tool.name}
+                                    name={tool.name}
+                                    type={tool.type}
+                                    size="sm"
+                                  />
+                                ))}
+                              {method.aiTools.length + method.traditionalTools.length > 3 && (
+                                <span className="text-[10px] text-muted-foreground">
+                                  +{method.aiTools.length + method.traditionalTools.length - 3}
+                                </span>
+                              )}
+                            </div>
+                            <ArrowRight className="w-4 h-4 text-muted-foreground/30 group-hover/method:text-clay transition-colors" />
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+
+                    {/* Phase CTA */}
+                    <div className="pt-3 flex justify-center">
+                      <button
+                        onClick={() => setView({ type: "method", id: categoryMethods[0]?.id })}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-body font-medium transition-colors hover:opacity-80"
+                        style={{ background: phase.colorBg, color: phase.color }}
+                      >
+                        {phase.cta}
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
