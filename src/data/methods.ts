@@ -444,10 +444,14 @@ export const methods: Method[] = [
     aiTools: [
       { name: "ChatGPT", description: "Review designs for WCAG compliance and suggest improvements", type: "ai" },
       { name: "axe DevTools", description: "Automated accessibility testing for web implementations", type: "ai" },
+      { name: "Lighthouse", description: "Google's built-in auditing tool for accessibility, performance, and best practices", type: "ai" },
+      { name: "WAVE", description: "Web accessibility evaluation tool that provides visual feedback on a11y issues", type: "ai" },
+      { name: "Pa11y", description: "Command-line accessibility testing tool for CI/CD pipelines", type: "ai" },
     ],
     traditionalTools: [
       { name: "Stark (Figma plugin)", description: "Check color contrast, simulate vision impairments, and audit designs", type: "traditional" },
       { name: "Screen readers", description: "Manual testing with VoiceOver, NVDA, or JAWS", type: "traditional" },
+      { name: "Colour Contrast Analyser", description: "Desktop app by TPGi for checking color contrast ratios against WCAG", type: "traditional" },
     ],
     workflow: [
       { label: "Automated audit", aiTool: "axe DevTools" },

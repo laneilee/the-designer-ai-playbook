@@ -35,4 +35,8 @@ export const toolLogos: Record<string, string> = {
   "Zeplin": "https://logo.clearbit.com/zeplin.io",
   "Amplitude / Mixpanel": "https://logo.clearbit.com/amplitude.com",
   "Hotjar / FullStory": "https://logo.clearbit.com/hotjar.com",
+  "Lighthouse": "https://logo.clearbit.com/developer.chrome.com",
+  "WAVE": "https://logo.clearbit.com/wave.webaim.org",
+  "Pa11y": "",
+  "Colour Contrast Analyser": "",
 };
