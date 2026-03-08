@@ -4,7 +4,7 @@ import { phaseColors } from "@/data/phaseColors";
 import MethodDetail from "@/components/MethodDetail";
 import ToolsView from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
-import DoubleDiamond from "@/components/DoubleDiamond";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import {
