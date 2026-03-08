@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { type Method, methods } from "@/data/methods";
+import { type Method } from "@/data/methods";
 import { phaseColors } from "@/data/phaseColors";
 import { motion } from "framer-motion";
 import {
