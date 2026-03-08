@@ -1,6 +1,6 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { categories, methods, type Method } from "@/data/methods";
-import { Bot, User } from "lucide-react";
+import { phases, methods, type Method } from "@/data/methods";
+import { Bot, Users } from "lucide-react";
 
 interface MethodSidebarProps {
   activeMethod: string;
@@ -33,12 +33,12 @@ export default function MethodSidebar({ activeMethod, onSelect, view, onViewChan
       </div>
       <ScrollArea className="h-[calc(100vh-120px)]">
         <div className="pb-6">
-          {categories.map((category) => {
-            const categoryMethods = methods.filter((m) => m.category === category);
+          {phases.map((phase) => {
+            const phaseMethods = methods.filter((m) => m.phase === phase);
             return (
-              <div key={category}>
-                <div className="category-label">{category}</div>
-                {categoryMethods.map((method) => (
+              <div key={phase}>
+                <div className="category-label">{phase}</div>
+                {phaseMethods.map((method) => (
                   <button
                     key={method.id}
                     onClick={() => onSelect(method.id)}
@@ -47,11 +47,11 @@ export default function MethodSidebar({ activeMethod, onSelect, view, onViewChan
                     }`}
                   >
                     <span className="truncate">{method.title}</span>
-                    {method.criticality === "ai-enhanced" ? (
-                      <Bot className="w-4 h-4 shrink-0 text-clay" />
-                    ) : (
-                      <User className="w-4 h-4 shrink-0 text-human" />
-                    )}
+                    <div className="flex items-center gap-1 shrink-0">
+                      {method.context.includes("Team") && (
+                        <Users className="w-3.5 h-3.5 text-muted-foreground" />
+                      )}
+                    </div>
                   </button>
                 ))}
               </div>
