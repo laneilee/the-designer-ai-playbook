@@ -491,7 +491,7 @@ function FeedbackForm() {
           </div>
           <div>
             <h3 className="text-base font-display text-foreground">Share your feedback</h3>
-            <p className="text-xs text-muted-foreground font-body">Ideas, suggestions, or anything on your mind — opens your email client.</p>
+            <p className="text-xs text-muted-foreground font-body">Ideas, suggestions, or anything on your mind.</p>
           </div>
         </div>
 
