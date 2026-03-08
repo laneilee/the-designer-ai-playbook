@@ -3,6 +3,7 @@ import { methods, categories, categoryImages } from "@/data/methods";
 import MethodDetail from "@/components/MethodDetail";
 import ToolsView from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
+import InteractiveDiamond from "@/components/InteractiveDiamond";
 import { Bot, User, ArrowLeft, Sparkles, ChevronRight, Users, SlidersHorizontal, Eye, Scale, RefreshCw } from "lucide-react";
 
 type ViewState =
