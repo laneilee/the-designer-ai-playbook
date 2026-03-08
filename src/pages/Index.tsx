@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { methods, categories, categoryImages } from "@/data/methods";
 import MethodDetail from "@/components/MethodDetail";
 import ToolsView from "@/components/ToolsView";
