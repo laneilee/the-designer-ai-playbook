@@ -458,33 +458,17 @@ const Index = () => {
 
 function FeedbackForm() {
   const [message, setMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const maxLen = 500;
+  const email = "feedback@example.com"; // Replace with your email
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = message.trim();
     if (!trimmed) return;
-    const feedback = { message: trimmed.slice(0, maxLen), date: new Date().toISOString() };
-    const existing = JSON.parse(localStorage.getItem("ux-framework-feedback") || "[]");
-    existing.push(feedback);
-    localStorage.setItem("ux-framework-feedback", JSON.stringify(existing));
-    setSubmitted(true);
+    const subject = encodeURIComponent("AI × UX Framework Feedback");
+    const body = encodeURIComponent(trimmed.slice(0, maxLen));
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
   };
-
-  if (submitted) {
-    return (
-      <div className="px-4 sm:px-6 pb-16">
-        <div className="max-w-4xl mx-auto rounded-2xl border border-border bg-card p-8 text-center">
-          <div className="w-12 h-12 rounded-full bg-accent mx-auto flex items-center justify-center mb-4">
-            <MessageSquare className="w-6 h-6 text-clay" />
-          </div>
-          <h3 className="text-lg font-display text-foreground mb-1">Thank you!</h3>
-          <p className="text-sm text-muted-foreground font-body">Your feedback helps shape this framework for the community.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="px-4 sm:px-6 pb-16">
@@ -495,7 +479,7 @@ function FeedbackForm() {
           </div>
           <div>
             <h3 className="text-base font-display text-foreground">Share your feedback</h3>
-            <p className="text-xs text-muted-foreground font-body">Ideas, suggestions, or anything on your mind — we're all ears.</p>
+            <p className="text-xs text-muted-foreground font-body">Ideas, suggestions, or anything on your mind — opens your email client.</p>
           </div>
         </div>
 
@@ -518,7 +502,7 @@ function FeedbackForm() {
             disabled={!message.trim()}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-body font-medium bg-foreground text-background hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            Send feedback
+            Send via email
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </form>
