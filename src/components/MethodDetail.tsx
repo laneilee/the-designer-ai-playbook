@@ -1,51 +1,100 @@
 import { type Method } from "@/data/methods";
-import { Bot, ArrowRight, ExternalLink } from "lucide-react";
+import { Bot, ArrowRight, ExternalLink, Clock, Zap, Users, Link2 } from "lucide-react";
 import ToolLogo from "@/components/ToolLogo";
 
 interface MethodDetailProps {
   method: Method;
+  onMethodClick?: (id: string) => void;
 }
 
-export default function MethodDetail({ method }: MethodDetailProps) {
+const effortColor: Record<string, string> = {
+  Low: "text-green-600 bg-green-500/10",
+  Medium: "text-amber-600 bg-amber-500/10",
+  High: "text-red-500 bg-red-500/10",
+};
+
+export default function MethodDetail({ method, onMethodClick }: MethodDetailProps) {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-8 lg:py-12">
-      {/* Hero image */}
-      <div className="rounded-xl overflow-hidden mb-8">
-        <img
-          src={method.image}
-          alt={method.title}
-          className="w-full h-48 lg:h-64 object-cover"
-        />
-      </div>
-
-      {/* Category & criticality badge */}
-      <div className="flex items-center gap-2 mb-3">
+      {/* Phase & context badges */}
+      <div className="flex flex-wrap items-center gap-2 mb-4">
         <span className="text-xs font-body uppercase tracking-widest text-muted-foreground">
-          {method.category}
+          {method.phase}
         </span>
         <span className="text-muted-foreground">·</span>
-        {method.criticality === "ai-enhanced" ? (
-          <span className="badge-ai">
-            <Bot className="w-3 h-3" /> AI-Enhanced
+        {method.context.map((ctx) => (
+          <span key={ctx} className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground font-body">
+            {ctx}
           </span>
-        ) : (
-          <span className="badge-human">
-            <span className="w-3 h-3 inline-block">✦</span> Human-Critical
-          </span>
-        )}
+        ))}
       </div>
 
-      {/* Title & description */}
-      <h2 className="text-2xl lg:text-3xl font-display mb-4 text-foreground leading-tight">
+      {/* Title */}
+      <h2 className="text-2xl lg:text-3xl font-display mb-3 text-foreground leading-tight">
         {method.title}
       </h2>
+
+      {/* Meta: effort + time */}
+      <div className="flex items-center gap-4 mb-6">
+        <div className={`flex items-center gap-1.5 text-xs font-body px-2.5 py-1 rounded-lg ${effortColor[method.effort]}`}>
+          <Zap className="w-3 h-3" />
+          {method.effort} effort
+        </div>
+        <div className="flex items-center gap-1.5 text-xs font-body text-muted-foreground">
+          <Clock className="w-3 h-3" />
+          {method.timeEstimate}
+        </div>
+      </div>
+
+      {/* When to use */}
+      <div className="rounded-xl bg-accent/50 border border-border p-4 mb-8">
+        <h3 className="text-[11px] font-body font-medium uppercase tracking-widest text-muted-foreground mb-2">
+          When to use this
+        </h3>
+        <p className="text-sm text-foreground font-body leading-relaxed">
+          {method.whenToUse}
+        </p>
+      </div>
+
+      {/* Description */}
       <p className="text-sm leading-relaxed text-muted-foreground mb-10">
         {method.description}
       </p>
 
+      {/* Step-by-step guide */}
+      <div className="mb-10">
+        <h3 className="text-[11px] font-body font-medium uppercase tracking-widest text-muted-foreground mb-4">
+          Step-by-Step Guide
+        </h3>
+        <ol className="space-y-3">
+          {method.steps.map((step, i) => (
+            <li key={i} className="flex items-start gap-3">
+              <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-[11px] font-display text-secondary-foreground shrink-0 mt-0.5">
+                {i + 1}
+              </span>
+              <span className="text-sm text-foreground font-body leading-relaxed">{step}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      {/* Example Artifacts */}
+      <div className="mb-10">
+        <h3 className="text-[11px] font-body font-medium uppercase tracking-widest text-muted-foreground mb-3">
+          Example Artifacts
+        </h3>
+        <ul className="space-y-2">
+          {method.artifacts.map((a, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+              <span className="text-clay mt-0.5">•</span>
+              {a}
+            </li>
+          ))}
+        </ul>
+      </div>
+
       {/* Tools section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-        {/* AI Tools */}
         <div>
           <h3 className="text-[11px] font-body font-medium uppercase tracking-widest text-muted-foreground mb-3">
             AI Tools
@@ -64,8 +113,6 @@ export default function MethodDetail({ method }: MethodDetailProps) {
             ))}
           </div>
         </div>
-
-        {/* Traditional Tools */}
         <div>
           <h3 className="text-[11px] font-body font-medium uppercase tracking-widest text-muted-foreground mb-3">
             Traditional Tools
@@ -86,44 +133,27 @@ export default function MethodDetail({ method }: MethodDetailProps) {
         </div>
       </div>
 
-      {/* Workflow */}
-      <div className="mb-10">
-        <h3 className="text-[11px] font-body font-medium uppercase tracking-widest text-muted-foreground mb-4">
-          Example Workflow
-        </h3>
-        <div className="flex flex-wrap items-center gap-2">
-          {method.workflow.map((step, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <div className="flex flex-col items-center">
-                <span className="text-sm text-foreground">{step.label}</span>
-                {step.aiTool && (
-                  <span className="badge-ai mt-1 text-[10px]">
-                    <Bot className="w-2.5 h-2.5" /> {step.aiTool}
-                  </span>
-                )}
-              </div>
-              {i < method.workflow.length - 1 && (
-                <ArrowRight className="w-4 h-4 text-muted-foreground shrink-0" />
-              )}
-            </div>
-          ))}
+      {/* Related Methods */}
+      {method.relatedMethods.length > 0 && (
+        <div className="mb-10">
+          <h3 className="text-[11px] font-body font-medium uppercase tracking-widest text-muted-foreground mb-3">
+            <Link2 className="w-3 h-3 inline mr-1.5" />
+            Related Methods
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {method.relatedMethods.map((relId) => (
+              <button
+                key={relId}
+                onClick={() => onMethodClick?.(relId)}
+                className="text-xs px-3 py-1.5 rounded-lg bg-secondary text-secondary-foreground font-body hover:bg-accent transition-colors"
+              >
+                {relId.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+                <ArrowRight className="w-3 h-3 inline ml-1.5" />
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* Deliverables */}
-      <div className="mb-10">
-        <h3 className="text-[11px] font-body font-medium uppercase tracking-widest text-muted-foreground mb-3">
-          Key Deliverables
-        </h3>
-        <ul className="space-y-2">
-          {method.deliverables.map((d, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-              <span className="text-clay mt-0.5">•</span>
-              {d}
-            </li>
-          ))}
-        </ul>
-      </div>
+      )}
 
       {/* Resources */}
       {method.resources.length > 0 && (

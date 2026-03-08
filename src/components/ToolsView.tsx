@@ -8,7 +8,7 @@ interface ToolInfo {
   description: string;
   type: "ai" | "traditional";
   usedIn: string[];
-  categories: string[];
+  phases: string[];
 }
 
 function getUniqueTools(): ToolInfo[] {
@@ -21,8 +21,8 @@ function getUniqueTools(): ToolInfo[] {
         if (!existing.usedIn.includes(method.title)) {
           existing.usedIn.push(method.title);
         }
-        if (!existing.categories.includes(method.category)) {
-          existing.categories.push(method.category);
+        if (!existing.phases.includes(method.phase)) {
+          existing.phases.push(method.phase);
         }
       } else {
         toolMap.set(tool.name, {
@@ -30,7 +30,7 @@ function getUniqueTools(): ToolInfo[] {
           description: tool.description,
           type: tool.type,
           usedIn: [method.title],
-          categories: [method.category],
+          phases: [method.phase],
         });
       }
     });
@@ -39,14 +39,14 @@ function getUniqueTools(): ToolInfo[] {
   return Array.from(toolMap.values()).sort((a, b) => a.name.localeCompare(b.name));
 }
 
-type GroupBy = "type" | "category";
+type GroupBy = "type" | "phase";
 
-const categoryOrder = ["Discovery", "Ideation", "Testing", "Design", "Handoff"];
+const phaseOrder = ["Discover", "Define", "Ideate", "Prototype", "Validate", "Align"];
 
 export default function ToolsView() {
   const tools = getUniqueTools();
-  const [groupBy, setGroupBy] = useState<GroupBy>("category");
-  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set(categoryOrder));
+  const [groupBy, setGroupBy] = useState<GroupBy>("phase");
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set(phaseOrder));
 
   const toggleGroup = (group: string) => {
     setExpandedGroups((prev) => {
@@ -64,9 +64,9 @@ export default function ToolsView() {
         { key: "Traditional Tools", items: tools.filter((t) => t.type === "traditional") },
       ];
     }
-    return categoryOrder.map((cat) => ({
-      key: cat,
-      items: tools.filter((t) => t.categories.includes(cat)),
+    return phaseOrder.map((phase) => ({
+      key: phase,
+      items: tools.filter((t) => t.phases.includes(phase)),
     }));
   })();
 
@@ -81,9 +81,9 @@ export default function ToolsView() {
         </div>
         <div className="flex items-center gap-1 bg-secondary rounded-lg p-0.5 shrink-0">
           <button
-            onClick={() => setGroupBy("category")}
+            onClick={() => setGroupBy("phase")}
             className={`text-xs px-3 py-1.5 rounded-md font-body transition-colors ${
-              groupBy === "category"
+              groupBy === "phase"
                 ? "bg-background text-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground"
             }`}
@@ -103,7 +103,6 @@ export default function ToolsView() {
         </div>
       </div>
 
-      {/* Quick stats */}
       <div className="grid grid-cols-2 gap-3 mb-8">
         <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/5 border border-primary/10">
           <Bot className="w-4 h-4 text-primary" />
@@ -121,7 +120,6 @@ export default function ToolsView() {
         </div>
       </div>
 
-      {/* Grouped sections */}
       <div className="space-y-3">
         {grouped.map(({ key, items }) => {
           const isExpanded = expandedGroups.has(key);
