@@ -3,7 +3,7 @@ import { methods, categories, categoryImages } from "@/data/methods";
 import MethodDetail from "@/components/MethodDetail";
 import ToolsView from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
-import { Bot, User, ArrowLeft, Sparkles, ChevronRight, ChevronDown, ArrowRight, Search, Microscope, Lightbulb, FlaskConical, Palette, Send } from "lucide-react";
+import { Bot, User, ArrowLeft, Sparkles, ChevronRight, ChevronDown, ArrowRight, Search, Lightbulb, FlaskConical, Palette, Send, MessageSquare, Star } from "lucide-react";
 
 import phaseDiscovery from "@/assets/phase-discovery.jpg";
 import phaseIdeation from "@/assets/phase-ideation.jpg";
