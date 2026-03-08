@@ -458,16 +458,28 @@ const Index = () => {
 
 function FeedbackForm() {
   const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
   const maxLen = 500;
-  const email = "feedback@example.com"; // Replace with your email
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = message.trim();
-    if (!trimmed) return;
-    const subject = encodeURIComponent("AI × UX Framework Feedback");
-    const body = encodeURIComponent(trimmed.slice(0, maxLen));
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    if (!trimmed || sending) return;
+    setSending(true);
+    try {
+      const { supabase } = await import("@/integrations/supabase/client");
+      const { error } = await supabase.functions.invoke("send-feedback", {
+        body: { message: trimmed },
+      });
+      if (error) throw error;
+      setSent(true);
+      setMessage("");
+    } catch {
+      alert("Failed to send feedback. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
