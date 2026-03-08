@@ -447,6 +447,7 @@ const Index = () => {
               </div>
             );
           })}
+        </div>
       </div>
 
       {/* Feedback Section */}
