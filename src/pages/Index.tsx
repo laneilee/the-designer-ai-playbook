@@ -448,9 +448,109 @@ const Index = () => {
             );
           })}
         </div>
-      </div>
+      {/* Feedback Section */}
+      <FeedbackForm />
     </div>
   );
 };
+
+function FeedbackForm() {
+  const [rating, setRating] = useState<number>(0);
+  const [message, setMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const maxLen = 500;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (rating === 0) return;
+    // Store locally (no backend) — ready for GitHub Issues integration later
+    const feedback = { rating, message: message.trim().slice(0, maxLen), date: new Date().toISOString() };
+    const existing = JSON.parse(localStorage.getItem("ux-framework-feedback") || "[]");
+    existing.push(feedback);
+    localStorage.setItem("ux-framework-feedback", JSON.stringify(existing));
+    setSubmitted(true);
+  };
+
+  if (submitted) {
+    return (
+      <div className="px-4 sm:px-6 pb-16">
+        <div className="max-w-4xl mx-auto rounded-2xl border border-border bg-card p-8 text-center">
+          <div className="w-12 h-12 rounded-full bg-accent mx-auto flex items-center justify-center mb-4">
+            <MessageSquare className="w-6 h-6 text-clay" />
+          </div>
+          <h3 className="text-lg font-display text-foreground mb-1">Thank you for your feedback!</h3>
+          <p className="text-sm text-muted-foreground font-body">Your input helps improve this framework for the community.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="px-4 sm:px-6 pb-16">
+      <div className="max-w-4xl mx-auto rounded-2xl border border-border bg-card p-6 sm:p-8">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center">
+            <MessageSquare className="w-4.5 h-4.5 text-clay" />
+          </div>
+          <div>
+            <h3 className="text-base font-display text-foreground">Share your feedback</h3>
+            <p className="text-xs text-muted-foreground font-body">Help us improve this playbook for the UX community.</p>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Star rating */}
+          <div>
+            <label className="text-xs font-body text-muted-foreground block mb-2">
+              How useful is this framework? <span className="text-clay">*</span>
+            </label>
+            <div className="flex gap-1">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  type="button"
+                  onClick={() => setRating(star)}
+                  className="p-1 transition-transform hover:scale-110"
+                >
+                  <Star
+                    className={`w-6 h-6 transition-colors ${
+                      star <= rating ? "fill-clay text-clay" : "text-border"
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Message */}
+          <div>
+            <label className="text-xs font-body text-muted-foreground block mb-2">
+              Any suggestions or thoughts? (optional)
+            </label>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value.slice(0, maxLen))}
+              placeholder="What would make this more useful for your workflow?"
+              rows={3}
+              className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm font-body text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+            />
+            <div className="text-[10px] text-muted-foreground/50 text-right mt-1 font-body">
+              {message.length}/{maxLen}
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={rating === 0}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-body font-medium bg-foreground text-background hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            Send feedback
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
 
 export default Index;
