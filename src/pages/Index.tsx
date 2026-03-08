@@ -458,16 +458,28 @@ const Index = () => {
 
 function FeedbackForm() {
   const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
   const maxLen = 500;
-  const email = "feedback@example.com"; // Replace with your email
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = message.trim();
-    if (!trimmed) return;
-    const subject = encodeURIComponent("AI × UX Framework Feedback");
-    const body = encodeURIComponent(trimmed.slice(0, maxLen));
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    if (!trimmed || sending) return;
+    setSending(true);
+    try {
+      const { supabase } = await import("@/integrations/supabase/client");
+      const { error } = await supabase.functions.invoke("send-feedback", {
+        body: { message: trimmed },
+      });
+      if (error) throw error;
+      setSent(true);
+      setMessage("");
+    } catch {
+      alert("Failed to send feedback. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -479,32 +491,43 @@ function FeedbackForm() {
           </div>
           <div>
             <h3 className="text-base font-display text-foreground">Share your feedback</h3>
-            <p className="text-xs text-muted-foreground font-body">Ideas, suggestions, or anything on your mind — opens your email client.</p>
+            <p className="text-xs text-muted-foreground font-body">Ideas, suggestions, or anything on your mind.</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <textarea
-              value={message}
-              onChange={(e) => setMessage(e.target.value.slice(0, maxLen))}
-              placeholder="What would you add, change, or improve?"
-              rows={3}
-              className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm font-body text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-            />
-            <div className="text-[10px] text-muted-foreground/50 text-right mt-1 font-body">
-              {message.length}/{maxLen}
-            </div>
+            {sent ? (
+              <div className="rounded-lg border border-border bg-accent/30 px-4 py-3 text-sm font-body text-foreground">
+                ✓ Thanks for your feedback!
+              </div>
+            ) : (
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value.slice(0, maxLen))}
+                placeholder="What would you add, change, or improve?"
+                rows={3}
+                disabled={sending}
+                className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm font-body text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-ring resize-none disabled:opacity-50"
+              />
+            )}
+            {!sent && (
+              <div className="text-[10px] text-muted-foreground/50 text-right mt-1 font-body">
+                {message.length}/{maxLen}
+              </div>
+            )}
           </div>
 
-          <button
-            type="submit"
-            disabled={!message.trim()}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-body font-medium bg-foreground text-background hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            Send via email
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+          {!sent && (
+            <button
+              type="submit"
+              disabled={!message.trim() || sending}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-body font-medium bg-foreground text-background hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              {sending ? "Sending…" : "Submit feedback"}
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          )}
         </form>
       </div>
     </div>
