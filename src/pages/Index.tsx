@@ -116,6 +116,40 @@ const Index = () => {
         </div>
       </header>
 
+      {/* Core Principles Section */}
+      <div className="px-4 sm:px-6 mb-12">
+        <div className="max-w-4xl mx-auto rounded-2xl bg-secondary px-6 sm:px-10 py-10 sm:py-12">
+          <h2 className="text-2xl sm:text-3xl font-display text-secondary-foreground leading-tight">
+            Five Core Principles of AI-First Design
+          </h2>
+          <p className="text-sm text-secondary-foreground/60 mt-3 max-w-2xl font-body leading-relaxed">
+            Through extensive analysis of successful AI-first implementations and expert frameworks, these five core principles emerge as fundamental to effective AI-first product design.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mt-8">
+            {[
+              { icon: Users, title: "Human-Centric Problem Solving", desc: "Maintain unwavering focus on solving real human problems and creating genuine user value." },
+              { icon: SlidersHorizontal, title: "User Agency and Control", desc: "Balance automation with user control, augmenting human capabilities rather than replacing judgment." },
+              { icon: Eye, title: "Radical Transparency", desc: "Build trust through clear explanations of how AI works, what data it uses, and how it makes decisions." },
+              { icon: Scale, title: "Ethical Considerations", desc: "Proactively address ethical responsibilities throughout the design and development process." },
+              { icon: RefreshCw, title: "Continuous Learning", desc: "Design for continuous improvement through use, becoming more valuable and personalized over time." },
+            ].map((principle) => (
+              <div
+                key={principle.title}
+                className="rounded-xl bg-secondary-foreground/10 p-4 sm:p-5 flex flex-col"
+              >
+                <principle.icon className="w-7 h-7 text-primary mb-4" />
+                <h3 className="text-sm font-display text-secondary-foreground leading-snug mb-2">
+                  {principle.title}
+                </h3>
+                <p className="text-xs text-secondary-foreground/55 font-body leading-relaxed mt-auto">
+                  {principle.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Accordion Book Layout */}
       <div className="px-4 sm:px-6 pb-16">
         <div className="max-w-4xl mx-auto">
