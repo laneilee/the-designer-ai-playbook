@@ -132,7 +132,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero */}
-      <header className="pt-10 pb-6 sm:pt-14 sm:pb-8 px-4 sm:px-6">
+      <header className="pt-10 pb-4 sm:pt-14 sm:pb-6 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground leading-tight">
             AI × UX Design Framework
@@ -140,19 +140,45 @@ const Index = () => {
           <p className="text-sm sm:text-base text-muted-foreground mt-3 max-w-2xl font-body leading-relaxed">
             A structured approach to AI-enhanced UX design — from discovery to handoff.
           </p>
-
-          {/* Tools link */}
-          <button
-            onClick={() => setView({ type: "tools" })}
-            className="mt-4 group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Sparkles className="w-4 h-4 text-clay" />
-            <span className="underline underline-offset-2 decoration-border group-hover:decoration-foreground">
-              Browse all tools
-            </span>
-          </button>
         </div>
       </header>
+
+      {/* Methods vs Tools Switcher */}
+      <div className="px-4 sm:px-6 mb-8">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <button
+            onClick={() => {/* Already on methods view */}}
+            className="group relative flex items-center gap-4 px-5 py-4 rounded-xl border-2 border-primary bg-primary/5 transition-all"
+          >
+            <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+              <Sparkles className="w-5 h-5 text-primary" />
+            </div>
+            <div className="text-left">
+              <div className="text-sm font-medium text-foreground font-body">Methods</div>
+              <div className="text-xs text-muted-foreground font-body">
+                Step-by-step UX processes enhanced with AI
+              </div>
+            </div>
+            <div className="ml-auto w-2 h-2 rounded-full bg-primary shrink-0" />
+          </button>
+
+          <button
+            onClick={() => setView({ type: "tools" })}
+            className="group relative flex items-center gap-4 px-5 py-4 rounded-xl border-2 border-border hover:border-clay bg-card hover:bg-accent transition-all"
+          >
+            <div className="w-11 h-11 rounded-xl bg-accent flex items-center justify-center shrink-0">
+              <Search className="w-5 h-5 text-clay" />
+            </div>
+            <div className="text-left">
+              <div className="text-sm font-medium text-foreground font-body">Tools Directory</div>
+              <div className="text-xs text-muted-foreground font-body">
+                Browse all AI & traditional tools in one place
+              </div>
+            </div>
+            <ArrowRight className="ml-auto w-4 h-4 text-muted-foreground group-hover:text-clay group-hover:translate-x-0.5 transition-all shrink-0" />
+          </button>
+        </div>
+      </div>
 
       {/* Double Diamond Diagram */}
       <div className="px-4 sm:px-6 mb-12">
