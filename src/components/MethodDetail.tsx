@@ -3,8 +3,8 @@ import { type Method } from "@/data/methods";
 import { phaseColors } from "@/data/phaseColors";
 import { motion } from "framer-motion";
 import {
-  Bot, ArrowRight, ExternalLink, Clock, Zap, Users,
-  Link2, ChevronDown, CheckCircle2, Wrench,
+  Bot, ExternalLink, Clock, Zap, Users,
+  ChevronDown, CheckCircle2, Wrench,
 } from "lucide-react";
 import ToolLogo from "@/components/ToolLogo";
 
