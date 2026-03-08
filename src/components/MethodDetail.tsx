@@ -156,33 +156,6 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
         </div>
       </div>
 
-      {/* Related methods */}
-      {method.relatedMethods.length > 0 && (
-        <div className="mb-10">
-          <SectionLabel>Related Methods</SectionLabel>
-          <div className="flex flex-wrap gap-2">
-            {method.relatedMethods.map((relId) => {
-              const relMethod = methods.find((m) => m.id === relId);
-              const relColors = relMethod ? phaseColors[relMethod.phase] : null;
-              return (
-                <button
-                  key={relId}
-                  onClick={() => onMethodClick?.(relId)}
-                  className="group flex items-center gap-2 px-3.5 py-2 rounded-xl border border-foreground/[0.06] bg-foreground/[0.02] hover:bg-foreground/[0.05] transition-all duration-200"
-                >
-                  {relColors && (
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: relColors.accent }} />
-                  )}
-                  <span className="text-[12px] font-body text-foreground/60 group-hover:text-foreground transition-colors">
-                    {relMethod?.title || relId.replace(/-/g, " ")}
-                  </span>
-                  <ArrowRight className="w-3 h-3 text-muted-foreground/20 group-hover:text-foreground/40 transition-colors" />
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
 
       {/* External resources */}
       {method.resources.length > 0 && (
