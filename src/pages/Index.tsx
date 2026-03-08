@@ -4,6 +4,7 @@ import { phaseColors } from "@/data/phaseColors";
 import MethodDetail from "@/components/MethodDetail";
 import ToolsView from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
+import DoubleDiamond from "@/components/DoubleDiamond";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -171,7 +172,7 @@ const Index = () => {
             AI × UX Design Framework
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground/60 mt-1.5 max-w-xl font-body leading-relaxed">
-            A practical toolkit for integrating AI into every stage of the UX design process — from research to handoff.
+            {methods.length} methods across {phases.length} phases — a practical toolkit for integrating AI into every stage of UX design.
           </p>
         </div>
         {/* Mobile menu button */}
@@ -245,6 +246,11 @@ const Index = () => {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Double Diamond */}
+          <div className="px-6 sm:px-8 lg:px-12 pt-8">
+            <DoubleDiamond />
+          </div>
 
           <FeedbackForm />
         </main>

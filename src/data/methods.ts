@@ -760,4 +760,429 @@ export const methods: Method[] = [
       { title: "What Matters: OKR Guide", url: "https://www.whatmatters.com/faqs/okr-meaning-definition-example" },
     ],
   },
+
+  // ── Additional DISCOVER methods ──
+  {
+    id: "contextual-inquiry",
+    title: "Contextual Inquiry",
+    phase: "Discover",
+    context: ["Solo", "Team"],
+    whenToUse: "When you need to understand how users actually behave in their natural environment — not what they say they do, but what they really do.",
+    description:
+      "Contextual inquiry combines observation and interview in the user's own environment. You watch users work, interrupt to ask why, and build a shared understanding of their process, tools, workarounds, and pain points. It reveals tacit knowledge that users can't articulate in a conference room.",
+    effort: "High",
+    timeEstimate: "1–3 weeks",
+    steps: [
+      "Define the focus areas and research questions",
+      "Recruit 6-12 participants in their actual work/use context",
+      "Observe users performing real tasks in their environment",
+      "Use the master/apprentice model — user leads, you follow and ask 'why'",
+      "Take detailed notes on actions, artifacts, workarounds, and breakdowns",
+      "Debrief after each session — capture key insights while fresh",
+      "Build an affinity diagram from all session notes",
+      "Synthesize into work models: flow, sequence, artifact, cultural, physical",
+    ],
+    artifacts: [
+      "Contextual inquiry session notes with observations and quotes",
+      "Work models (flow, sequence, cultural)",
+      "Affinity diagram of cross-session themes",
+      "Environment and artifact photos (with consent)",
+    ],
+    relatedMethods: ["journey-mapping", "jobs-to-be-done", "affinity-mapping"],
+    aiTools: [
+      { name: "Otter.ai", description: "Transcribe field interviews in real time", type: "ai" },
+      { name: "Claude", description: "Analyze field notes to surface patterns across sessions", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Dovetail", description: "Tag and organize qualitative field research data", type: "traditional" },
+      { name: "Miro / FigJam", description: "Build affinity diagrams from field notes", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Contextual Inquiry", url: "https://www.nngroup.com/articles/contextual-inquiry/" },
+    ],
+  },
+  {
+    id: "diary-study",
+    title: "Diary Study",
+    phase: "Discover",
+    context: ["Solo", "Team"],
+    whenToUse: "When you need to understand behaviors and experiences that unfold over time — habits, routines, and evolving needs that a single interview can't capture.",
+    description:
+      "Diary studies ask participants to self-report their experiences over days or weeks. They reveal longitudinal patterns, context-dependent behaviors, and the emotional arc of product usage. Particularly valuable for understanding habits, onboarding journeys, and intermittent use cases.",
+    effort: "High",
+    timeEstimate: "2–6 weeks",
+    steps: [
+      "Define the research questions and study duration (typically 1-4 weeks)",
+      "Design the diary protocol: what to log, how often, what format",
+      "Recruit 10-15 participants and brief them thoroughly",
+      "Send regular prompts/reminders to maintain engagement",
+      "Monitor entries and follow up on interesting observations mid-study",
+      "Conduct post-study debrief interviews with each participant",
+      "Analyze entries for patterns across time and participants",
+      "Synthesize into journey insights and behavioral patterns",
+    ],
+    artifacts: [
+      "Diary entry database with coded themes",
+      "Longitudinal behavior patterns and timelines",
+      "Participant journey arcs showing experience over time",
+      "Key quotes and moments for storytelling",
+    ],
+    relatedMethods: ["journey-mapping", "contextual-inquiry", "jobs-to-be-done"],
+    aiTools: [
+      { name: "ChatGPT", description: "Analyze diary entries at scale to find patterns across participants", type: "ai" },
+      { name: "Claude", description: "Generate thematic analysis from hundreds of diary entries", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "dscout", description: "Purpose-built diary study platform with mobile capture", type: "traditional" },
+      { name: "Dovetail", description: "Organize and analyze qualitative diary data", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Diary Studies", url: "https://www.nngroup.com/articles/diary-studies/" },
+    ],
+  },
+
+  // ── Additional DEFINE methods ──
+  {
+    id: "persona-development",
+    title: "Persona Development",
+    phase: "Define",
+    context: ["Team", "Stakeholder"],
+    whenToUse: "When you need to align the team around who you're designing for — creating a shared, research-grounded understanding of your key user segments.",
+    description:
+      "Personas are research-based archetypes representing distinct user segments. Good personas go beyond demographics — they capture goals, behaviors, pain points, and contexts of use. They serve as a decision-making tool: 'Would Maria do this?' is more actionable than 'Would our users do this?'",
+    effort: "Medium",
+    timeEstimate: "1–2 weeks",
+    steps: [
+      "Synthesize research data to identify behavioral patterns and segments",
+      "Cluster users by goals and behaviors, not demographics",
+      "Draft 3-5 persona archetypes with names and narratives",
+      "Include: goals, frustrations, behaviors, context, tech comfort, key quotes",
+      "Validate personas against raw research data — do they ring true?",
+      "Present to stakeholders and iterate based on feedback",
+      "Socialize personas across the organization with posters, cards, or wiki pages",
+    ],
+    artifacts: [
+      "3-5 persona documents with photos, narratives, and behavioral traits",
+      "Persona spectrum showing range of user needs",
+      "Quick-reference persona cards for meetings and workshops",
+    ],
+    relatedMethods: ["jobs-to-be-done", "journey-mapping", "experience-principles"],
+    aiTools: [
+      { name: "ChatGPT", description: "Draft persona narratives from research synthesis and generate scenario variations", type: "ai" },
+      { name: "Midjourney / DALL-E", description: "Generate representative persona illustrations (avoiding stock photos)", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Design polished persona documents and cards", type: "traditional" },
+      { name: "Notion / Confluence", description: "Host living persona documents the team can reference", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Personas", url: "https://www.nngroup.com/articles/persona/" },
+    ],
+  },
+  {
+    id: "problem-framing",
+    title: "Problem Framing",
+    phase: "Define",
+    context: ["Team", "Stakeholder"],
+    whenToUse: "When the team is jumping to solutions before agreeing on the problem — you need to step back and ensure you're solving the right problem.",
+    description:
+      "Problem framing is the discipline of defining what problem you're actually solving, for whom, and why it matters now. A well-framed problem is half-solved. This method prevents the team from optimizing the wrong thing and creates alignment on scope, constraints, and success criteria.",
+    effort: "Medium",
+    timeEstimate: "2–3 days",
+    steps: [
+      "Gather all known context: research findings, business goals, technical constraints",
+      "Write the problem from multiple perspectives: user, business, technical",
+      "Use the '5 Whys' technique to find the root problem behind symptoms",
+      "Draft a problem statement: [User] needs [need] because [insight]",
+      "Define what's in scope and explicitly out of scope",
+      "Set success criteria: how will we know we've solved this?",
+      "Align with stakeholders on the problem frame before ideation begins",
+    ],
+    artifacts: [
+      "Problem statement document with user, business, and technical perspectives",
+      "Scope definition with explicit in/out boundaries",
+      "Success criteria and measurable outcomes",
+      "Constraints inventory",
+    ],
+    relatedMethods: ["how-might-we", "assumption-mapping", "north-star-framing"],
+    aiTools: [
+      { name: "Claude", description: "Challenge problem framing by generating alternative perspectives and reframes", type: "ai" },
+      { name: "ChatGPT", description: "Apply '5 Whys' analysis and generate problem statement variations", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Miro / FigJam", description: "Collaborative problem framing workshop facilitation", type: "traditional" },
+      { name: "Google Docs", description: "Draft and iterate on problem statements with stakeholders", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Problem Statements", url: "https://www.nngroup.com/articles/problem-statements/" },
+    ],
+  },
+
+  // ── Additional IDEATE methods ──
+  {
+    id: "design-studio",
+    title: "Design Studio",
+    phase: "Ideate",
+    context: ["Team", "Cross-functional"],
+    whenToUse: "When you need cross-functional input on design solutions — bringing diverse perspectives together to sketch, critique, and converge on concepts.",
+    description:
+      "Design Studio is a structured collaborative sketching workshop where everyone — designers, engineers, PMs, even stakeholders — generates and critiques solutions. It democratizes ideation, surfaces unexpected ideas from non-designers, and builds shared ownership of the solution direction.",
+    effort: "Medium",
+    timeEstimate: "2–4 hours",
+    steps: [
+      "Brief the group on the design challenge, constraints, and research insights",
+      "Round 1: Individual sketching (10 min) — everyone draws 6-8 concepts",
+      "Present and critique: each person shares, group provides structured feedback",
+      "Round 2: Iterate on best ideas — refine, combine, or pivot (10 min)",
+      "Present refined concepts and vote on strongest directions",
+      "Select 2-3 concepts for further development by the design team",
+    ],
+    artifacts: [
+      "Sketches from all participants across rounds",
+      "Critique notes and voting results",
+      "2-3 selected concept directions with rationale",
+    ],
+    relatedMethods: ["crazy-eights", "design-critique", "how-might-we"],
+    aiTools: [
+      { name: "Midjourney / DALL-E", description: "Quickly visualize rough concepts for discussion", type: "ai" },
+      { name: "ChatGPT", description: "Generate 'What if...' prompts to push ideation further", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Paper & pen", description: "Low-barrier sketching for all participants regardless of skill", type: "traditional" },
+      { name: "Miro / FigJam", description: "Remote design studio with templates and voting", type: "traditional" },
+    ],
+    resources: [
+      { title: "Todd Zaki Warfel: Design Studio Method", url: "https://www.uxpin.com/studio/blog/design-studio-methodology/" },
+    ],
+  },
+
+  // ── Additional PROTOTYPE methods ──
+  {
+    id: "design-system",
+    title: "Design System Development",
+    phase: "Prototype",
+    context: ["Team", "Cross-functional"],
+    whenToUse: "When scaling design across multiple teams, products, or platforms — ensuring consistency, efficiency, and quality at scale.",
+    description:
+      "A design system is the single source of truth for how your product looks, feels, and behaves. It includes components, patterns, tokens, guidelines, and principles. For senior designers, building and evolving a design system is one of the highest-leverage activities — it multiplies your impact across the entire organization.",
+    effort: "High",
+    timeEstimate: "Ongoing (initial: 2–3 months)",
+    steps: [
+      "Audit existing UI patterns: screenshot and catalog every component and pattern in use",
+      "Identify inconsistencies, duplications, and one-offs",
+      "Define design tokens: colors, typography, spacing, elevation, motion",
+      "Build core components: buttons, inputs, cards, navigation, modals",
+      "Document usage guidelines, dos/don'ts, and accessibility requirements for each",
+      "Set up a contribution model: how do teams propose new components?",
+      "Establish a governance process for updates and deprecations",
+      "Measure adoption and track design debt reduction over time",
+    ],
+    artifacts: [
+      "Component library in Figma with variants and documentation",
+      "Design token specification",
+      "Usage guidelines and pattern documentation",
+      "Contribution and governance model",
+    ],
+    relatedMethods: ["hifi-prototyping", "design-principles-workshop", "design-qa"],
+    aiTools: [
+      { name: "Figma AI", description: "Generate component variants and auto-document design tokens", type: "ai" },
+      { name: "ChatGPT", description: "Draft component usage guidelines and accessibility documentation", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Build and maintain the component library with variants", type: "traditional" },
+      { name: "Storybook", description: "Document and test coded components in isolation", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Design Systems 101", url: "https://www.nngroup.com/articles/design-systems-101/" },
+    ],
+  },
+
+  // ── Additional VALIDATE methods ──
+  {
+    id: "heuristic-evaluation",
+    title: "Heuristic Evaluation",
+    phase: "Validate",
+    context: ["Solo", "Team"],
+    whenToUse: "When you need a fast, expert-driven assessment of usability issues — useful when there's no time or budget for user testing.",
+    description:
+      "Heuristic evaluation is an expert review method where evaluators examine a UI against a set of established usability principles (heuristics). It's fast, cheap, and effective at catching common issues. Best when done by 3-5 evaluators independently, then combined. Not a substitute for user testing, but a powerful complement.",
+    effort: "Low",
+    timeEstimate: "1–3 days",
+    steps: [
+      "Select a heuristic framework (Nielsen's 10, Shneiderman's 8, or custom)",
+      "Define the scope: which flows, screens, or features to evaluate",
+      "Each evaluator independently reviews the UI against each heuristic",
+      "Rate each finding by severity: cosmetic, minor, major, catastrophic",
+      "Consolidate findings across evaluators — note agreement and disagreements",
+      "Prioritize findings and create actionable recommendations",
+    ],
+    artifacts: [
+      "Heuristic evaluation report with severity-rated findings",
+      "Annotated screenshots showing specific violations",
+      "Prioritized action plan for addressing issues",
+    ],
+    relatedMethods: ["usability-testing", "design-critique", "accessibility-audit"],
+    aiTools: [
+      { name: "ChatGPT", description: "Pre-scan screenshots against heuristic checklists to surface potential issues", type: "ai" },
+      { name: "Claude", description: "Generate detailed heuristic evaluation reports from UI descriptions", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Annotate designs with heuristic violation markers", type: "traditional" },
+      { name: "Spreadsheets", description: "Track and score heuristic findings systematically", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: How to Conduct a Heuristic Evaluation", url: "https://www.nngroup.com/articles/how-to-conduct-a-heuristic-evaluation/" },
+    ],
+  },
+  {
+    id: "accessibility-audit",
+    title: "Accessibility Audit",
+    phase: "Validate",
+    context: ["Solo", "Team", "Cross-functional"],
+    whenToUse: "When ensuring your product is usable by people with disabilities — both for ethical reasons and legal compliance (WCAG, ADA, EAA).",
+    description:
+      "An accessibility audit systematically evaluates your product against WCAG guidelines across perceivable, operable, understandable, and robust criteria. For senior designers, accessibility isn't a checklist — it's a design constraint that improves the experience for everyone.",
+    effort: "Medium",
+    timeEstimate: "1–2 weeks",
+    steps: [
+      "Define scope: which pages, flows, and states to audit",
+      "Run automated scans (axe, Lighthouse) to catch low-hanging fruit",
+      "Manual keyboard navigation testing: can every action be completed without a mouse?",
+      "Screen reader testing: does the experience make sense auditorily?",
+      "Color contrast and text sizing evaluation",
+      "Test with assistive technology users if possible",
+      "Document findings with WCAG criteria references and severity",
+      "Create a remediation roadmap with priorities",
+    ],
+    artifacts: [
+      "Accessibility audit report with WCAG criteria mapping",
+      "Automated scan results from axe/Lighthouse",
+      "Remediation roadmap with severity and effort estimates",
+      "Accessible design patterns documentation for the team",
+    ],
+    relatedMethods: ["heuristic-evaluation", "usability-testing", "design-system"],
+    aiTools: [
+      { name: "ChatGPT", description: "Generate WCAG-compliant alternatives for inaccessible patterns", type: "ai" },
+      { name: "axe AI", description: "AI-enhanced automated accessibility scanning", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "axe DevTools", description: "Browser-based automated accessibility testing", type: "traditional" },
+      { name: "Figma", description: "Use accessibility plugins to check contrast and reading order", type: "traditional" },
+    ],
+    resources: [
+      { title: "W3C: WCAG 2.2 Quick Reference", url: "https://www.w3.org/WAI/WCAG22/quickref/" },
+    ],
+  },
+  {
+    id: "ab-testing",
+    title: "A/B Testing",
+    phase: "Validate",
+    context: ["Team", "Cross-functional"],
+    whenToUse: "When you have enough traffic to statistically compare design variations — making data-driven decisions about which design performs better.",
+    description:
+      "A/B testing compares two or more design variations with real users in production. It provides statistical evidence for design decisions, reducing reliance on opinions and HiPPO (Highest Paid Person's Opinion). Senior designers use it strategically — testing high-impact hypotheses, not random button colors.",
+    effort: "Medium",
+    timeEstimate: "1–4 weeks (including analysis)",
+    steps: [
+      "Formulate a clear hypothesis: changing [X] will improve [metric] because [reason]",
+      "Define primary and secondary metrics with statistical significance thresholds",
+      "Design the variations with minimal differences to isolate the variable",
+      "Calculate required sample size for statistical power",
+      "Run the test until reaching significance — don't peek and stop early",
+      "Analyze results: primary metric, secondary metrics, and segment breakdowns",
+      "Document learnings and apply to future design decisions",
+    ],
+    artifacts: [
+      "Test hypothesis document with metrics and success criteria",
+      "Design variations with documented differences",
+      "Results report with statistical analysis and recommendations",
+      "Learning repository entry for organizational knowledge",
+    ],
+    relatedMethods: ["usability-testing", "concept-testing", "okr-alignment"],
+    aiTools: [
+      { name: "ChatGPT", description: "Generate test hypotheses and help calculate sample sizes", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Optimizely / LaunchDarkly", description: "Feature flagging and A/B test infrastructure", type: "traditional" },
+      { name: "Amplitude / Mixpanel", description: "Analyze test results with statistical rigor", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: A/B Testing", url: "https://www.nngroup.com/articles/putting-ab-testing-in-its-place/" },
+    ],
+  },
+
+  // ── Additional ALIGN methods ──
+  {
+    id: "design-qa",
+    title: "Design QA & Handoff",
+    phase: "Align",
+    context: ["Team", "Cross-functional"],
+    whenToUse: "When ensuring the built product matches the designed intent — bridging the gap between design files and production code.",
+    description:
+      "Design QA is the systematic process of comparing the implemented product against design specifications. For senior designers, this isn't pixel-policing — it's about ensuring the user experience intent survives the build process. Good handoff prevents QA; great QA catches what handoff missed.",
+    effort: "Medium",
+    timeEstimate: "Ongoing (per feature: 1–3 days)",
+    steps: [
+      "Create a comprehensive handoff document: specs, interactions, states, edge cases",
+      "Review the build against designs at each major milestone, not just at the end",
+      "Check responsive behavior across key breakpoints",
+      "Verify all interaction states: hover, focus, active, disabled, loading, error, empty",
+      "Test content extremes: long names, missing images, empty lists",
+      "File issues with clear screenshots comparing expected vs. actual",
+      "Work with engineers to understand technical constraints and find compromises",
+    ],
+    artifacts: [
+      "Design QA checklist per feature",
+      "Bug reports with annotated comparison screenshots",
+      "Design-dev feedback loop documentation",
+      "Handoff spec template for future features",
+    ],
+    relatedMethods: ["hifi-prototyping", "design-system", "accessibility-audit"],
+    aiTools: [
+      { name: "Figma AI", description: "Auto-generate dev-ready specs and interaction documentation", type: "ai" },
+      { name: "ChatGPT", description: "Generate comprehensive QA checklists from design specs", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Dev mode for inspecting designs and extracting specs", type: "traditional" },
+      { name: "Storybook", description: "Review implemented components against design", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Design Handoff", url: "https://www.nngroup.com/articles/design-handoff/" },
+    ],
+  },
+  {
+    id: "retrospective",
+    title: "Design Retrospective",
+    phase: "Align",
+    context: ["Team", "Cross-functional"],
+    whenToUse: "After a major release, sprint, or project — reflecting on what worked, what didn't, and how to improve the design process.",
+    description:
+      "Design retrospectives focus specifically on the design process, collaboration, and craft quality — not just delivery speed. They're how senior designers evolve team practices, improve cross-functional relationships, and build a culture of continuous improvement.",
+    effort: "Low",
+    timeEstimate: "1–2 hours",
+    steps: [
+      "Set the stage: review what was shipped, key decisions made, and timeline",
+      "Individual reflection: what went well, what was frustrating, what surprised you?",
+      "Share and cluster observations into themes",
+      "Identify the top 2-3 improvement areas the team agrees on",
+      "Define concrete action items with owners for each improvement",
+      "Review action items from previous retros — did we follow through?",
+    ],
+    artifacts: [
+      "Retrospective summary with themes and action items",
+      "Process improvement backlog",
+      "Updated team working agreements",
+    ],
+    relatedMethods: ["design-critique", "okr-alignment", "design-principles-workshop"],
+    aiTools: [
+      { name: "ChatGPT", description: "Generate retro prompts and help synthesize themes from team input", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Miro / FigJam", description: "Retro board templates with voting and action tracking", type: "traditional" },
+      { name: "Notion / Confluence", description: "Document retro outcomes and track action items", type: "traditional" },
+    ],
+    resources: [
+      { title: "Atlassian: Retrospectives", url: "https://www.atlassian.com/team-playbook/plays/retrospective" },
+    ],
+  },
 ];
