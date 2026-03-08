@@ -137,8 +137,11 @@ const Index = () => {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground leading-tight">
             AI × UX Design Framework
           </h1>
-          <p className="text-sm sm:text-base text-muted-foreground mt-3 max-w-2xl font-body leading-relaxed">
-            A structured approach to AI-enhanced UX design — from discovery to handoff.
+          <p className="text-lg sm:text-xl font-display text-clay mt-3 leading-snug">
+            The modern UX playbook — where human craft meets AI superpowers.
+          </p>
+          <p className="text-sm text-muted-foreground mt-2 max-w-2xl font-body leading-relaxed">
+            17 battle-tested methods and 30+ tools organized across 5 design phases. Built for designers who want to work smarter, not harder.
           </p>
         </div>
       </header>
