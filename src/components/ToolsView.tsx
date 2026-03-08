@@ -1,6 +1,5 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { methods } from "@/data/methods";
-import { Bot, Wrench } from "lucide-react";
+import ToolLogo from "@/components/ToolLogo";
 
 interface ToolInfo {
   name: string;
@@ -41,16 +40,16 @@ export default function ToolsView() {
   const aiTools = tools.filter((t) => t.type === "ai");
   const traditionalTools = tools.filter((t) => t.type === "traditional");
 
-  const renderSection = (title: string, items: ToolInfo[], icon: React.ReactNode) => (
+  const renderSection = (title: string, items: ToolInfo[]) => (
     <div className="mb-10">
-      <h3 className="text-[11px] font-body font-medium uppercase tracking-widest text-muted-foreground mb-4 px-6 lg:px-12">
+      <h3 className="text-[11px] font-body font-medium uppercase tracking-widest text-muted-foreground mb-4">
         {title}
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-6 lg:px-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {items.map((tool) => (
           <div key={tool.name} className="tool-card">
-            <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center shrink-0">
-              {icon}
+            <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 flex items-center justify-center bg-accent">
+              <ToolLogo name={tool.name} type={tool.type} size="lg" />
             </div>
             <div className="flex-1">
               <div className="text-sm font-medium text-foreground">{tool.name}</div>
@@ -78,15 +77,13 @@ export default function ToolsView() {
   );
 
   return (
-    <ScrollArea className="flex-1 h-screen">
-      <div className="max-w-3xl mx-auto py-8 lg:py-12">
-        <h2 className="text-2xl lg:text-3xl font-display mb-2 px-6 lg:px-12">Tools Directory</h2>
-        <p className="text-sm text-muted-foreground mb-8 px-6 lg:px-12">
-          Every AI and traditional tool referenced across the framework.
-        </p>
-        {renderSection("AI Tools", aiTools, <Bot className="w-4 h-4 text-clay" />)}
-        {renderSection("Traditional Tools", traditionalTools, <Wrench className="w-4 h-4 text-muted-foreground" />)}
-      </div>
-    </ScrollArea>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 py-8 lg:py-12">
+      <h2 className="text-2xl lg:text-3xl font-display mb-2">Tools Directory</h2>
+      <p className="text-sm text-muted-foreground mb-8">
+        Every AI and traditional tool referenced across the framework.
+      </p>
+      {renderSection("AI Tools", aiTools)}
+      {renderSection("Traditional Tools", traditionalTools)}
+    </div>
   );
 }
