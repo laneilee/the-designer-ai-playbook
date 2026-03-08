@@ -138,10 +138,10 @@ const Index = () => {
             AI × UX Design Framework
           </h1>
           <p className="text-lg sm:text-xl font-display text-clay mt-3 leading-snug">
-            Design faster. Research deeper. Ship with confidence.
+            From discovery to final handoff — design thinking, amplified by AI.
           </p>
           <p className="text-sm text-muted-foreground mt-2 max-w-2xl font-body leading-relaxed">
-            Your end-to-end AI-powered design toolkit — from first interview to final handoff.
+            A design-thinking-first playbook that weaves AI into every phase of the creative process — empowering you to empathize deeper, ideate bolder, and iterate faster.
           </p>
         </div>
       </header>
