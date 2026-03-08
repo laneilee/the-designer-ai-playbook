@@ -12,8 +12,21 @@ export default {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      display: ['Instrument Serif', 'serif'],
+      body: ['DM Sans', 'sans-serif'],
+    },
     extend: {
       colors: {
+        sand: {
+          DEFAULT: "hsl(var(--sand))",
+          dark: "hsl(var(--sand-dark))",
+        },
+        warm: "hsl(var(--warm))",
+        clay: "hsl(var(--clay))",
+        ink: "hsl(var(--ink))",
+        sage: "hsl(var(--sage))",
+        human: "hsl(var(--human))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
