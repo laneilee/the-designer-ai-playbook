@@ -4,7 +4,7 @@ import { phaseColors } from "@/data/phaseColors";
 import MethodDetail from "@/components/MethodDetail";
 import ToolsView from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
-import DoubleDiamond from "@/components/DoubleDiamond";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -247,10 +247,6 @@ const Index = () => {
             )}
           </AnimatePresence>
 
-          {/* Double Diamond */}
-          <div className="px-6 sm:px-8 lg:px-12 pt-8">
-            <DoubleDiamond />
-          </div>
 
           <FeedbackForm />
         </main>
