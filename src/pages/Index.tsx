@@ -171,7 +171,7 @@ const Index = () => {
             AI × UX Design Framework
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground/60 mt-1.5 max-w-xl font-body leading-relaxed">
-            {methods.length} methods across {phases.length} phases — step-by-step guidance with AI tool recommendations.
+            A practical toolkit for integrating AI into every stage of the UX design process — from research to handoff.
           </p>
         </div>
         {/* Mobile menu button */}
