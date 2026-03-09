@@ -33,7 +33,7 @@ const toolCategoryMap: Record<string, ToolCategory> = {
   "Cursor / Copilot": "Prototyping",
   "Framer": "Prototyping",
   "Miro / FigJam": "Collaboration",
-  "Sticky notes": "Collaboration",
+  
   "Maze": "Testing",
   "Lookback / UserTesting": "Testing",
   "axe AI": "Accessibility",
