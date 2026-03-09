@@ -165,7 +165,7 @@ export const methods: Method[] = [
       "Stakeholder profiles with goals, concerns, and communication preferences",
       "RACI chart for design decisions",
     ],
-    relatedMethods: ["conduct-stakeholder-interviews", "north-star-framing", "okr-alignment"],
+    relatedMethods: ["conduct-stakeholder-interviews", "okr-alignment"],
     aiTools: [
       { name: "ChatGPT", description: "Generate interview guides and synthesize stakeholder notes into profiles", type: "ai" },
     ],
