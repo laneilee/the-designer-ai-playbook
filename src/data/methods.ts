@@ -7,6 +7,7 @@ export interface Tool {
   name: string;
   description: string;
   type: ToolType;
+  promptGuide?: string;
 }
 
 export interface Method {
