@@ -261,7 +261,7 @@ const Index = () => {
 
 /* ── Tools sidebar list ── */
 function ToolsSidebarList() {
-  const toolCategories = getToolCategories();
+  const toolCategories = getToolsByCategory();
   return (
     <div className="pb-8">
       {toolCategories.map(({ category, tools }) => (
@@ -285,23 +285,6 @@ function ToolsSidebarList() {
       ))}
     </div>
   );
-}
-
-function getToolCategories() {
-  const toolMap = new Map<string, { name: string; type: "ai" | "traditional" }>();
-  methods.forEach((method) => {
-    [...method.aiTools, ...method.traditionalTools].forEach((tool) => {
-      if (!toolMap.has(tool.name)) {
-        toolMap.set(tool.name, { name: tool.name, type: tool.type });
-      }
-    });
-  });
-  const aiTools = Array.from(toolMap.values()).filter((t) => t.type === "ai").sort((a, b) => a.name.localeCompare(b.name));
-  const tradTools = Array.from(toolMap.values()).filter((t) => t.type === "traditional").sort((a, b) => a.name.localeCompare(b.name));
-  return [
-    { category: "AI Tools", tools: aiTools },
-    { category: "Traditional", tools: tradTools },
-  ];
 }
 
 /* ── Feedback Form ── */
