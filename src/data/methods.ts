@@ -891,8 +891,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["define-success-metrics", "design-retrospective", "okr-alignment"],
     aiTools: [
-      { name: "ChatGPT", description: "Analyze user feedback at scale and identify sentiment patterns", type: "ai" },
-      { name: "Claude", description: "Generate comprehensive performance reports from analytics data", type: "ai" },
+      { name: "ChatGPT", description: "Analyze user feedback at scale and identify sentiment patterns", type: "ai", promptGuide: "Analyze these [X] pieces of user feedback collected after launching [feature]. Categorize by: sentiment (positive/negative/neutral), theme, and frequency. Highlight the top 5 issues and top 3 praise points. Suggest which findings warrant immediate action vs. next iteration." },
+      { name: "Claude", description: "Generate comprehensive performance reports from analytics data", type: "ai", promptGuide: "Here are our post-launch metrics for [feature]: [paste data]. Our targets were: [list targets]. Generate a performance report covering: metrics vs. targets, hypothesis validation, unexpected findings, and recommended next steps. Include a summary suitable for stakeholder presentation." },
     ],
     traditionalTools: [
       { name: "Amplitude / Mixpanel", description: "Analyze user behavior and conversion funnels", type: "traditional" },
