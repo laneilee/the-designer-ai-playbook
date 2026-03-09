@@ -199,30 +199,63 @@ const Index = () => {
           <p className="text-xs sm:text-sm text-muted-foreground/60 mt-1.5 max-w-xl font-body leading-relaxed">
             {methods.length} actionable methods to elevate every phase of your UX process with AI.
           </p>
-          {/* Quick nav pills */}
-          <div className="flex items-center gap-2 mt-3">
+          {/* Quick nav cards */}
+          <div className="flex flex-col sm:flex-row items-stretch gap-3 mt-4">
             <button
               onClick={() => setViewMode("methods")}
-              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-body font-medium border transition-all ${
+              className={`group flex items-start gap-3 px-4 py-3 rounded-xl border text-left transition-all w-full sm:w-auto ${
                 viewMode === "methods"
-                  ? "bg-foreground text-background border-foreground"
-                  : "bg-card/60 text-muted-foreground border-border hover:text-foreground hover:border-foreground/30"
+                  ? "bg-foreground/[0.06] border-foreground/20"
+                  : "bg-card/40 border-border hover:border-foreground/15 hover:bg-foreground/[0.03]"
               }`}
             >
-              <Lightbulb className="w-3 h-3" />
-              Methods
-              <span className="text-[10px] opacity-60">{methods.length}</span>
+              <div className={`mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                viewMode === "methods" ? "bg-foreground text-background" : "bg-foreground/10 text-foreground/60 group-hover:bg-foreground/15"
+              }`}>
+                <Lightbulb className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-display font-medium text-foreground">Methods</span>
+                  <span className="text-[10px] font-body text-muted-foreground/50 bg-foreground/5 px-1.5 py-0.5 rounded-full">{methods.length}</span>
+                </div>
+                <p className="text-xs font-body text-muted-foreground/60 mt-0.5 leading-relaxed">
+                  Step-by-step UX techniques powered by AI — from research to handoff.
+                </p>
+                <span className={`inline-flex items-center gap-1 text-[11px] font-body font-medium mt-1.5 transition-colors ${
+                  viewMode === "methods" ? "text-foreground" : "text-muted-foreground/40 group-hover:text-foreground/60"
+                }`}>
+                  Explore methods <ArrowRight className="w-3 h-3" />
+                </span>
+              </div>
             </button>
+
             <button
               onClick={() => setViewMode("tools")}
-              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-body font-medium border transition-all ${
+              className={`group flex items-start gap-3 px-4 py-3 rounded-xl border text-left transition-all w-full sm:w-auto ${
                 viewMode === "tools"
-                  ? "bg-foreground text-background border-foreground"
-                  : "bg-card/60 text-muted-foreground border-border hover:text-foreground hover:border-foreground/30"
+                  ? "bg-foreground/[0.06] border-foreground/20"
+                  : "bg-card/40 border-border hover:border-foreground/15 hover:bg-foreground/[0.03]"
               }`}
             >
-              <Bot className="w-3 h-3" />
-              Tools
+              <div className={`mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                viewMode === "tools" ? "bg-foreground text-background" : "bg-foreground/10 text-foreground/60 group-hover:bg-foreground/15"
+              }`}>
+                <Bot className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-display font-medium text-foreground">Tools</span>
+                </div>
+                <p className="text-xs font-body text-muted-foreground/60 mt-0.5 leading-relaxed">
+                  AI and traditional tools curated for every design workflow.
+                </p>
+                <span className={`inline-flex items-center gap-1 text-[11px] font-body font-medium mt-1.5 transition-colors ${
+                  viewMode === "tools" ? "text-foreground" : "text-muted-foreground/40 group-hover:text-foreground/60"
+                }`}>
+                  Browse tools <ArrowRight className="w-3 h-3" />
+                </span>
+              </div>
             </button>
           </div>
         </div>
