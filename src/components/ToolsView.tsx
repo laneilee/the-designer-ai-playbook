@@ -255,7 +255,7 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
         {/* Prompts */}
         <div className="p-6 space-y-4">
           <p className="text-xs font-body text-muted-foreground">
-            Copy these prompts to use {tool.name} effectively in different design workflows.
+            Copy these guidance prompts to use {tool.name} effectively in different design workflows.
           </p>
           {tool.prompts.map((entry, idx) => (
             <PromptCard key={idx} entry={entry} />
