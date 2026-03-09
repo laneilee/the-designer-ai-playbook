@@ -252,10 +252,6 @@ const Index = () => {
             )}
           </AnimatePresence>
 
-          {/* Double Diamond */}
-          <div className="px-6 sm:px-8 lg:px-12 pt-8">
-            <DoubleDiamond />
-          </div>
 
           <FeedbackForm />
         </main>
