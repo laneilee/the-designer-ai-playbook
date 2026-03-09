@@ -29,7 +29,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
       {/* Phase pill + context */}
       <div className="flex items-center gap-2.5 mb-5 flex-wrap">
         <span
-          className="text-[10px] font-body font-semibold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full"
+          className="text-xs font-body font-semibold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full"
           style={{ background: colors.accentBg, color: colors.accent, border: `1px solid ${colors.accentBorder}` }}
         >
           {method.phase}
@@ -37,7 +37,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
         {method.context.map((ctx) => (
           <span
             key={ctx}
-            className="text-[10px] px-2 py-0.5 rounded-full bg-foreground/5 text-muted-foreground/60 font-body border border-foreground/5"
+            className="text-xs px-2 py-0.5 rounded-full bg-foreground/5 text-muted-foreground font-body border border-foreground/5"
           >
             {ctx}
           </span>
@@ -45,31 +45,31 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
       </div>
 
       {/* Title */}
-      <h2 className="text-2xl lg:text-[2rem] font-display text-foreground leading-tight mb-4">
+      <h2 className="text-3xl lg:text-4xl font-display text-foreground leading-tight mb-4">
         {method.title}
       </h2>
 
       {/* Meta bar */}
       <div className="flex items-center gap-4 mb-8">
         <div
-          className="flex items-center gap-1.5 text-[11px] font-body font-medium px-2.5 py-1 rounded-lg"
+          className="flex items-center gap-1.5 text-xs font-body font-medium px-2.5 py-1 rounded-lg"
           style={{ background: effort.bg, color: effort.color }}
         >
-          <Zap className="w-3 h-3" />
+          <Zap className="w-3.5 h-3.5" />
           {effort.label}
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] font-body text-muted-foreground/50">
-          <Clock className="w-3 h-3" />
+        <div className="flex items-center gap-1.5 text-xs font-body text-muted-foreground">
+          <Clock className="w-3.5 h-3.5" />
           {method.timeEstimate}
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] font-body text-muted-foreground/50">
-          <Users className="w-3 h-3" />
+        <div className="flex items-center gap-1.5 text-xs font-body text-muted-foreground">
+          <Users className="w-3.5 h-3.5" />
           {method.context.join(", ")}
         </div>
       </div>
 
       {/* Description */}
-      <p className="text-sm leading-[1.7] text-foreground/70 font-body mb-8">
+      <p className="text-base leading-[1.8] text-foreground/80 font-body mb-8">
         {method.description}
       </p>
 
@@ -83,11 +83,11 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
             className="w-1.5 h-1.5 rounded-full"
             style={{ background: colors.accent }}
           />
-          <span className="text-[10px] font-body font-semibold uppercase tracking-widest" style={{ color: colors.accent }}>
+          <span className="text-xs font-body font-semibold uppercase tracking-widest" style={{ color: colors.accent }}>
             When to use this
           </span>
         </div>
-        <p className="text-sm text-foreground/80 font-body leading-relaxed">
+        <p className="text-[15px] text-foreground/80 font-body leading-relaxed">
           {method.whenToUse}
         </p>
       </div>
@@ -115,7 +115,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
                 >
                   {i + 1}
                 </div>
-                <span className={`text-[13px] font-body leading-relaxed flex-1 transition-colors ${
+                <span className={`text-sm font-body leading-relaxed flex-1 transition-colors ${
                   expandedStep === i ? "text-foreground" : "text-foreground/70"
                 }`}>
                   {step}
@@ -141,7 +141,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
               className="flex items-start gap-2.5 p-3 rounded-xl bg-foreground/[0.02] border border-foreground/[0.04]"
             >
               <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" style={{ color: colors.accent }} />
-              <span className="text-[13px] text-foreground/70 font-body leading-relaxed">{artifact}</span>
+              <span className="text-sm text-foreground/80 font-body leading-relaxed">{artifact}</span>
             </div>
           ))}
         </div>
@@ -168,7 +168,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
                 href={r.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[13px] text-foreground/60 hover:text-clay font-body transition-colors group"
+                className="flex items-center gap-2 text-sm text-foreground/70 hover:text-clay font-body transition-colors group"
               >
                 <ExternalLink className="w-3.5 h-3.5 group-hover:text-clay transition-colors" />
                 {r.title}
@@ -183,7 +183,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground/40 mb-4">
+    <h3 className="text-xs font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-4">
       {children}
     </h3>
   );
@@ -194,7 +194,7 @@ function ToolColumn({ label, icon, tools }: { label: string; icon: React.ReactNo
     <div>
       <div className="flex items-center gap-1.5 mb-3">
         {icon}
-        <span className="text-[10px] font-body font-medium uppercase tracking-widest text-muted-foreground/50">{label}</span>
+        <span className="text-xs font-body font-medium uppercase tracking-widest text-muted-foreground">{label}</span>
       </div>
       <div className="space-y-2">
         {tools.map((tool) => (
@@ -206,8 +206,8 @@ function ToolColumn({ label, icon, tools }: { label: string; icon: React.ReactNo
               <ToolLogo name={tool.name} type={tool.type} size="md" />
             </div>
             <div className="min-w-0">
-              <div className="text-[13px] font-medium text-foreground font-body">{tool.name}</div>
-              <div className="text-[11px] text-muted-foreground/60 leading-relaxed font-body mt-0.5">{tool.description}</div>
+              <div className="text-sm font-medium text-foreground font-body">{tool.name}</div>
+              <div className="text-xs text-muted-foreground leading-relaxed font-body mt-0.5">{tool.description}</div>
             </div>
           </div>
         ))}

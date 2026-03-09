@@ -99,12 +99,12 @@ const Index = () => {
                       <PhaseIcon className="w-3 h-3" style={{ color: colors.accent }} />
                     </div>
                     <span
-                      className="text-[10px] font-body font-semibold uppercase tracking-[0.15em]"
+                      className="text-xs font-body font-semibold uppercase tracking-[0.15em]"
                       style={{ color: colors.accent }}
                     >
                       {phase}
                     </span>
-                    <span className="text-[9px] text-muted-foreground/30 font-body ml-auto">
+                     <span className="text-[11px] text-muted-foreground/50 font-body ml-auto">
                       {phaseMethods.length}
                     </span>
                   </div>
@@ -135,10 +135,10 @@ const Index = () => {
                           }`}
                         >
                           <span
-                            className={`text-[13px] font-body transition-colors truncate ${
-                              isActive
-                                ? "text-foreground font-medium"
-                                : "text-muted-foreground/70 group-hover:text-foreground/80"
+                           className={`text-sm font-body transition-colors truncate ${
+                            isActive
+                              ? "text-foreground font-medium"
+                              : "text-muted-foreground group-hover:text-foreground/80"
                             }`}
                           >
                             {method.title}
@@ -267,10 +267,10 @@ function ToolsSidebarList() {
       {toolCategories.map(({ category, tools }) => (
         <div key={category} className="mb-1">
           <div className="flex items-center gap-2 px-5 pt-5 pb-2">
-            <span className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground/50">
+             <span className="text-xs font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground">
               {category}
             </span>
-            <span className="text-[9px] text-muted-foreground/30 font-body ml-auto">{tools.length}</span>
+            <span className="text-[11px] text-muted-foreground/50 font-body ml-auto">{tools.length}</span>
           </div>
           {tools.map((tool) => (
             <div
@@ -278,7 +278,7 @@ function ToolsSidebarList() {
               className="flex items-center gap-2.5 px-5 py-2 mx-2 rounded-lg hover:bg-foreground/[0.03] transition-colors cursor-default"
             >
               <ToolLogo name={tool.name} type={tool.type} size="sm" />
-              <span className="text-[13px] font-body text-muted-foreground/70 truncate">{tool.name}</span>
+              <span className="text-sm font-body text-muted-foreground truncate">{tool.name}</span>
             </div>
           ))}
         </div>

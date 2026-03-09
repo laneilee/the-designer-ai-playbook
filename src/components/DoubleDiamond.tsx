@@ -42,15 +42,15 @@ export default function DoubleDiamond() {
       {/* Header with toggle */}
       <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-border">
         <div>
-          <h3 className="text-base font-display text-foreground">The Double Diamond — Reimagined</h3>
-          <p className="text-[11px] text-muted-foreground/50 font-body mt-0.5">
+          <h3 className="text-lg font-display text-foreground">The Double Diamond — Reimagined</h3>
+          <p className="text-xs text-muted-foreground font-body mt-0.5">
             How AI transforms each phase of the design process
           </p>
         </div>
         <div className="flex items-center bg-background rounded-xl p-1 border border-border">
           <button
             onClick={() => setMode("traditional")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-body font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-body font-medium transition-all ${
               mode === "traditional"
                 ? "bg-foreground text-background shadow-sm"
                 : "text-muted-foreground/50 hover:text-muted-foreground"
@@ -61,7 +61,7 @@ export default function DoubleDiamond() {
           </button>
           <button
             onClick={() => setMode("ai")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-body font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-body font-medium transition-all ${
               mode === "ai"
                 ? "bg-foreground text-background shadow-sm"
                 : "text-muted-foreground/50 hover:text-muted-foreground"
@@ -100,16 +100,16 @@ export default function DoubleDiamond() {
             />
 
             {/* Phase labels on diamond */}
-            <text x="130" y="88" textAnchor="middle" className="fill-foreground/70" fontSize="11" fontFamily="var(--font-body)" fontWeight="500">Discover</text>
-            <text x="300" y="88" textAnchor="middle" className="fill-foreground/70" fontSize="11" fontFamily="var(--font-body)" fontWeight="500">Define</text>
-            <text x="480" y="88" textAnchor="middle" className="fill-foreground/70" fontSize="11" fontFamily="var(--font-body)" fontWeight="500">Ideate</text>
-            <text x="640" y="88" textAnchor="middle" className="fill-foreground/70" fontSize="11" fontFamily="var(--font-body)" fontWeight="500">Prototype</text>
+            <text x="130" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Discover</text>
+            <text x="300" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Define</text>
+            <text x="480" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Ideate</text>
+            <text x="640" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Prototype</text>
 
             {/* Diverge/Converge labels */}
-            <text x="130" y="105" textAnchor="middle" className="fill-muted-foreground/30" fontSize="9" fontFamily="var(--font-body)">Diverge</text>
-            <text x="300" y="105" textAnchor="middle" className="fill-muted-foreground/30" fontSize="9" fontFamily="var(--font-body)">Converge</text>
-            <text x="480" y="105" textAnchor="middle" className="fill-muted-foreground/30" fontSize="9" fontFamily="var(--font-body)">Diverge</text>
-            <text x="640" y="105" textAnchor="middle" className="fill-muted-foreground/30" fontSize="9" fontFamily="var(--font-body)">Converge</text>
+            <text x="130" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Diverge</text>
+            <text x="300" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Converge</text>
+            <text x="480" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Diverge</text>
+            <text x="640" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Converge</text>
 
             {/* AI sparkle indicators */}
             <AnimatePresence>
@@ -161,7 +161,7 @@ export default function DoubleDiamond() {
                     className="w-2 h-2 rounded-full"
                     style={{ background: colors.accent }}
                   />
-                  <span className="text-[10px] font-body font-semibold uppercase tracking-wider" style={{ color: colors.accent }}>
+                  <span className="text-xs font-body font-semibold uppercase tracking-wider" style={{ color: colors.accent }}>
                     {label}
                   </span>
                 </div>
@@ -172,7 +172,7 @@ export default function DoubleDiamond() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
                     transition={{ duration: 0.2 }}
-                    className="text-[11px] text-foreground/60 font-body leading-relaxed"
+                    className="text-xs text-foreground/70 font-body leading-relaxed"
                   >
                     {mode === "ai" ? aiDesc[phase] : traditionalDesc[phase]}
                   </motion.p>
@@ -192,7 +192,7 @@ export default function DoubleDiamond() {
             transition={{ duration: 0.3 }}
             className="mt-5 px-4 py-3 rounded-xl bg-foreground/[0.03] border border-foreground/[0.05]"
           >
-            <p className="text-[12px] text-foreground/60 font-body leading-relaxed text-center">
+            <p className="text-sm text-foreground/70 font-body leading-relaxed text-center">
               {mode === "ai" ? (
                 <>
                   <span className="font-medium text-foreground/80">AI amplifies every phase</span> — from research synthesis to prototype generation. The designer's role shifts from execution to curation, judgment, and strategic decision-making.
