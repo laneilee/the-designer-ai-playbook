@@ -183,7 +183,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground/40 mb-4">
+    <h3 className="text-xs font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-4">
       {children}
     </h3>
   );
