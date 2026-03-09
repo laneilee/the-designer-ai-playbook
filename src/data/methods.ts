@@ -815,7 +815,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["design-qa", "design-system-review", "design-specs"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate component documentation drafts from design files", type: "ai" },
+      { name: "ChatGPT", description: "Generate component documentation drafts from design files", type: "ai", promptGuide: "Document this component: [component name]. It has these variants: [list]. For each variant, describe: purpose, visual appearance, interaction behavior, states, accessibility requirements (ARIA labels, keyboard), and usage dos/don'ts. Include design token references." },
       { name: "Figma AI", description: "Auto-generate component specs and variant documentation", type: "ai" },
     ],
     traditionalTools: [
