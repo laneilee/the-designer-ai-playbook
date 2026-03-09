@@ -9,7 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Bot, Users, MessageSquare, ArrowRight, Compass, Target,
-  Lightbulb, PenTool, FlaskConical, Handshake, Menu, X,
+  Lightbulb, PenTool, FlaskConical, Handshake, Menu, X, Search,
 } from "lucide-react";
 
 type ViewMode = "methods" | "tools";
@@ -27,6 +27,7 @@ const Index = () => {
   const [viewMode, setViewMode] = useState<ViewMode>("methods");
   const [activeMethodId, setActiveMethodId] = useState<string>(methods[0]?.id || "");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -80,11 +81,34 @@ const Index = () => {
         </button>
       </div>
 
+      {/* Search input */}
+      <div className="px-4 pb-3">
+        <div className="relative">
+          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground/40" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder={viewMode === "methods" ? "Search methods…" : "Search tools…"}
+            className="w-full h-8 pl-8 pr-3 rounded-lg border border-border bg-background text-sm font-body text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-1 focus:ring-ring"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-0.5"
+            >
+              <X className="w-3 h-3 text-muted-foreground/50" />
+            </button>
+          )}
+        </div>
+      </div>
+
       <ScrollArea className="flex-1">
         {viewMode === "methods" ? (
           <div className="pb-8">
             {phases.map((phase) => {
-              const phaseMethods = methods.filter((m) => m.phase === phase);
+              const phaseMethods = methods.filter((m) => m.phase === phase && m.title.toLowerCase().includes(searchQuery.toLowerCase()));
+              if (searchQuery && phaseMethods.length === 0) return null;
               const colors = phaseColors[phase];
               const PhaseIcon = phaseIcons[phase];
 
@@ -157,7 +181,7 @@ const Index = () => {
             })}
           </div>
         ) : (
-          <ToolsSidebarList />
+          <ToolsSidebarList searchQuery={searchQuery} />
         )}
       </ScrollArea>
     </>
@@ -261,29 +285,33 @@ const Index = () => {
 };
 
 /* ── Tools sidebar list ── */
-function ToolsSidebarList() {
+function ToolsSidebarList({ searchQuery = "" }: { searchQuery?: string }) {
   const toolCategories = getToolsByCategory();
   return (
     <div className="pb-8">
-      {toolCategories.map(({ category, tools }) => (
-        <div key={category} className="mb-1">
-          <div className="flex items-center gap-2 px-5 pt-5 pb-2">
-             <span className="text-xs font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-              {category}
-            </span>
-            <span className="text-[11px] text-muted-foreground/50 font-body ml-auto">{tools.length}</span>
-          </div>
-          {tools.map((tool) => (
-            <div
-              key={tool.name}
-              className="flex items-center gap-2.5 px-5 py-2 mx-2 rounded-lg hover:bg-foreground/[0.03] transition-colors cursor-default"
-            >
-              <ToolLogo name={tool.name} type={tool.type} size="sm" />
-              <span className="text-sm font-body text-muted-foreground truncate">{tool.name}</span>
+      {toolCategories.map(({ category, tools: catTools }) => {
+        const filtered = catTools.filter((t) => t.name.toLowerCase().includes(searchQuery.toLowerCase()));
+        if (searchQuery && filtered.length === 0) return null;
+        return (
+          <div key={category} className="mb-1">
+            <div className="flex items-center gap-2 px-5 pt-5 pb-2">
+              <span className="text-xs font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                {category}
+              </span>
+              <span className="text-[11px] text-muted-foreground/50 font-body ml-auto">{filtered.length}</span>
             </div>
-          ))}
-        </div>
-      ))}
+            {filtered.map((tool) => (
+              <div
+                key={tool.name}
+                className="flex items-center gap-2.5 px-5 py-2 mx-2 rounded-lg hover:bg-foreground/[0.03] transition-colors cursor-default"
+              >
+                <ToolLogo name={tool.name} type={tool.type} size="sm" />
+                <span className="text-sm font-body text-muted-foreground truncate">{tool.name}</span>
+              </div>
+            ))}
+          </div>
+        );
+      })}
     </div>
   );
 }
