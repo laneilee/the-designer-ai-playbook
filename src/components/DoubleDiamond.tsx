@@ -100,16 +100,16 @@ export default function DoubleDiamond() {
             />
 
             {/* Phase labels on diamond */}
-            <text x="130" y="88" textAnchor="middle" className="fill-foreground/70" fontSize="11" fontFamily="var(--font-body)" fontWeight="500">Discover</text>
-            <text x="300" y="88" textAnchor="middle" className="fill-foreground/70" fontSize="11" fontFamily="var(--font-body)" fontWeight="500">Define</text>
-            <text x="480" y="88" textAnchor="middle" className="fill-foreground/70" fontSize="11" fontFamily="var(--font-body)" fontWeight="500">Ideate</text>
-            <text x="640" y="88" textAnchor="middle" className="fill-foreground/70" fontSize="11" fontFamily="var(--font-body)" fontWeight="500">Prototype</text>
+            <text x="130" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Discover</text>
+            <text x="300" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Define</text>
+            <text x="480" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Ideate</text>
+            <text x="640" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Prototype</text>
 
             {/* Diverge/Converge labels */}
-            <text x="130" y="105" textAnchor="middle" className="fill-muted-foreground/30" fontSize="9" fontFamily="var(--font-body)">Diverge</text>
-            <text x="300" y="105" textAnchor="middle" className="fill-muted-foreground/30" fontSize="9" fontFamily="var(--font-body)">Converge</text>
-            <text x="480" y="105" textAnchor="middle" className="fill-muted-foreground/30" fontSize="9" fontFamily="var(--font-body)">Diverge</text>
-            <text x="640" y="105" textAnchor="middle" className="fill-muted-foreground/30" fontSize="9" fontFamily="var(--font-body)">Converge</text>
+            <text x="130" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Diverge</text>
+            <text x="300" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Converge</text>
+            <text x="480" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Diverge</text>
+            <text x="640" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Converge</text>
 
             {/* AI sparkle indicators */}
             <AnimatePresence>
