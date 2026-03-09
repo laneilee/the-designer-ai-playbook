@@ -659,7 +659,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["design-system-review", "design-critique", "hifi-designs"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate WCAG-compliant alternatives for inaccessible patterns", type: "ai" },
+      { name: "ChatGPT", description: "Generate WCAG-compliant alternatives for inaccessible patterns", type: "ai", promptGuide: "This UI pattern [describe pattern] fails WCAG [criterion]. Suggest 3 alternative implementations that meet WCAG AA compliance while preserving the design intent. Include: the fix, why it works, and any tradeoffs." },
       { name: "axe AI", description: "AI-enhanced accessibility evaluation of design patterns", type: "ai" },
     ],
     traditionalTools: [
