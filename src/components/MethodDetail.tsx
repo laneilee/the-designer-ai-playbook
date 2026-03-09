@@ -194,7 +194,7 @@ function ToolColumn({ label, icon, tools }: { label: string; icon: React.ReactNo
     <div>
       <div className="flex items-center gap-1.5 mb-3">
         {icon}
-        <span className="text-[10px] font-body font-medium uppercase tracking-widest text-muted-foreground/50">{label}</span>
+        <span className="text-xs font-body font-medium uppercase tracking-widest text-muted-foreground">{label}</span>
       </div>
       <div className="space-y-2">
         {tools.map((tool) => (
