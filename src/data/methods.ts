@@ -95,8 +95,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["conduct-stakeholder-interviews", "review-competitive-analysis"],
     aiTools: [
-      { name: "ChatGPT", description: "Summarize and cross-reference large volumes of past research documents", type: "ai" },
-      { name: "Claude", description: "Analyze and synthesize findings across multiple research reports", type: "ai" },
+      { name: "ChatGPT", description: "Summarize and cross-reference large volumes of past research documents", type: "ai", promptGuide: "I'm uploading [X] past research documents. For each, extract: (1) Key findings, (2) Methodology used, (3) Date conducted, (4) Open questions. Then cross-reference findings across all documents and highlight contradictions or knowledge gaps." },
+      { name: "Claude", description: "Analyze and synthesize findings across multiple research reports", type: "ai", promptGuide: "Here are findings from [X] previous research studies. Identify: (1) Recurring themes across studies, (2) Findings that contradict each other, (3) Questions that remain unanswered, (4) Areas where research is outdated (>2 years old)." },
     ],
     traditionalTools: [
       { name: "Notion / Confluence", description: "Central repository for organizing past research", type: "traditional" },
