@@ -61,7 +61,7 @@ export default function DoubleDiamond() {
           </button>
           <button
             onClick={() => setMode("ai")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-body font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-body font-medium transition-all ${
               mode === "ai"
                 ? "bg-foreground text-background shadow-sm"
                 : "text-muted-foreground/50 hover:text-muted-foreground"
