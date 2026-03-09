@@ -196,7 +196,7 @@ const Index = () => {
             The AI Design Playbook
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground/60 mt-1.5 max-w-xl font-body leading-relaxed">
-            {methods.length} actionable methods to supercharge every phase of your UX process with AI.
+            {methods.length} actionable methods to elevate every phase of your UX process with AI.
           </p>
         </div>
         {/* Mobile menu button */}
