@@ -15,7 +15,7 @@ export const toolLogos: Record<string, string> = {
   "Notion / Confluence": "https://logo.clearbit.com/notion.so",
   "Notion": "https://logo.clearbit.com/notion.so",
   "Dovetail": "https://logo.clearbit.com/dovetail.com",
-  "Google Docs": "https://logo.clearbit.com/google.com",
+  
   "Figma": "https://logo.clearbit.com/figma.com",
   "Zoom / Teams": "https://logo.clearbit.com/zoom.us",
   "Analytics tools": "",
