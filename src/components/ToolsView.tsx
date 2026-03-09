@@ -1,14 +1,70 @@
 import { useState } from "react";
 import { methods } from "@/data/methods";
 import ToolLogo from "@/components/ToolLogo";
-import { Bot, Wrench, ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
+
+export type ToolCategory =
+  | "AI Assistants"
+  | "Research"
+  | "Design"
+  | "Prototyping"
+  | "Collaboration"
+  | "Testing"
+  | "Accessibility"
+  | "Documentation"
+  | "Analytics";
+
+// Maps each tool name to its functional category
+const toolCategoryMap: Record<string, ToolCategory> = {
+  "ChatGPT": "AI Assistants",
+  "Claude": "AI Assistants",
+  "Perplexity": "Research",
+  "Otter.ai": "Research",
+  "Dovetail": "Research",
+  "dscout": "Research",
+  "Zoom / Teams": "Research",
+  "Optimal Workshop": "Research",
+  "Figma": "Design",
+  "Figma AI": "Design",
+  "Midjourney / DALL-E": "Design",
+  "Paper & pen": "Design",
+  "Lovable": "Prototyping",
+  "v0 by Vercel": "Prototyping",
+  "Cursor / Copilot": "Prototyping",
+  "Framer": "Prototyping",
+  "Miro / FigJam": "Collaboration",
+  "Sticky notes": "Collaboration",
+  "Maze": "Testing",
+  "Lookback / UserTesting": "Testing",
+  "axe AI": "Accessibility",
+  "axe DevTools": "Accessibility",
+  "Notion / Confluence": "Documentation",
+  "Google Docs": "Documentation",
+  "Spreadsheets": "Documentation",
+  "Storybook": "Documentation",
+  "Zeplin": "Documentation",
+  "Amplitude / Mixpanel": "Analytics",
+  "Hotjar / FullStory": "Analytics",
+};
+
+const categoryOrder: ToolCategory[] = [
+  "AI Assistants",
+  "Research",
+  "Design",
+  "Prototyping",
+  "Collaboration",
+  "Testing",
+  "Accessibility",
+  "Documentation",
+  "Analytics",
+];
 
 interface ToolInfo {
   name: string;
   description: string;
   type: "ai" | "traditional";
   usedIn: string[];
-  phases: string[];
+  category: ToolCategory;
 }
 
 function getUniqueTools(): ToolInfo[] {
@@ -21,32 +77,37 @@ function getUniqueTools(): ToolInfo[] {
         if (!existing.usedIn.includes(method.title)) {
           existing.usedIn.push(method.title);
         }
-        if (!existing.phases.includes(method.phase)) {
-          existing.phases.push(method.phase);
-        }
       } else {
         toolMap.set(tool.name, {
           name: tool.name,
           description: tool.description,
           type: tool.type,
           usedIn: [method.title],
-          phases: [method.phase],
+          category: toolCategoryMap[tool.name] || "Documentation",
         });
       }
     });
   });
 
-  return Array.from(toolMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+  return Array.from(toolMap.values());
 }
 
-type GroupBy = "type" | "phase";
-
-const phaseOrder = ["Discover", "Define", "Ideate", "Prototype", "Validate", "Align"];
+export function getToolsByCategory() {
+  const tools = getUniqueTools();
+  return categoryOrder
+    .map((cat) => ({
+      category: cat,
+      tools: tools.filter((t) => t.category === cat).sort((a, b) => a.name.localeCompare(b.name)),
+    }))
+    .filter((g) => g.tools.length > 0);
+}
 
 export default function ToolsView() {
-  const tools = getUniqueTools();
-  const [groupBy, setGroupBy] = useState<GroupBy>("phase");
-  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set(phaseOrder));
+  const grouped = getToolsByCategory();
+  const allTools = grouped.flatMap((g) => g.tools);
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(
+    new Set(categoryOrder)
+  );
 
   const toggleGroup = (group: string) => {
     setExpandedGroups((prev) => {
@@ -57,82 +118,28 @@ export default function ToolsView() {
     });
   };
 
-  const grouped = (() => {
-    if (groupBy === "type") {
-      return [
-        { key: "AI-Powered Tools", items: tools.filter((t) => t.type === "ai") },
-        { key: "Traditional Tools", items: tools.filter((t) => t.type === "traditional") },
-      ];
-    }
-    return phaseOrder.map((phase) => ({
-      key: phase,
-      items: tools.filter((t) => t.phases.includes(phase)),
-    }));
-  })();
-
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 py-8 lg:py-12">
-      <div className="flex items-end justify-between gap-4 mb-6">
-        <div>
-          <h2 className="text-2xl lg:text-3xl font-display mb-1">Tools Directory</h2>
-          <p className="text-sm text-muted-foreground">
-            {tools.length} tools referenced across the framework.
-          </p>
-        </div>
-        <div className="flex items-center gap-1 bg-secondary rounded-lg p-0.5 shrink-0">
-          <button
-            onClick={() => setGroupBy("phase")}
-            className={`text-xs px-3 py-1.5 rounded-md font-body transition-colors ${
-              groupBy === "phase"
-                ? "bg-background text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            By Phase
-          </button>
-          <button
-            onClick={() => setGroupBy("type")}
-            className={`text-xs px-3 py-1.5 rounded-md font-body transition-colors ${
-              groupBy === "type"
-                ? "bg-background text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            By Type
-          </button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-2 gap-3 mb-8">
-        <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/5 border border-primary/10">
-          <Bot className="w-4 h-4 text-primary" />
-          <div>
-            <div className="text-lg font-display text-foreground">{tools.filter((t) => t.type === "ai").length}</div>
-            <div className="text-[11px] text-muted-foreground font-body">AI-Powered Tools</div>
-          </div>
-        </div>
-        <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-accent border border-border">
-          <Wrench className="w-4 h-4 text-muted-foreground" />
-          <div>
-            <div className="text-lg font-display text-foreground">{tools.filter((t) => t.type === "traditional").length}</div>
-            <div className="text-[11px] text-muted-foreground font-body">Traditional Tools</div>
-          </div>
-        </div>
+      <div className="mb-6">
+        <h2 className="text-2xl lg:text-3xl font-display mb-1">Tools Directory</h2>
+        <p className="text-sm text-muted-foreground">
+          {allTools.length} tools referenced across the playbook, organized by what they're for.
+        </p>
       </div>
 
       <div className="space-y-3">
-        {grouped.map(({ key, items }) => {
-          const isExpanded = expandedGroups.has(key);
+        {grouped.map(({ category, tools }) => {
+          const isExpanded = expandedGroups.has(category);
           return (
-            <div key={key} className="rounded-xl border border-border bg-card overflow-hidden">
+            <div key={category} className="rounded-xl border border-border bg-card overflow-hidden">
               <button
-                onClick={() => toggleGroup(key)}
+                onClick={() => toggleGroup(category)}
                 className="w-full flex items-center justify-between px-5 py-4 hover:bg-accent/50 transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-sm font-display text-foreground">{key}</span>
+                  <span className="text-sm font-display text-foreground">{category}</span>
                   <span className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground font-body">
-                    {items.length} tools
+                    {tools.length}
                   </span>
                 </div>
                 {isExpanded ? (
@@ -143,20 +150,13 @@ export default function ToolsView() {
               </button>
               {isExpanded && (
                 <div className="px-5 pb-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {items.map((tool) => (
+                  {tools.map((tool) => (
                     <div key={tool.name} className="flex items-start gap-3 p-3 rounded-lg bg-accent/40">
                       <div className="w-9 h-9 rounded-lg overflow-hidden shrink-0 flex items-center justify-center bg-background">
                         <ToolLogo name={tool.name} type={tool.type} size="md" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium text-foreground truncate">{tool.name}</span>
-                          {tool.type === "ai" ? (
-                            <Bot className="w-3 h-3 text-primary shrink-0" />
-                          ) : (
-                            <Wrench className="w-3 h-3 text-muted-foreground shrink-0" />
-                          )}
-                        </div>
+                        <span className="text-sm font-medium text-foreground truncate block">{tool.name}</span>
                         <p className="text-xs text-muted-foreground leading-relaxed mt-0.5 line-clamp-2">
                           {tool.description}
                         </p>
