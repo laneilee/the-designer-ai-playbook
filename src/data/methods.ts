@@ -510,9 +510,9 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["define-interaction-model", "create-lofi-concepts", "concept-testing"],
     aiTools: [
-      { name: "Lovable", description: "Build interactive prototypes from natural language descriptions", type: "ai" },
-      { name: "v0 by Vercel", description: "Generate UI components and pages from text descriptions", type: "ai" },
-      { name: "Cursor / Copilot", description: "AI-assisted coding for rapid prototype iteration", type: "ai" },
+      { name: "Lovable", description: "Build interactive prototypes from natural language descriptions", type: "ai", promptGuide: "Build a low-fidelity prototype for [product type]. The main flow is: [describe user journey]. Include these screens: [list screens]. Keep the design minimal — focus on layout and flow, not visual polish. Use placeholder content." },
+      { name: "v0 by Vercel", description: "Generate UI components and pages from text descriptions", type: "ai", promptGuide: "Create a [component type] that [describe functionality]. It should have [list key elements]. Style it minimally — this is for concept validation, not production." },
+      { name: "Cursor / Copilot", description: "AI-assisted coding for rapid prototype iteration", type: "ai", promptGuide: "I have a prototype with [describe current state]. Modify it to: [describe changes]. Keep the code simple — this is a throwaway prototype for user testing, not production code." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Build clickable wireframe prototypes with linking", type: "traditional" },
