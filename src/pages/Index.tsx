@@ -285,12 +285,13 @@ const Index = () => {
 };
 
 /* ── Tools sidebar list ── */
-function ToolsSidebarList() {
+function ToolsSidebarList({ searchQuery = "" }: { searchQuery?: string }) {
   const toolCategories = getToolsByCategory();
   return (
     <div className="pb-8">
-      {toolCategories.map(({ category, tools }) => (
-        <div key={category} className="mb-1">
+      {toolCategories.map(({ category, tools: catTools }) => {
+        const filtered = catTools.filter((t) => t.name.toLowerCase().includes(searchQuery.toLowerCase()));
+        if (searchQuery && filtered.length === 0) return null;
           <div className="flex items-center gap-2 px-5 pt-5 pb-2">
              <span className="text-xs font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground">
               {category}
