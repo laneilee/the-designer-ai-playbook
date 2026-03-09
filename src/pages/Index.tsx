@@ -27,6 +27,7 @@ const Index = () => {
   const [viewMode, setViewMode] = useState<ViewMode>("methods");
   const [activeMethodId, setActiveMethodId] = useState<string>(methods[0]?.id || "");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
