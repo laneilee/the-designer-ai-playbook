@@ -358,8 +358,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["synthesize-research", "problem-framing", "lofi-vibe-coding"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate concept variations and 'what if' prompts to push thinking further", type: "ai" },
-      { name: "Claude", description: "Challenge assumptions and suggest alternative approaches", type: "ai" },
+      { name: "ChatGPT", description: "Generate concept variations and 'what if' prompts to push thinking further", type: "ai", promptGuide: "We're ideating solutions for this problem: [problem statement]. Generate 10 'How Might We' questions that reframe the problem from different angles. Then for each HMW, suggest 3 wildly different solution concepts — one conventional, one ambitious, and one that breaks assumptions." },
+      { name: "Claude", description: "Challenge assumptions and suggest alternative approaches", type: "ai", promptGuide: "Here are our current solution concepts for [problem]: [list concepts]. For each, identify the underlying assumptions. Then suggest 3 alternative approaches we haven't considered — specifically ones that challenge our biggest assumptions." },
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Digital whiteboard for remote ideation and voting", type: "traditional" },
