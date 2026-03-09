@@ -184,8 +184,13 @@ const Index = () => {
         </button>
       </header>
 
+      {/* Process Diagram */}
+      <div className="px-5 sm:px-8 lg:px-10 pb-5">
+        <DoubleDiamond />
+      </div>
+
       {/* Two-panel layout */}
-      <div className="flex border-t border-border" style={{ height: "calc(100vh - 100px)" }}>
+      <div className="flex border-t border-border" style={{ height: "calc(100vh - 280px)" }}>
         {/* ── Desktop Sidebar ── */}
         <aside className="w-[300px] lg:w-[340px] shrink-0 border-r border-border bg-card/50 hidden md:flex flex-col">
           {sidebarContent}
@@ -247,10 +252,6 @@ const Index = () => {
             )}
           </AnimatePresence>
 
-          {/* Double Diamond */}
-          <div className="px-6 sm:px-8 lg:px-12 pt-8">
-            <DoubleDiamond />
-          </div>
 
           <FeedbackForm />
         </main>
