@@ -83,11 +83,11 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
             className="w-1.5 h-1.5 rounded-full"
             style={{ background: colors.accent }}
           />
-          <span className="text-[10px] font-body font-semibold uppercase tracking-widest" style={{ color: colors.accent }}>
+          <span className="text-xs font-body font-semibold uppercase tracking-widest" style={{ color: colors.accent }}>
             When to use this
           </span>
         </div>
-        <p className="text-sm text-foreground/80 font-body leading-relaxed">
+        <p className="text-[15px] text-foreground/80 font-body leading-relaxed">
           {method.whenToUse}
         </p>
       </div>
