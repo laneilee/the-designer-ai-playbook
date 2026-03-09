@@ -321,8 +321,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["conduct-user-interviews", "problem-framing", "define-success-metrics"],
     aiTools: [
-      { name: "ChatGPT", description: "Pre-cluster large datasets and suggest theme labels for review", type: "ai" },
-      { name: "Claude", description: "Analyze and cross-reference data to find non-obvious connections", type: "ai" },
+      { name: "ChatGPT", description: "Pre-cluster large datasets and suggest theme labels for review", type: "ai", promptGuide: "Here are [X] research observations from user interviews. Group them into natural clusters by affinity. For each cluster: suggest a descriptive theme name, list the observations that belong to it, and write an insight statement in the format: 'We learned that [observation] because [reason], which means [implication].'" },
+      { name: "Claude", description: "Analyze and cross-reference data to find non-obvious connections", type: "ai", promptGuide: "Review these research findings from [interviews/surveys/analytics]. Identify connections that aren't immediately obvious — contradictions between what users say vs. do, patterns that span multiple data sources, and minority findings that might signal emerging needs." },
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Digital sticky notes for affinity mapping", type: "traditional" },
