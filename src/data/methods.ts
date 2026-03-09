@@ -294,43 +294,6 @@ export const methods: Method[] = [
 
   // ── DEFINE ──
   {
-    id: "ideation",
-    title: "Ideation",
-    phase: "Define",
-    context: ["Team", "Cross-functional"],
-    whenToUse: "When transitioning from research insights to design opportunities — generating a wide range of possible solutions before converging on direction.",
-    description:
-      "Ideation is the structured generation of ideas to address defined problems. Using techniques like brainstorming, How Might We questions, Crazy 8s, and design studios, the team diverges widely before converging on the most promising directions. The goal is quantity and variety — evaluation comes later.",
-    effort: "Low",
-    timeEstimate: "2–4 hours",
-    steps: [
-      "Review research insights and problem statements as a team",
-      "Frame the challenge with How Might We questions",
-      "Use rapid ideation techniques (Crazy 8s, brainstorming, brainwriting)",
-      "Generate as many ideas as possible — no judgment during divergence",
-      "Cluster and theme the ideas using affinity mapping",
-      "Vote on the most promising directions",
-      "Select 2-3 concepts to carry forward for further development",
-    ],
-    artifacts: [
-      "Ideation output: sketches, sticky notes, concept descriptions",
-      "Clustered themes with voting results",
-      "Selected concept directions with rationale",
-    ],
-    relatedMethods: ["synthesize-research", "problem-framing", "lofi-vibe-coding"],
-    aiTools: [
-      { name: "ChatGPT", description: "Generate concept variations and 'what if' prompts to push thinking further", type: "ai" },
-      { name: "Claude", description: "Challenge assumptions and suggest alternative approaches", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Miro / FigJam", description: "Digital whiteboard for remote ideation and voting", type: "traditional" },
-      { name: "Sticky notes", description: "Physical or digital sticky notes for brainstorming", type: "traditional" },
-    ],
-    resources: [
-      { title: "IDEO: Brainstorming Rules", url: "https://www.ideou.com/pages/brainstorming-rules" },
-    ],
-  },
-  {
     id: "synthesize-research",
     title: "Synthesize Research",
     phase: "Define",
@@ -366,6 +329,43 @@ export const methods: Method[] = [
     ],
     resources: [
       { title: "NNG: Affinity Diagramming", url: "https://www.nngroup.com/articles/affinity-diagram/" },
+    ],
+  },
+  {
+    id: "ideation",
+    title: "Ideation",
+    phase: "Define",
+    context: ["Team", "Cross-functional"],
+    whenToUse: "When transitioning from research insights to design opportunities — generating a wide range of possible solutions before converging on direction.",
+    description:
+      "Ideation is the structured generation of ideas to address defined problems. Using techniques like brainstorming, How Might We questions, Crazy 8s, and design studios, the team diverges widely before converging on the most promising directions. The goal is quantity and variety — evaluation comes later.",
+    effort: "Low",
+    timeEstimate: "2–4 hours",
+    steps: [
+      "Review research insights and problem statements as a team",
+      "Frame the challenge with How Might We questions",
+      "Use rapid ideation techniques (Crazy 8s, brainstorming, brainwriting)",
+      "Generate as many ideas as possible — no judgment during divergence",
+      "Cluster and theme the ideas using affinity mapping",
+      "Vote on the most promising directions",
+      "Select 2-3 concepts to carry forward for further development",
+    ],
+    artifacts: [
+      "Ideation output: sketches, sticky notes, concept descriptions",
+      "Clustered themes with voting results",
+      "Selected concept directions with rationale",
+    ],
+    relatedMethods: ["synthesize-research", "problem-framing", "lofi-vibe-coding"],
+    aiTools: [
+      { name: "ChatGPT", description: "Generate concept variations and 'what if' prompts to push thinking further", type: "ai" },
+      { name: "Claude", description: "Challenge assumptions and suggest alternative approaches", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Miro / FigJam", description: "Digital whiteboard for remote ideation and voting", type: "traditional" },
+      { name: "Sticky notes", description: "Physical or digital sticky notes for brainstorming", type: "traditional" },
+    ],
+    resources: [
+      { title: "IDEO: Brainstorming Rules", url: "https://www.ideou.com/pages/brainstorming-rules" },
     ],
   },
   {
