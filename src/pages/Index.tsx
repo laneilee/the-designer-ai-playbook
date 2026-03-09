@@ -99,7 +99,7 @@ const Index = () => {
                       <PhaseIcon className="w-3 h-3" style={{ color: colors.accent }} />
                     </div>
                     <span
-                      className="text-[10px] font-body font-semibold uppercase tracking-[0.15em]"
+                      className="text-xs font-body font-semibold uppercase tracking-[0.15em]"
                       style={{ color: colors.accent }}
                     >
                       {phase}
