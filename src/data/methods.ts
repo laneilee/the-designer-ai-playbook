@@ -129,7 +129,7 @@ export const methods: Method[] = [
       "UX strengths and weaknesses per competitor",
       "Opportunity areas for differentiation",
     ],
-    relatedMethods: ["review-previous-research", "audit-experiences"],
+    relatedMethods: ["review-previous-research"],
     aiTools: [
       { name: "ChatGPT", description: "Research competitors and generate comparison matrices", type: "ai" },
       { name: "Perplexity", description: "Deep research on competitor features, positioning, and reviews", type: "ai" },
