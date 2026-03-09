@@ -115,7 +115,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
                 >
                   {i + 1}
                 </div>
-                <span className={`text-[13px] font-body leading-relaxed flex-1 transition-colors ${
+                <span className={`text-sm font-body leading-relaxed flex-1 transition-colors ${
                   expandedStep === i ? "text-foreground" : "text-foreground/70"
                 }`}>
                   {step}
