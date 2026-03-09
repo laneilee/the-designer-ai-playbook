@@ -443,43 +443,6 @@ export const methods: Method[] = [
       { title: "NNG: UX Metrics", url: "https://www.nngroup.com/articles/usability-metrics/" },
     ],
   },
-  {
-    id: "audit-experiences",
-    title: "Audit Current and Comparable Experiences",
-    phase: "Define",
-    context: ["Solo", "Team"],
-    whenToUse: "When you need a clear picture of the current state — evaluating existing product experiences and comparable solutions to identify gaps and opportunities.",
-    description:
-      "An experience audit systematically evaluates your current product (and comparable experiences) against usability heuristics, design principles, and user needs. It reveals pain points, inconsistencies, and opportunities that inform the design direction. This goes beyond competitive analysis by deeply examining interaction quality.",
-    effort: "Medium",
-    timeEstimate: "3–5 days",
-    steps: [
-      "Define audit scope: which flows, screens, and comparable products to evaluate",
-      "Walk through each key user flow, documenting friction points and bright spots",
-      "Evaluate against established heuristics (Nielsen's 10, WCAG guidelines)",
-      "Screenshot and annotate specific issues with severity ratings",
-      "Compare patterns across your product and comparable experiences",
-      "Synthesize findings into opportunity areas ranked by impact",
-    ],
-    artifacts: [
-      "Experience audit report with annotated screenshots",
-      "Heuristic scorecard for current product vs. comparables",
-      "Opportunity map with severity-ranked findings",
-      "Bright spots inventory — patterns worth preserving",
-    ],
-    relatedMethods: ["review-competitive-analysis", "problem-framing", "define-interaction-model"],
-    aiTools: [
-      { name: "ChatGPT", description: "Pre-scan screenshots against heuristic checklists to surface potential issues", type: "ai" },
-      { name: "Claude", description: "Generate detailed audit reports from UI descriptions and screenshots", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Figma", description: "Annotate designs with audit findings and severity markers", type: "traditional" },
-      { name: "Spreadsheets", description: "Track and score audit findings systematically", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: How to Conduct a Heuristic Evaluation", url: "https://www.nngroup.com/articles/how-to-conduct-a-heuristic-evaluation/" },
-    ],
-  },
 
   // ── DESIGN ──
   {
