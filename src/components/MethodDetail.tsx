@@ -45,7 +45,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
       </div>
 
       {/* Title */}
-      <h2 className="text-2xl lg:text-[2rem] font-display text-foreground leading-tight mb-4">
+      <h2 className="text-3xl lg:text-4xl font-display text-foreground leading-tight mb-4">
         {method.title}
       </h2>
 
