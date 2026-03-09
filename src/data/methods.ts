@@ -1,4 +1,4 @@
-export type Phase = "Discover" | "Define" | "Ideate" | "Prototype" | "Validate" | "Align";
+export type Phase = "Align" | "Discovery" | "Define" | "Design" | "Validate" | "Handoff";
 export type Context = "Solo" | "Team" | "Stakeholder" | "Cross-functional";
 export type Effort = "Low" | "Medium" | "High";
 export type ToolType = "ai" | "traditional";
@@ -26,669 +26,11 @@ export interface Method {
   resources: { title: string; url: string }[];
 }
 
-export const phases: Phase[] = ["Discover", "Define", "Ideate", "Prototype", "Validate", "Align"];
+export const phases: Phase[] = ["Align", "Discovery", "Define", "Design", "Validate", "Handoff"];
 
 export const contexts: Context[] = ["Solo", "Team", "Stakeholder", "Cross-functional"];
 
 export const methods: Method[] = [
-  // ── DISCOVER ──
-  {
-    id: "jobs-to-be-done",
-    title: "Jobs To Be Done",
-    phase: "Discover",
-    context: ["Solo", "Team"],
-    whenToUse: "When you need to uncover the underlying motivations behind user behavior — what progress are they trying to make in their lives?",
-    description:
-      "JTBD reframes user needs around the 'job' they hire a product to do. Instead of asking what features users want, you explore the functional, emotional, and social dimensions of the progress they're seeking. This method reveals opportunities that demographic-based personas often miss.",
-    effort: "Medium",
-    timeEstimate: "1–2 weeks",
-    steps: [
-      "Identify the domain and target users to interview",
-      "Conduct switch interviews — ask about the last time they switched to/from a solution",
-      "Map the timeline: first thought → passive looking → active looking → deciding → consuming → satisfaction",
-      "Extract the functional, emotional, and social jobs",
-      "Write job statements: 'When [situation], I want to [motivation], so I can [outcome]'",
-      "Cluster jobs by themes and prioritize by frequency and importance",
-    ],
-    artifacts: [
-      "Job statements with situation-motivation-outcome structure",
-      "Forces of progress diagram (push, pull, anxiety, habit)",
-      "Job map showing the full consumption chain",
-    ],
-    relatedMethods: ["user-story-mapping", "journey-mapping", "assumption-mapping"],
-    aiTools: [
-      { name: "Claude", description: "Analyze interview transcripts to extract job statements and forces of progress", type: "ai" },
-      { name: "Otter.ai", description: "Real-time transcription of JTBD interviews", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Miro / FigJam", description: "Map forces diagrams and cluster job statements collaboratively", type: "traditional" },
-      { name: "Dovetail", description: "Tag and organize qualitative interview data", type: "traditional" },
-    ],
-    resources: [
-      { title: "Intercom: Jobs To Be Done", url: "https://www.intercom.com/resources/books/intercom-jobs-to-be-done" },
-      { title: "JTBD Toolkit by Jim Kalbach", url: "https://jtbd-toolkit.com/" },
-    ],
-  },
-  {
-    id: "competitive-analysis",
-    title: "Competitive Analysis",
-    phase: "Discover",
-    context: ["Solo", "Team"],
-    whenToUse: "When entering a market, redesigning a product, or looking for differentiation opportunities against existing solutions.",
-    description:
-      "Systematically evaluate competitor products to understand market patterns, UX conventions, and opportunities for differentiation. Go beyond feature checklists — analyze the experience quality, positioning, and unmet needs competitors leave open.",
-    effort: "Medium",
-    timeEstimate: "3–5 days",
-    steps: [
-      "Define your competitive landscape: direct, indirect, and aspirational competitors",
-      "Create a feature/experience comparison matrix",
-      "Evaluate each competitor hands-on — sign up, complete key flows, note friction",
-      "Analyze their positioning, messaging, and target audience",
-      "Identify patterns, conventions, and gaps across the landscape",
-      "Synthesize findings into opportunity areas for differentiation",
-    ],
-    artifacts: [
-      "Competitive landscape map with positioning",
-      "Feature/experience comparison matrix with scoring",
-      "UX strengths and weaknesses per competitor",
-      "Opportunity areas for differentiation",
-    ],
-    relatedMethods: ["experience-principles", "north-star-framing", "stakeholder-mapping"],
-    aiTools: [
-      { name: "ChatGPT", description: "Research competitors and generate comparison matrices", type: "ai" },
-      { name: "Perplexity", description: "Deep research on competitor features, positioning, and reviews", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Figma", description: "Screenshot and annotate competitor UIs for comparison", type: "traditional" },
-      { name: "Spreadsheets", description: "Build feature comparison matrices and scoring rubrics", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Competitive UX Benchmarking", url: "https://www.nngroup.com/articles/competitive-usability-evaluations/" },
-    ],
-  },
-  {
-    id: "journey-mapping",
-    title: "Journey Mapping",
-    phase: "Discover",
-    context: ["Team", "Stakeholder"],
-    whenToUse: "When you need a shared understanding of the end-to-end user experience, including emotional highs and lows, across all touchpoints.",
-    description:
-      "Journey maps visualize the complete user experience over time, capturing actions, thoughts, emotions, touchpoints, and pain points. They create empathy and alignment across teams by making the invisible visible — especially the gaps between touchpoints that no single team owns.",
-    effort: "Medium",
-    timeEstimate: "3–5 days",
-    steps: [
-      "Define the scope: which persona, which scenario, start/end points",
-      "Gather research data — interviews, analytics, support tickets",
-      "Map the stages of the journey (awareness → consideration → use → retention)",
-      "For each stage, capture: actions, thoughts, emotions, touchpoints, pain points",
-      "Plot the emotional curve across the journey",
-      "Identify moments of truth and opportunity areas",
-      "Workshop with cross-functional team to validate and ideate",
-    ],
-    artifacts: [
-      "Journey map with stages, actions, emotions, and pain points",
-      "Opportunity map highlighting key improvement areas",
-      "Emotional curve visualization",
-    ],
-    relatedMethods: ["service-blueprint", "jobs-to-be-done", "stakeholder-mapping"],
-    aiTools: [
-      { name: "ChatGPT", description: "Synthesize research data into journey stages and identify patterns", type: "ai" },
-      { name: "Claude", description: "Analyze support tickets and reviews to surface pain points along the journey", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Miro / FigJam", description: "Collaborative journey mapping with the team", type: "traditional" },
-      { name: "Figma", description: "Create polished journey map deliverables", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Journey Mapping 101", url: "https://www.nngroup.com/articles/journey-mapping-101/" },
-    ],
-  },
-  {
-    id: "service-blueprint",
-    title: "Service Blueprint",
-    phase: "Discover",
-    context: ["Cross-functional", "Stakeholder"],
-    whenToUse: "When you need to understand and optimize the systems, processes, and people behind the user-facing experience.",
-    description:
-      "Service blueprints extend journey maps by revealing the backstage operations that support each user touchpoint. They map frontstage interactions alongside backstage processes, support systems, and internal actions — making it possible to diagnose systemic failures and design holistic improvements.",
-    effort: "High",
-    timeEstimate: "1–2 weeks",
-    steps: [
-      "Start with a customer journey map as the foundation",
-      "Add the line of interaction: what the user directly interacts with",
-      "Add the line of visibility: frontstage employee actions the user sees",
-      "Add backstage actions: what happens behind the scenes",
-      "Add support processes: systems, tools, and policies that enable delivery",
-      "Mark failure points, bottlenecks, and wait times",
-      "Identify improvement opportunities across all layers",
-    ],
-    artifacts: [
-      "Service blueprint with all five layers mapped",
-      "Failure point inventory with severity ratings",
-      "Improvement roadmap with quick wins and strategic bets",
-    ],
-    relatedMethods: ["journey-mapping", "stakeholder-mapping", "okr-alignment"],
-    aiTools: [
-      { name: "ChatGPT", description: "Generate backstage process descriptions from operational documentation", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Miro / FigJam", description: "Large-format collaborative blueprinting sessions", type: "traditional" },
-      { name: "Notion / Confluence", description: "Document and share the blueprint with stakeholders", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Service Blueprints", url: "https://www.nngroup.com/articles/service-blueprints-definition/" },
-    ],
-  },
-  {
-    id: "stakeholder-mapping",
-    title: "Stakeholder Mapping",
-    phase: "Discover",
-    context: ["Solo", "Stakeholder"],
-    whenToUse: "At project kickoff — when you need to understand who has influence, who has concerns, and how to navigate organizational dynamics.",
-    description:
-      "Map the people and teams who influence, are affected by, or care about your project. Understanding power dynamics, motivations, and concerns helps you build the right coalitions, anticipate resistance, and communicate effectively throughout the design process.",
-    effort: "Low",
-    timeEstimate: "1–2 days",
-    steps: [
-      "List all people and teams connected to the project",
-      "Plot them on a power/interest matrix (high power + high interest = manage closely)",
-      "Identify each stakeholder's goals, concerns, and definition of success",
-      "Map relationships and potential conflicts between stakeholders",
-      "Define your communication strategy for each quadrant",
-      "Schedule introductory conversations with key stakeholders",
-    ],
-    artifacts: [
-      "Power/interest matrix with all stakeholders plotted",
-      "Stakeholder profiles with goals, concerns, and communication preferences",
-      "RACI chart for design decisions",
-    ],
-    relatedMethods: ["okr-alignment", "design-critique", "service-blueprint"],
-    aiTools: [
-      { name: "ChatGPT", description: "Generate interview guides and synthesize stakeholder notes into profiles", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Miro / FigJam", description: "Collaborative stakeholder mapping and relationship diagrams", type: "traditional" },
-      { name: "Notion / Confluence", description: "Document stakeholder profiles and communication plans", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Stakeholder Interviews", url: "https://www.nngroup.com/articles/stakeholder-interviews/" },
-    ],
-  },
-
-  // ── DEFINE ──
-  {
-    id: "north-star-framing",
-    title: "North Star Vision Framing",
-    phase: "Define",
-    context: ["Team", "Stakeholder"],
-    whenToUse: "When the team needs a shared, inspiring vision of the future state to guide design decisions and align stakeholders.",
-    description:
-      "Define a compelling vision of the ideal user experience 12–18 months out. The North Star isn't a feature spec — it's an aspirational narrative that describes how life is better for users. It gives the team a decision-making compass and helps stakeholders understand the 'why' behind design choices.",
-    effort: "Medium",
-    timeEstimate: "2–3 days",
-    steps: [
-      "Synthesize research insights and identify the biggest opportunity areas",
-      "Draft a future-state narrative: describe a day in the user's life with the ideal experience",
-      "Define the key experience principles that guide toward this vision",
-      "Create a visual concept or storyboard of the North Star experience",
-      "Pressure-test with stakeholders: is it inspiring? Is it achievable? Does it align with business goals?",
-      "Distill into a one-page North Star document the team can reference",
-    ],
-    artifacts: [
-      "North Star narrative document with vision statement",
-      "Future-state storyboard or concept visualization",
-      "Experience principles derived from the vision",
-    ],
-    relatedMethods: ["experience-principles", "how-might-we", "okr-alignment"],
-    aiTools: [
-      { name: "ChatGPT", description: "Draft narrative scenarios and vision statements from research insights", type: "ai" },
-      { name: "Midjourney / DALL-E", description: "Generate visual concept explorations for the future state", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Figma", description: "Create storyboards and visual concepts for the North Star", type: "traditional" },
-      { name: "Google Docs", description: "Collaboratively draft and refine the vision narrative", type: "traditional" },
-    ],
-    resources: [
-      { title: "Amplitude: North Star Metric", url: "https://amplitude.com/blog/north-star-metric" },
-    ],
-  },
-  {
-    id: "how-might-we",
-    title: "How Might We",
-    phase: "Define",
-    context: ["Team", "Cross-functional"],
-    whenToUse: "When transitioning from research insights to design opportunities — turning problems into actionable starting points for ideation.",
-    description:
-      "HMW questions reframe problems as opportunities. The magic is in the specificity: too broad and they're useless ('HMW make users happy'), too narrow and they're prescriptive ('HMW add a button'). Well-crafted HMW questions open creative space while maintaining focus on real user needs.",
-    effort: "Low",
-    timeEstimate: "2–4 hours",
-    steps: [
-      "Review research insights and identify the most important pain points and needs",
-      "For each insight, write 3-5 HMW questions at different levels of specificity",
-      "Critique each HMW: is it too broad? Too narrow? Does it assume a solution?",
-      "Vote on the most promising HMW questions as a team",
-      "Cluster related HMWs into design challenge themes",
-      "Select 3-5 top HMW questions to take into ideation",
-    ],
-    artifacts: [
-      "Prioritized list of HMW questions linked to research insights",
-      "Clustered design challenge themes",
-      "Selected HMWs ready for ideation sessions",
-    ],
-    relatedMethods: ["affinity-mapping", "crazy-eights", "assumption-mapping"],
-    aiTools: [
-      { name: "ChatGPT", description: "Generate HMW variations from research insights at different specificity levels", type: "ai" },
-      { name: "Claude", description: "Critique HMW questions for breadth/narrowness and assumption bias", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Sticky notes", description: "Physical or digital sticky notes for collaborative HMW generation", type: "traditional" },
-      { name: "Miro / FigJam", description: "Cluster and vote on HMW questions together", type: "traditional" },
-    ],
-    resources: [
-      { title: "IDEO: How Might We", url: "https://designthinking.ideo.com/faq/how-might-we-questions" },
-    ],
-  },
-  {
-    id: "experience-principles",
-    title: "Experience Principles",
-    phase: "Define",
-    context: ["Team", "Stakeholder"],
-    whenToUse: "When the team needs a shared set of decision-making criteria to evaluate design options consistently.",
-    description:
-      "Experience principles are opinionated statements that describe the qualities your product experience must embody. Unlike generic values ('simple', 'delightful'), good experience principles are specific enough to resolve design debates — they tell you what to prioritize when principles conflict.",
-    effort: "Medium",
-    timeEstimate: "2–3 days",
-    steps: [
-      "Review research synthesis, competitive analysis, and North Star vision",
-      "Workshop: brainstorm qualities that describe the ideal experience",
-      "Cluster and prioritize — aim for 4-6 principles, not 20",
-      "Make each principle specific and opinionated (not 'be simple', but 'reduce decisions at checkout to three')",
-      "Add 'this, not that' comparisons to clarify intent",
-      "Validate with stakeholders and test against real design decisions",
-    ],
-    artifacts: [
-      "4-6 experience principles with rationale and examples",
-      "'This, not that' comparisons for each principle",
-      "Decision-making rubric for evaluating designs against principles",
-    ],
-    relatedMethods: ["north-star-framing", "design-principles-workshop", "design-critique"],
-    aiTools: [
-      { name: "ChatGPT", description: "Generate principle candidates from research themes and competitive gaps", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Miro / FigJam", description: "Collaborative brainstorming and voting on principles", type: "traditional" },
-      { name: "Notion", description: "Document and socialize the final principles", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: UX Principles", url: "https://www.nngroup.com/articles/ux-principles/" },
-    ],
-  },
-  {
-    id: "assumption-mapping",
-    title: "Assumption Mapping",
-    phase: "Define",
-    context: ["Team", "Cross-functional"],
-    whenToUse: "Before investing in building — when you need to surface and prioritize the riskiest unknowns so you can test the right things first.",
-    description:
-      "Every design decision rests on assumptions. Assumption mapping makes them explicit, then plots them on a certainty/impact matrix to identify which assumptions are both high-impact and least validated. This focuses your research and testing on what matters most.",
-    effort: "Low",
-    timeEstimate: "2–4 hours",
-    steps: [
-      "Individually list all assumptions behind your current design direction",
-      "Categorize: desirability (will users want this?), viability (can the business support it?), feasibility (can we build it?)",
-      "Plot each on a 2×2: importance vs. certainty",
-      "Focus on high-importance, low-certainty quadrant — these are your riskiest bets",
-      "For each risky assumption, define what would prove/disprove it",
-      "Plan validation experiments for top-priority assumptions",
-    ],
-    artifacts: [
-      "Assumption inventory categorized by type",
-      "2×2 importance/certainty matrix",
-      "Validation plan for high-risk assumptions",
-    ],
-    relatedMethods: ["concept-testing", "usability-testing", "how-might-we"],
-    aiTools: [
-      { name: "Claude", description: "Challenge your assumptions and suggest blind spots from different user perspectives", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Miro / FigJam", description: "Plot assumptions on the 2×2 matrix collaboratively", type: "traditional" },
-      { name: "Sticky notes", description: "Silent brainstorming to surface individual assumptions", type: "traditional" },
-    ],
-    resources: [
-      { title: "Strategyzer: Assumption Mapping", url: "https://www.strategyzer.com/library/how-to-test-business-ideas-5-assumption-mapping" },
-    ],
-  },
-
-  // ── IDEATE ──
-  {
-    id: "affinity-mapping",
-    title: "Affinity Mapping",
-    phase: "Ideate",
-    context: ["Team", "Cross-functional"],
-    whenToUse: "When you have a large volume of unstructured data — research notes, brainstorm outputs, feedback — and need to find patterns and themes.",
-    description:
-      "Affinity mapping (or affinity diagramming) is a bottom-up clustering technique. You write individual observations on sticky notes, then silently group them by natural affinity. Themes emerge from the data rather than being imposed top-down, reducing bias and surfacing unexpected connections.",
-    effort: "Low",
-    timeEstimate: "1–3 hours",
-    steps: [
-      "Write each observation/idea on a separate sticky note (one thought per note)",
-      "Silently cluster notes that feel related — don't discuss while sorting",
-      "Once clusters stabilize, discuss what each group represents",
-      "Name each cluster with a theme statement (not just a label)",
-      "Identify outliers that don't fit — these often contain the most interesting insights",
-      "Prioritize themes by frequency, impact, or novelty",
-    ],
-    artifacts: [
-      "Themed clusters with descriptive labels",
-      "Key insights summary from each theme",
-      "Outlier observations for further investigation",
-    ],
-    relatedMethods: ["how-might-we", "crazy-eights", "prioritization-matrix"],
-    aiTools: [
-      { name: "ChatGPT", description: "Pre-cluster large datasets and suggest theme labels for review", type: "ai" },
-      { name: "Claude", description: "Analyze and cross-reference data to find non-obvious connections", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Miro / FigJam", description: "Digital sticky notes for remote affinity mapping", type: "traditional" },
-      { name: "Sticky notes", description: "Physical sticky notes on a wall for in-person sessions", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Affinity Diagramming", url: "https://www.nngroup.com/articles/affinity-diagram/" },
-    ],
-  },
-  {
-    id: "crazy-eights",
-    title: "Crazy 8s",
-    phase: "Ideate",
-    context: ["Solo", "Team"],
-    whenToUse: "When you need to push past your first idea and rapidly generate multiple divergent solutions to a focused design challenge.",
-    description:
-      "Crazy 8s forces rapid ideation: fold a sheet into 8 panels and sketch 8 distinct ideas in 8 minutes. The time pressure bypasses your inner critic and pushes you past obvious solutions. It's not about quality — it's about quantity and variety. The best ideas often come in panels 5-8.",
-    effort: "Low",
-    timeEstimate: "30–60 minutes",
-    steps: [
-      "Select a focused HMW question or design challenge",
-      "Fold paper into 8 panels (or use a digital template)",
-      "Set a timer for 8 minutes",
-      "Sketch one distinct concept per panel — no repeating ideas",
-      "Share sketches with the team (1 minute per person)",
-      "Dot-vote on the most promising concepts",
-      "Combine and refine the top-voted ideas",
-    ],
-    artifacts: [
-      "8 rough concept sketches per participant",
-      "Top-voted concepts selected for further development",
-      "Combined concept directions for prototyping",
-    ],
-    relatedMethods: ["how-might-we", "affinity-mapping", "design-critique"],
-    aiTools: [
-      { name: "ChatGPT", description: "Generate additional concept variations and 'what if' prompts to push thinking", type: "ai" },
-      { name: "Midjourney / DALL-E", description: "Rapidly visualize concept directions as mood references", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Paper & pen", description: "The original and still the fastest medium for Crazy 8s", type: "traditional" },
-      { name: "Miro / FigJam", description: "Digital templates for remote Crazy 8s sessions", type: "traditional" },
-    ],
-    resources: [
-      { title: "Google Design Sprint: Crazy 8s", url: "https://designsprintkit.withgoogle.com/methodology/phase3-sketch/crazy-eights" },
-    ],
-  },
-  {
-    id: "user-story-mapping",
-    title: "User Story Mapping",
-    phase: "Ideate",
-    context: ["Team", "Cross-functional"],
-    whenToUse: "When planning what to build and in what order — mapping the user's journey into a releasable backlog that preserves narrative coherence.",
-    description:
-      "User story mapping arranges user stories along two axes: the horizontal backbone of user activities (the narrative flow) and vertical priority within each activity. This reveals the 'walking skeleton' — the minimum end-to-end experience you can ship — and prevents the backlog from becoming a disconnected list of features.",
-    effort: "Medium",
-    timeEstimate: "3–5 hours",
-    steps: [
-      "Map the user's journey as a horizontal backbone of activities",
-      "Under each activity, list the tasks/stories that support it",
-      "Arrange stories vertically by priority (top = must-have, bottom = nice-to-have)",
-      "Draw horizontal lines to define release slices across the backbone",
-      "Validate: does each slice deliver a coherent end-to-end experience?",
-      "Identify gaps and dependencies between stories",
-    ],
-    artifacts: [
-      "Story map with backbone, stories, and release slices",
-      "MVP/v1 definition as the top slice across the backbone",
-      "Dependency map between user stories",
-    ],
-    relatedMethods: ["jobs-to-be-done", "prioritization-matrix", "okr-alignment"],
-    aiTools: [
-      { name: "ChatGPT", description: "Generate user stories from research findings and acceptance criteria", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Miro / FigJam", description: "Large-format story mapping with the cross-functional team", type: "traditional" },
-      { name: "Sticky notes", description: "Physical story mapping on a wall for in-person sessions", type: "traditional" },
-    ],
-    resources: [
-      { title: "Jeff Patton: User Story Mapping (book)", url: "https://jpattonassociates.com/user-story-mapping/" },
-    ],
-  },
-  {
-    id: "design-principles-workshop",
-    title: "Design Principles Workshop",
-    phase: "Ideate",
-    context: ["Team", "Stakeholder"],
-    whenToUse: "When establishing or refreshing the guiding principles that inform every design decision across the product.",
-    description:
-      "Unlike experience principles (which describe the desired user experience), design principles are the team's operating rules for how to design. They codify hard-won lessons and shared values into memorable, actionable guidelines — e.g., 'Show, don't tell' or 'Earn every interaction'.",
-    effort: "Medium",
-    timeEstimate: "1–2 days",
-    steps: [
-      "Review existing design decisions that the team is proud of (and ones that went wrong)",
-      "Each team member writes 5-7 principles they think should guide the team",
-      "Share and discuss: what patterns emerge? Where do you disagree?",
-      "Consolidate into 5-7 candidate principles through affinity mapping",
-      "Stress-test each principle against recent design decisions — does it help resolve debates?",
-      "Finalize wording, add examples, and publish to the team",
-    ],
-    artifacts: [
-      "5-7 design principles with rationale and real examples",
-      "Principle cards for display and reference",
-      "Decision-log showing how principles apply to past choices",
-    ],
-    relatedMethods: ["experience-principles", "design-critique", "north-star-framing"],
-    aiTools: [
-      { name: "ChatGPT", description: "Generate principle candidates and 'this not that' examples from team input", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Miro / FigJam", description: "Collaborative workshop facilitation and affinity sorting", type: "traditional" },
-      { name: "Notion", description: "Publish and maintain the principles as living documentation", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Design Principles", url: "https://www.nngroup.com/articles/design-principles/" },
-    ],
-  },
-
-  // ── PROTOTYPE ──
-  {
-    id: "lofi-prototyping",
-    title: "Low-Fidelity Prototyping",
-    phase: "Prototype",
-    context: ["Solo", "Team"],
-    whenToUse: "When you need to quickly test structure, flow, and concept viability before investing in visual design.",
-    description:
-      "Low-fi prototypes are deliberately rough — they focus attention on information architecture, task flow, and content hierarchy. The intentional lack of polish invites honest feedback and prevents stakeholders from fixating on colors and fonts when the structure isn't yet validated.",
-    effort: "Low",
-    timeEstimate: "1–3 days",
-    steps: [
-      "Define the key user flows to prototype (2-3 max for a single round)",
-      "Sketch key screens on paper or whiteboard first",
-      "Build a clickable wireframe prototype using your tool of choice",
-      "Keep fidelity intentionally low: grayscale, system fonts, placeholder content",
-      "Add just enough interactivity to simulate the core task flow",
-      "Prepare a test script with task scenarios for validation",
-    ],
-    artifacts: [
-      "Clickable wireframe prototype with key user flows",
-      "Task scenarios for usability testing",
-      "Annotated wireframes explaining design rationale",
-    ],
-    relatedMethods: ["crazy-eights", "usability-testing", "concept-testing"],
-    aiTools: [
-      { name: "v0 by Vercel", description: "Generate UI wireframe components from text descriptions", type: "ai" },
-      { name: "Lovable", description: "Build interactive prototypes from natural language descriptions", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Figma", description: "Build clickable wireframe prototypes with linking", type: "traditional" },
-      { name: "Paper & pen", description: "Fastest medium for initial layout exploration", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Prototyping", url: "https://www.nngroup.com/articles/prototyping/" },
-    ],
-  },
-  {
-    id: "hifi-prototyping",
-    title: "High-Fidelity Prototyping",
-    phase: "Prototype",
-    context: ["Solo", "Team"],
-    whenToUse: "When validating the final experience before development — testing visual design, micro-interactions, and content in a realistic context.",
-    description:
-      "High-fi prototypes closely simulate the final product. They're essential for validating the complete experience with users, getting stakeholder sign-off, and serving as a precise reference for developers. AI coding tools now make it possible to generate functional prototypes at unprecedented speed.",
-    effort: "High",
-    timeEstimate: "1–2 weeks",
-    steps: [
-      "Apply the final visual design system to validated wireframes",
-      "Add real (or realistic) content — no more 'Lorem ipsum'",
-      "Build micro-interactions, transitions, and loading states",
-      "Include edge cases: empty states, errors, long content, offline",
-      "Test across devices and screen sizes",
-      "Conduct a final usability test with the hi-fi prototype",
-    ],
-    artifacts: [
-      "Interactive high-fidelity prototype with complete user flows",
-      "Responsive design across key breakpoints",
-      "Interaction specifications for development handoff",
-    ],
-    relatedMethods: ["usability-testing", "design-critique", "lofi-prototyping"],
-    aiTools: [
-      { name: "Lovable", description: "Generate full functional prototypes from designs or descriptions", type: "ai" },
-      { name: "Cursor / Copilot", description: "AI-assisted coding for interactive prototype features", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Figma", description: "Advanced prototyping with variables and conditionals", type: "traditional" },
-      { name: "Framer", description: "Code-backed prototypes with real data and interactions", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Prototyping", url: "https://www.nngroup.com/articles/prototyping/" },
-    ],
-  },
-
-  // ── VALIDATE ──
-  {
-    id: "usability-testing",
-    title: "Usability Testing",
-    phase: "Validate",
-    context: ["Team", "Cross-functional"],
-    whenToUse: "When you need to observe real users attempting tasks to identify usability issues — the single most important validation activity in design.",
-    description:
-      "Watch real people try to use your design. No amount of expert review or AI analysis replaces the insight of watching someone struggle with something you thought was obvious. Even 5 participants reveal ~85% of major usability issues. Test early, test often, test with real users.",
-    effort: "Medium",
-    timeEstimate: "1–2 weeks",
-    steps: [
-      "Define test objectives and success criteria",
-      "Write a test script with realistic task scenarios",
-      "Recruit 5-8 representative participants",
-      "Conduct sessions (moderated or unmoderated) with think-aloud protocol",
-      "Take detailed notes on behaviors, not just opinions",
-      "Analyze findings by severity and frequency",
-      "Present actionable recommendations to the team",
-    ],
-    artifacts: [
-      "Usability test report with severity-rated findings",
-      "Video highlight reel for stakeholder presentations",
-      "Prioritized list of design changes",
-    ],
-    relatedMethods: ["concept-testing", "assumption-mapping", "design-critique"],
-    aiTools: [
-      { name: "Otter.ai", description: "Transcribe usability sessions in real time", type: "ai" },
-      { name: "Claude", description: "Analyze session transcripts and generate usability finding reports", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Maze", description: "Run unmoderated usability tests at scale with analytics", type: "traditional" },
-      { name: "Lookback / UserTesting", description: "Conduct moderated remote usability sessions", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Usability Testing 101", url: "https://www.nngroup.com/articles/usability-testing-101/" },
-    ],
-  },
-  {
-    id: "concept-testing",
-    title: "Concept Testing",
-    phase: "Validate",
-    context: ["Team", "Stakeholder"],
-    whenToUse: "When evaluating early-stage concepts before committing to building — do users understand it, want it, and see value in it?",
-    description:
-      "Concept testing evaluates whether your idea resonates with users before you invest in detailed design. It tests the 'what' and 'why' before the 'how'. Present concepts through storyboards, landing pages, or simple prototypes and measure comprehension, appeal, and perceived value.",
-    effort: "Medium",
-    timeEstimate: "3–5 days",
-    steps: [
-      "Create concept stimuli: descriptions, storyboards, fake landing pages, or rough prototypes",
-      "Define evaluation criteria: comprehension, appeal, relevance, uniqueness",
-      "Recruit 8-12 target users for concept interviews",
-      "Present concepts one at a time — observe reactions before asking questions",
-      "Use both qualitative (reactions, quotes) and quantitative (rating scales) measures",
-      "Compare concepts if testing multiple options",
-    ],
-    artifacts: [
-      "Concept test results with comprehension and appeal scores",
-      "Qualitative feedback themes per concept",
-      "Go/no-go recommendation with rationale",
-    ],
-    relatedMethods: ["assumption-mapping", "usability-testing", "north-star-framing"],
-    aiTools: [
-      { name: "ChatGPT", description: "Draft concept descriptions and discussion guides for testing", type: "ai" },
-      { name: "Midjourney / DALL-E", description: "Generate concept visualizations for testing stimuli", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Maze", description: "Run unmoderated concept tests with survey follow-ups", type: "traditional" },
-      { name: "Zoom / Teams", description: "Conduct moderated concept testing interviews remotely", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Concept Testing", url: "https://www.nngroup.com/articles/concept-testing/" },
-    ],
-  },
-  {
-    id: "design-critique",
-    title: "Design Critique",
-    phase: "Validate",
-    context: ["Team"],
-    whenToUse: "Throughout the design process — when you need structured, constructive peer feedback on work in progress.",
-    description:
-      "Design critiques are structured feedback sessions where the team evaluates designs against stated objectives and principles. Unlike 'design reviews' (approval gates), critiques are collaborative learning moments. The goal is to improve the work, not approve or reject it.",
-    effort: "Low",
-    timeEstimate: "1–2 hours",
-    steps: [
-      "Presenter shares context: objectives, constraints, specific questions for the group",
-      "Team silently reviews the design (2-3 minutes)",
-      "Each person writes feedback organized as: what's working, what's not, suggestions",
-      "Go around the room — each person shares their top feedback points",
-      "Discuss and debate the most impactful feedback",
-      "Presenter summarizes takeaways and next steps",
-    ],
-    artifacts: [
-      "Critique notes organized by theme",
-      "Action items with owners and timelines",
-      "Updated design rationale documentation",
-    ],
-    relatedMethods: ["experience-principles", "design-principles-workshop", "usability-testing"],
-    aiTools: [
-      { name: "ChatGPT", description: "Pre-review designs for common UX heuristic violations", type: "ai" },
-      { name: "Claude", description: "Generate structured feedback questions based on design objectives", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Figma", description: "Comment directly on designs during critique", type: "traditional" },
-      { name: "Miro / FigJam", description: "Structured feedback templates for remote critiques", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Design Critiques", url: "https://www.nngroup.com/articles/design-critiques/" },
-    ],
-  },
-
   // ── ALIGN ──
   {
     id: "prioritization-matrix",
@@ -713,7 +55,7 @@ export const methods: Method[] = [
       "Prioritized roadmap or backlog",
       "Decision log with rationale for key tradeoffs",
     ],
-    relatedMethods: ["user-story-mapping", "okr-alignment", "assumption-mapping"],
+    relatedMethods: ["okr-alignment"],
     aiTools: [
       { name: "ChatGPT", description: "Generate scoring criteria and help estimate impact/effort for candidates", type: "ai" },
     ],
@@ -748,7 +90,7 @@ export const methods: Method[] = [
       "Design-specific leading metrics for each initiative",
       "Quarterly design review template tied to OKRs",
     ],
-    relatedMethods: ["north-star-framing", "prioritization-matrix", "stakeholder-mapping"],
+    relatedMethods: ["prioritization-matrix", "define-success-metrics"],
     aiTools: [
       { name: "ChatGPT", description: "Suggest design metrics that correlate with business OKRs", type: "ai" },
     ],
@@ -761,50 +103,193 @@ export const methods: Method[] = [
     ],
   },
 
-  // ── Additional DISCOVER methods ──
+  // ── DISCOVERY ──
   {
-    id: "contextual-inquiry",
-    title: "Contextual Inquiry",
-    phase: "Discover",
+    id: "review-previous-research",
+    title: "Review Previous Research",
+    phase: "Discovery",
     context: ["Solo", "Team"],
-    whenToUse: "When you need to understand how users actually behave in their natural environment — not what they say they do, but what they really do.",
+    whenToUse: "At the start of any project — before conducting new research, understand what's already been learned to avoid redundant effort and build on existing knowledge.",
     description:
-      "Contextual inquiry combines observation and interview in the user's own environment. You watch users work, interrupt to ask why, and build a shared understanding of their process, tools, workarounds, and pain points. It reveals tacit knowledge that users can't articulate in a conference room.",
-    effort: "High",
-    timeEstimate: "1–3 weeks",
+      "A thorough review of prior research ensures you're not re-discovering what the organization already knows. Gather past usability studies, analytics reports, customer feedback, survey results, and prior design explorations. Synthesize findings to identify knowledge gaps that warrant new research.",
+    effort: "Low",
+    timeEstimate: "1–3 days",
     steps: [
-      "Define the focus areas and research questions",
-      "Recruit 6-12 participants in their actual work/use context",
-      "Observe users performing real tasks in their environment",
-      "Use the master/apprentice model — user leads, you follow and ask 'why'",
-      "Take detailed notes on actions, artifacts, workarounds, and breakdowns",
-      "Debrief after each session — capture key insights while fresh",
-      "Build an affinity diagram from all session notes",
-      "Synthesize into work models: flow, sequence, artifact, cultural, physical",
+      "Identify all sources of existing research: past studies, analytics, support data, surveys",
+      "Gather and organize materials into a central repository",
+      "Review each source for key findings, insights, and recommendations",
+      "Note what was acted upon and what was shelved",
+      "Identify gaps — what questions remain unanswered?",
+      "Synthesize into a research landscape document to share with the team",
     ],
     artifacts: [
-      "Contextual inquiry session notes with observations and quotes",
-      "Work models (flow, sequence, cultural)",
-      "Affinity diagram of cross-session themes",
-      "Environment and artifact photos (with consent)",
+      "Research landscape summary with key findings from past work",
+      "Knowledge gap analysis highlighting unanswered questions",
+      "Annotated bibliography of prior research sources",
     ],
-    relatedMethods: ["journey-mapping", "jobs-to-be-done", "affinity-mapping"],
+    relatedMethods: ["conduct-stakeholder-interviews", "review-competitive-analysis"],
     aiTools: [
-      { name: "Otter.ai", description: "Transcribe field interviews in real time", type: "ai" },
-      { name: "Claude", description: "Analyze field notes to surface patterns across sessions", type: "ai" },
+      { name: "ChatGPT", description: "Summarize and cross-reference large volumes of past research documents", type: "ai" },
+      { name: "Claude", description: "Analyze and synthesize findings across multiple research reports", type: "ai" },
     ],
     traditionalTools: [
-      { name: "Dovetail", description: "Tag and organize qualitative field research data", type: "traditional" },
-      { name: "Miro / FigJam", description: "Build affinity diagrams from field notes", type: "traditional" },
+      { name: "Notion / Confluence", description: "Central repository for organizing past research", type: "traditional" },
+      { name: "Dovetail", description: "Search and resurface insights from previous qualitative studies", type: "traditional" },
     ],
     resources: [
-      { title: "NNG: Contextual Inquiry", url: "https://www.nngroup.com/articles/contextual-inquiry/" },
+      { title: "NNG: Secondary Research in UX", url: "https://www.nngroup.com/articles/secondary-research-in-ux/" },
+    ],
+  },
+  {
+    id: "conduct-stakeholder-interviews",
+    title: "Conduct Stakeholder Interviews",
+    phase: "Discovery",
+    context: ["Solo", "Stakeholder"],
+    whenToUse: "At project kickoff — to understand business goals, constraints, success criteria, and internal perspectives before diving into user research.",
+    description:
+      "Stakeholder interviews uncover the business context, political landscape, and organizational constraints that shape your design work. They build relationships, surface hidden expectations, and ensure design direction aligns with what the business needs to achieve.",
+    effort: "Medium",
+    timeEstimate: "1–2 weeks",
+    steps: [
+      "Identify key stakeholders across functions: product, engineering, marketing, leadership",
+      "Prepare an interview guide covering goals, concerns, success metrics, and constraints",
+      "Schedule 30-60 minute individual interviews",
+      "Conduct interviews — listen for both stated needs and underlying motivations",
+      "Document key themes, conflicting perspectives, and shared priorities",
+      "Synthesize findings into a stakeholder summary and share back for validation",
+    ],
+    artifacts: [
+      "Stakeholder interview summary with key themes",
+      "Business goals and success criteria document",
+      "Constraint inventory — technical, business, and organizational",
+      "Conflicting perspectives map for resolution",
+    ],
+    relatedMethods: ["review-stakeholder-mapping", "north-star-framing", "okr-alignment"],
+    aiTools: [
+      { name: "Otter.ai", description: "Transcribe stakeholder interviews in real time", type: "ai" },
+      { name: "ChatGPT", description: "Generate interview guides and synthesize notes into themes", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Google Docs", description: "Collaborative note-taking during interviews", type: "traditional" },
+      { name: "Miro / FigJam", description: "Map stakeholder perspectives and themes visually", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Stakeholder Interviews", url: "https://www.nngroup.com/articles/stakeholder-interviews/" },
+    ],
+  },
+  {
+    id: "review-stakeholder-mapping",
+    title: "Review Stakeholder Mapping",
+    phase: "Discovery",
+    context: ["Solo", "Stakeholder"],
+    whenToUse: "After stakeholder interviews — when you need to understand who has influence, who has concerns, and how to navigate organizational dynamics.",
+    description:
+      "Map the people and teams who influence, are affected by, or care about your project. Understanding power dynamics, motivations, and concerns helps you build the right coalitions, anticipate resistance, and communicate effectively throughout the design process.",
+    effort: "Low",
+    timeEstimate: "1–2 days",
+    steps: [
+      "List all people and teams connected to the project",
+      "Plot them on a power/interest matrix (high power + high interest = manage closely)",
+      "Identify each stakeholder's goals, concerns, and definition of success",
+      "Map relationships and potential conflicts between stakeholders",
+      "Define your communication strategy for each quadrant",
+      "Schedule introductory conversations with key stakeholders",
+    ],
+    artifacts: [
+      "Power/interest matrix with all stakeholders plotted",
+      "Stakeholder profiles with goals, concerns, and communication preferences",
+      "RACI chart for design decisions",
+    ],
+    relatedMethods: ["conduct-stakeholder-interviews", "north-star-framing", "okr-alignment"],
+    aiTools: [
+      { name: "ChatGPT", description: "Generate interview guides and synthesize stakeholder notes into profiles", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Miro / FigJam", description: "Collaborative stakeholder mapping and relationship diagrams", type: "traditional" },
+      { name: "Notion / Confluence", description: "Document stakeholder profiles and communication plans", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Stakeholder Maps", url: "https://www.nngroup.com/articles/stakeholder-interviews/" },
+    ],
+  },
+  {
+    id: "north-star-framing",
+    title: "North Star Vision Framing",
+    phase: "Discovery",
+    context: ["Team", "Stakeholder"],
+    whenToUse: "When the team needs a shared, inspiring vision of the future state to guide design decisions and align stakeholders.",
+    description:
+      "Define a compelling vision of the ideal user experience 12–18 months out. The North Star isn't a feature spec — it's an aspirational narrative that describes how life is better for users. It gives the team a decision-making compass and helps stakeholders understand the 'why' behind design choices.",
+    effort: "Medium",
+    timeEstimate: "2–3 days",
+    steps: [
+      "Synthesize research insights and identify the biggest opportunity areas",
+      "Draft a future-state narrative: describe a day in the user's life with the ideal experience",
+      "Define the key experience principles that guide toward this vision",
+      "Create a visual concept or storyboard of the North Star experience",
+      "Pressure-test with stakeholders: is it inspiring? Is it achievable? Does it align with business goals?",
+      "Distill into a one-page North Star document the team can reference",
+    ],
+    artifacts: [
+      "North Star narrative document with vision statement",
+      "Future-state storyboard or concept visualization",
+      "Experience principles derived from the vision",
+    ],
+    relatedMethods: ["conduct-stakeholder-interviews", "review-stakeholder-mapping", "okr-alignment"],
+    aiTools: [
+      { name: "ChatGPT", description: "Draft narrative scenarios and vision statements from research insights", type: "ai" },
+      { name: "Midjourney / DALL-E", description: "Generate visual concept explorations for the future state", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Create storyboards and visual concepts for the North Star", type: "traditional" },
+      { name: "Google Docs", description: "Collaboratively draft and refine the vision narrative", type: "traditional" },
+    ],
+    resources: [
+      { title: "Amplitude: North Star Metric", url: "https://amplitude.com/blog/north-star-metric" },
+    ],
+  },
+  {
+    id: "conduct-user-interviews",
+    title: "Conduct User Interviews",
+    phase: "Discovery",
+    context: ["Solo", "Team"],
+    whenToUse: "When you need deep qualitative understanding of user needs, behaviors, motivations, and pain points directly from the people you're designing for.",
+    description:
+      "User interviews are the foundation of user-centered design. One-on-one conversations with real users reveal the 'why' behind behaviors, uncover unmet needs, and build empathy. Great interviews go beyond surface-level opinions to understand the context, motivations, and mental models that drive user behavior.",
+    effort: "Medium",
+    timeEstimate: "1–3 weeks",
+    steps: [
+      "Define research objectives and key questions to answer",
+      "Create a screening criteria and recruit 6-12 representative participants",
+      "Write a semi-structured interview guide with open-ended questions",
+      "Conduct 45-60 minute interviews — listen more than you speak",
+      "Ask follow-up questions: 'Tell me more about that', 'Why?', 'Can you show me?'",
+      "Debrief after each session — capture key insights while fresh",
+      "Synthesize findings across all interviews into themes and patterns",
+    ],
+    artifacts: [
+      "Interview transcripts and session recordings",
+      "Research synthesis with key themes and patterns",
+      "Key quotes and user stories for storytelling",
+      "Insight statements linked to research evidence",
+    ],
+    relatedMethods: ["review-previous-research", "synthesize-research", "diary-study"],
+    aiTools: [
+      { name: "Otter.ai", description: "Real-time transcription of user interviews", type: "ai" },
+      { name: "Claude", description: "Analyze interview transcripts to extract themes and patterns", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Dovetail", description: "Tag and organize qualitative interview data", type: "traditional" },
+      { name: "Zoom / Teams", description: "Conduct and record remote interview sessions", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: User Interviews", url: "https://www.nngroup.com/articles/user-interviews/" },
     ],
   },
   {
     id: "diary-study",
     title: "Diary Study",
-    phase: "Discover",
+    phase: "Discovery",
     context: ["Solo", "Team"],
     whenToUse: "When you need to understand behaviors and experiences that unfold over time — habits, routines, and evolving needs that a single interview can't capture.",
     description:
@@ -827,7 +312,7 @@ export const methods: Method[] = [
       "Participant journey arcs showing experience over time",
       "Key quotes and moments for storytelling",
     ],
-    relatedMethods: ["journey-mapping", "contextual-inquiry", "jobs-to-be-done"],
+    relatedMethods: ["conduct-user-interviews", "review-previous-research", "synthesize-research"],
     aiTools: [
       { name: "ChatGPT", description: "Analyze diary entries at scale to find patterns across participants", type: "ai" },
       { name: "Claude", description: "Generate thematic analysis from hundreds of diary entries", type: "ai" },
@@ -840,48 +325,123 @@ export const methods: Method[] = [
       { title: "NNG: Diary Studies", url: "https://www.nngroup.com/articles/diary-studies/" },
     ],
   },
-
-  // ── Additional DEFINE methods ──
   {
-    id: "persona-development",
-    title: "Persona Development",
-    phase: "Define",
-    context: ["Team", "Stakeholder"],
-    whenToUse: "When you need to align the team around who you're designing for — creating a shared, research-grounded understanding of your key user segments.",
+    id: "review-competitive-analysis",
+    title: "Review Competitive Analysis",
+    phase: "Discovery",
+    context: ["Solo", "Team"],
+    whenToUse: "When entering a market, redesigning a product, or looking for differentiation opportunities against existing solutions.",
     description:
-      "Personas are research-based archetypes representing distinct user segments. Good personas go beyond demographics — they capture goals, behaviors, pain points, and contexts of use. They serve as a decision-making tool: 'Would Maria do this?' is more actionable than 'Would our users do this?'",
+      "Systematically evaluate competitor products to understand market patterns, UX conventions, and opportunities for differentiation. Go beyond feature checklists — analyze the experience quality, positioning, and unmet needs competitors leave open.",
     effort: "Medium",
-    timeEstimate: "1–2 weeks",
+    timeEstimate: "3–5 days",
     steps: [
-      "Synthesize research data to identify behavioral patterns and segments",
-      "Cluster users by goals and behaviors, not demographics",
-      "Draft 3-5 persona archetypes with names and narratives",
-      "Include: goals, frustrations, behaviors, context, tech comfort, key quotes",
-      "Validate personas against raw research data — do they ring true?",
-      "Present to stakeholders and iterate based on feedback",
-      "Socialize personas across the organization with posters, cards, or wiki pages",
+      "Define your competitive landscape: direct, indirect, and aspirational competitors",
+      "Create a feature/experience comparison matrix",
+      "Evaluate each competitor hands-on — sign up, complete key flows, note friction",
+      "Analyze their positioning, messaging, and target audience",
+      "Identify patterns, conventions, and gaps across the landscape",
+      "Synthesize findings into opportunity areas for differentiation",
     ],
     artifacts: [
-      "3-5 persona documents with photos, narratives, and behavioral traits",
-      "Persona spectrum showing range of user needs",
-      "Quick-reference persona cards for meetings and workshops",
+      "Competitive landscape map with positioning",
+      "Feature/experience comparison matrix with scoring",
+      "UX strengths and weaknesses per competitor",
+      "Opportunity areas for differentiation",
     ],
-    relatedMethods: ["jobs-to-be-done", "journey-mapping", "experience-principles"],
+    relatedMethods: ["review-previous-research", "audit-experiences", "north-star-framing"],
     aiTools: [
-      { name: "ChatGPT", description: "Draft persona narratives from research synthesis and generate scenario variations", type: "ai" },
-      { name: "Midjourney / DALL-E", description: "Generate representative persona illustrations (avoiding stock photos)", type: "ai" },
+      { name: "ChatGPT", description: "Research competitors and generate comparison matrices", type: "ai" },
+      { name: "Perplexity", description: "Deep research on competitor features, positioning, and reviews", type: "ai" },
     ],
     traditionalTools: [
-      { name: "Figma", description: "Design polished persona documents and cards", type: "traditional" },
-      { name: "Notion / Confluence", description: "Host living persona documents the team can reference", type: "traditional" },
+      { name: "Figma", description: "Screenshot and annotate competitor UIs for comparison", type: "traditional" },
+      { name: "Spreadsheets", description: "Build feature comparison matrices and scoring rubrics", type: "traditional" },
     ],
     resources: [
-      { title: "NNG: Personas", url: "https://www.nngroup.com/articles/persona/" },
+      { title: "NNG: Competitive UX Benchmarking", url: "https://www.nngroup.com/articles/competitive-usability-evaluations/" },
+    ],
+  },
+
+  // ── DEFINE ──
+  {
+    id: "ideation",
+    title: "Ideation",
+    phase: "Define",
+    context: ["Team", "Cross-functional"],
+    whenToUse: "When transitioning from research insights to design opportunities — generating a wide range of possible solutions before converging on direction.",
+    description:
+      "Ideation is the structured generation of ideas to address defined problems. Using techniques like brainstorming, How Might We questions, Crazy 8s, and design studios, the team diverges widely before converging on the most promising directions. The goal is quantity and variety — evaluation comes later.",
+    effort: "Low",
+    timeEstimate: "2–4 hours",
+    steps: [
+      "Review research insights and problem statements as a team",
+      "Frame the challenge with How Might We questions",
+      "Use rapid ideation techniques (Crazy 8s, brainstorming, brainwriting)",
+      "Generate as many ideas as possible — no judgment during divergence",
+      "Cluster and theme the ideas using affinity mapping",
+      "Vote on the most promising directions",
+      "Select 2-3 concepts to carry forward for further development",
+    ],
+    artifacts: [
+      "Ideation output: sketches, sticky notes, concept descriptions",
+      "Clustered themes with voting results",
+      "Selected concept directions with rationale",
+    ],
+    relatedMethods: ["synthesize-research", "problem-framing", "lofi-vibe-coding"],
+    aiTools: [
+      { name: "ChatGPT", description: "Generate concept variations and 'what if' prompts to push thinking further", type: "ai" },
+      { name: "Claude", description: "Challenge assumptions and suggest alternative approaches", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Miro / FigJam", description: "Digital whiteboard for remote ideation and voting", type: "traditional" },
+      { name: "Sticky notes", description: "Physical or digital sticky notes for brainstorming", type: "traditional" },
+    ],
+    resources: [
+      { title: "IDEO: Brainstorming Rules", url: "https://www.ideou.com/pages/brainstorming-rules" },
+    ],
+  },
+  {
+    id: "synthesize-research",
+    title: "Synthesize Research",
+    phase: "Define",
+    context: ["Solo", "Team"],
+    whenToUse: "After completing discovery research — when you need to distill raw data into actionable insights that inform design direction.",
+    description:
+      "Research synthesis transforms raw research data into structured, actionable insights. Using techniques like affinity mapping, thematic analysis, and insight statements, you move from 'what we observed' to 'what it means' and 'what we should do about it'. This is where research becomes design fuel.",
+    effort: "Medium",
+    timeEstimate: "3–5 days",
+    steps: [
+      "Gather all research data: interview notes, survey results, diary entries, analytics",
+      "Create individual observations on sticky notes — one insight per note",
+      "Cluster observations by natural affinity into themes",
+      "Name each cluster with a descriptive theme statement",
+      "Write insight statements: 'We learned that [observation] because [reason], which means [implication]'",
+      "Prioritize insights by impact and frequency",
+      "Create a research synthesis document to share with the team",
+    ],
+    artifacts: [
+      "Affinity diagram with themed clusters",
+      "Prioritized insight statements with supporting evidence",
+      "Research synthesis presentation for stakeholders",
+      "Key personas or behavioral archetypes derived from research",
+    ],
+    relatedMethods: ["conduct-user-interviews", "problem-framing", "define-success-metrics"],
+    aiTools: [
+      { name: "ChatGPT", description: "Pre-cluster large datasets and suggest theme labels for review", type: "ai" },
+      { name: "Claude", description: "Analyze and cross-reference data to find non-obvious connections", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Miro / FigJam", description: "Digital sticky notes for affinity mapping", type: "traditional" },
+      { name: "Dovetail", description: "Qualitative research analysis and tagging", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Affinity Diagramming", url: "https://www.nngroup.com/articles/affinity-diagram/" },
     ],
   },
   {
     id: "problem-framing",
-    title: "Problem Framing",
+    title: "Conduct Problem Framing Session",
     phase: "Define",
     context: ["Team", "Stakeholder"],
     whenToUse: "When the team is jumping to solutions before agreeing on the problem — you need to step back and ensure you're solving the right problem.",
@@ -904,7 +464,7 @@ export const methods: Method[] = [
       "Success criteria and measurable outcomes",
       "Constraints inventory",
     ],
-    relatedMethods: ["how-might-we", "assumption-mapping", "north-star-framing"],
+    relatedMethods: ["synthesize-research", "define-success-metrics", "ideation"],
     aiTools: [
       { name: "Claude", description: "Challenge problem framing by generating alternative perspectives and reframes", type: "ai" },
       { name: "ChatGPT", description: "Apply '5 Whys' analysis and generate problem statement variations", type: "ai" },
@@ -917,76 +477,259 @@ export const methods: Method[] = [
       { title: "NNG: Problem Statements", url: "https://www.nngroup.com/articles/problem-statements/" },
     ],
   },
-
-  // ── Additional IDEATE methods ──
   {
-    id: "design-studio",
-    title: "Design Studio",
-    phase: "Ideate",
-    context: ["Team", "Cross-functional"],
-    whenToUse: "When you need cross-functional input on design solutions — bringing diverse perspectives together to sketch, critique, and converge on concepts.",
+    id: "define-success-metrics",
+    title: "Define Success Metrics and Hypotheses",
+    phase: "Define",
+    context: ["Team", "Stakeholder", "Cross-functional"],
+    whenToUse: "Before moving to design — when you need clear, measurable criteria for success and testable hypotheses to validate your design direction.",
     description:
-      "Design Studio is a structured collaborative sketching workshop where everyone — designers, engineers, PMs, even stakeholders — generates and critiques solutions. It democratizes ideation, surfaces unexpected ideas from non-designers, and builds shared ownership of the solution direction.",
+      "Defining success metrics and hypotheses ensures the team agrees on what 'done well' looks like before building anything. Hypotheses make your assumptions explicit and testable, while metrics create accountability. This method bridges research insights and design action with measurable outcomes.",
     effort: "Medium",
-    timeEstimate: "2–4 hours",
+    timeEstimate: "1–2 days",
     steps: [
-      "Brief the group on the design challenge, constraints, and research insights",
-      "Round 1: Individual sketching (10 min) — everyone draws 6-8 concepts",
-      "Present and critique: each person shares, group provides structured feedback",
-      "Round 2: Iterate on best ideas — refine, combine, or pivot (10 min)",
-      "Present refined concepts and vote on strongest directions",
-      "Select 2-3 concepts for further development by the design team",
+      "Review problem statements and research insights",
+      "Define primary success metrics: what user behavior change indicates success?",
+      "Define secondary metrics: leading indicators and guardrail metrics",
+      "Write design hypotheses: 'We believe [change] will [outcome] because [evidence]'",
+      "Map each hypothesis to the metric it will move",
+      "Define how and when you'll measure each metric",
+      "Align with stakeholders on targets and acceptable ranges",
     ],
     artifacts: [
-      "Sketches from all participants across rounds",
-      "Critique notes and voting results",
-      "2-3 selected concept directions with rationale",
+      "Success metrics framework with primary, secondary, and guardrail metrics",
+      "Design hypotheses linked to research evidence",
+      "Measurement plan with tools and timelines",
+      "Stakeholder-approved success criteria",
     ],
-    relatedMethods: ["crazy-eights", "design-critique", "how-might-we"],
+    relatedMethods: ["problem-framing", "okr-alignment", "concept-testing"],
     aiTools: [
-      { name: "Midjourney / DALL-E", description: "Quickly visualize rough concepts for discussion", type: "ai" },
-      { name: "ChatGPT", description: "Generate 'What if...' prompts to push ideation further", type: "ai" },
+      { name: "ChatGPT", description: "Generate hypothesis variations and suggest relevant metrics for design outcomes", type: "ai" },
     ],
     traditionalTools: [
-      { name: "Paper & pen", description: "Low-barrier sketching for all participants regardless of skill", type: "traditional" },
-      { name: "Miro / FigJam", description: "Remote design studio with templates and voting", type: "traditional" },
+      { name: "Spreadsheets", description: "Build metrics tracking frameworks", type: "traditional" },
+      { name: "Notion / Confluence", description: "Document hypotheses and measurement plans", type: "traditional" },
     ],
     resources: [
-      { title: "Todd Zaki Warfel: Design Studio Method", url: "https://www.uxpin.com/studio/blog/design-studio-methodology/" },
+      { title: "NNG: UX Metrics", url: "https://www.nngroup.com/articles/usability-metrics/" },
+    ],
+  },
+  {
+    id: "audit-experiences",
+    title: "Audit Current and Comparable Experiences",
+    phase: "Define",
+    context: ["Solo", "Team"],
+    whenToUse: "When you need a clear picture of the current state — evaluating existing product experiences and comparable solutions to identify gaps and opportunities.",
+    description:
+      "An experience audit systematically evaluates your current product (and comparable experiences) against usability heuristics, design principles, and user needs. It reveals pain points, inconsistencies, and opportunities that inform the design direction. This goes beyond competitive analysis by deeply examining interaction quality.",
+    effort: "Medium",
+    timeEstimate: "3–5 days",
+    steps: [
+      "Define audit scope: which flows, screens, and comparable products to evaluate",
+      "Walk through each key user flow, documenting friction points and bright spots",
+      "Evaluate against established heuristics (Nielsen's 10, WCAG guidelines)",
+      "Screenshot and annotate specific issues with severity ratings",
+      "Compare patterns across your product and comparable experiences",
+      "Synthesize findings into opportunity areas ranked by impact",
+    ],
+    artifacts: [
+      "Experience audit report with annotated screenshots",
+      "Heuristic scorecard for current product vs. comparables",
+      "Opportunity map with severity-ranked findings",
+      "Bright spots inventory — patterns worth preserving",
+    ],
+    relatedMethods: ["review-competitive-analysis", "problem-framing", "define-interaction-model"],
+    aiTools: [
+      { name: "ChatGPT", description: "Pre-scan screenshots against heuristic checklists to surface potential issues", type: "ai" },
+      { name: "Claude", description: "Generate detailed audit reports from UI descriptions and screenshots", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Annotate designs with audit findings and severity markers", type: "traditional" },
+      { name: "Spreadsheets", description: "Track and score audit findings systematically", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: How to Conduct a Heuristic Evaluation", url: "https://www.nngroup.com/articles/how-to-conduct-a-heuristic-evaluation/" },
     ],
   },
 
-  // ── Additional PROTOTYPE methods ──
+  // ── DESIGN ──
   {
-    id: "design-system",
-    title: "Design System Development",
-    phase: "Prototype",
-    context: ["Team", "Cross-functional"],
-    whenToUse: "When scaling design across multiple teams, products, or platforms — ensuring consistency, efficiency, and quality at scale.",
+    id: "define-interaction-model",
+    title: "Define Interaction Model and IA",
+    phase: "Design",
+    context: ["Solo", "Team"],
+    whenToUse: "When establishing the structural foundation of the product — how information is organized, how users navigate, and how interactions work.",
     description:
-      "A design system is the single source of truth for how your product looks, feels, and behaves. It includes components, patterns, tokens, guidelines, and principles. For senior designers, building and evolving a design system is one of the highest-leverage activities — it multiplies your impact across the entire organization.",
-    effort: "High",
-    timeEstimate: "Ongoing (initial: 2–3 months)",
+      "The interaction model and information architecture define how users think about, find, and interact with content and features. This foundational work determines navigation patterns, content hierarchy, and the mental model users need to develop. Get this wrong and no amount of visual polish will save the experience.",
+    effort: "Medium",
+    timeEstimate: "3–5 days",
     steps: [
-      "Audit existing UI patterns: screenshot and catalog every component and pattern in use",
-      "Identify inconsistencies, duplications, and one-offs",
-      "Define design tokens: colors, typography, spacing, elevation, motion",
-      "Build core components: buttons, inputs, cards, navigation, modals",
-      "Document usage guidelines, dos/don'ts, and accessibility requirements for each",
-      "Set up a contribution model: how do teams propose new components?",
-      "Establish a governance process for updates and deprecations",
-      "Measure adoption and track design debt reduction over time",
+      "Conduct a content inventory of all information and features",
+      "Run card sorting sessions to understand user mental models",
+      "Define the information architecture: hierarchy, categories, and navigation structure",
+      "Map key user flows and interaction patterns",
+      "Create a sitemap showing the overall structure",
+      "Define interaction patterns: how users move between sections, complete tasks, and recover from errors",
+      "Validate the IA with tree testing or first-click testing",
     ],
     artifacts: [
-      "Component library in Figma with variants and documentation",
-      "Design token specification",
-      "Usage guidelines and pattern documentation",
-      "Contribution and governance model",
+      "Information architecture diagram / sitemap",
+      "Navigation model with defined patterns",
+      "User flow diagrams for key tasks",
+      "Interaction pattern library for the product",
     ],
-    relatedMethods: ["hifi-prototyping", "design-principles-workshop", "design-qa"],
+    relatedMethods: ["lofi-vibe-coding", "create-lofi-concepts", "audit-experiences"],
     aiTools: [
-      { name: "Figma AI", description: "Generate component variants and auto-document design tokens", type: "ai" },
-      { name: "ChatGPT", description: "Draft component usage guidelines and accessibility documentation", type: "ai" },
+      { name: "ChatGPT", description: "Generate IA structure suggestions from content inventories", type: "ai" },
+      { name: "Claude", description: "Analyze user flows for complexity and suggest simplifications", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Create sitemaps, flow diagrams, and IA documentation", type: "traditional" },
+      { name: "Optimal Workshop", description: "Run card sorting and tree testing studies", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: IA 101", url: "https://www.nngroup.com/articles/ia-101/" },
+    ],
+  },
+  {
+    id: "lofi-vibe-coding",
+    title: "Build Low-Fidelity Prototypes with Vibe Coding",
+    phase: "Design",
+    context: ["Solo", "Team"],
+    whenToUse: "When you need to quickly test structure, flow, and concept viability — using AI-powered coding tools to generate functional prototypes from descriptions.",
+    description:
+      "Vibe coding leverages AI tools like Lovable, v0, and Cursor to generate functional prototypes from natural language descriptions. Instead of spending days in Figma, describe what you want and iterate in minutes. The result is a real, interactive prototype — not a static mockup — enabling faster testing and more realistic user feedback.",
+    effort: "Low",
+    timeEstimate: "1–3 days",
+    steps: [
+      "Define the key user flows to prototype (2-3 max for a single round)",
+      "Write clear descriptions of each screen: layout, content, interactions",
+      "Use AI coding tools to generate the initial prototype from descriptions",
+      "Iterate by refining prompts and adjusting the output",
+      "Keep fidelity intentionally low: focus on structure and flow, not visual polish",
+      "Add just enough interactivity to simulate the core task flow",
+      "Prepare test scenarios for validation with users",
+    ],
+    artifacts: [
+      "Functional low-fidelity prototype with key user flows",
+      "Task scenarios for usability testing",
+      "Iteration log showing prompt-to-output evolution",
+    ],
+    relatedMethods: ["define-interaction-model", "create-lofi-concepts", "concept-testing"],
+    aiTools: [
+      { name: "Lovable", description: "Build interactive prototypes from natural language descriptions", type: "ai" },
+      { name: "v0 by Vercel", description: "Generate UI components and pages from text descriptions", type: "ai" },
+      { name: "Cursor / Copilot", description: "AI-assisted coding for rapid prototype iteration", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Build clickable wireframe prototypes with linking", type: "traditional" },
+      { name: "Paper & pen", description: "Fastest medium for initial layout exploration", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Prototyping", url: "https://www.nngroup.com/articles/prototyping/" },
+    ],
+  },
+  {
+    id: "create-lofi-concepts",
+    title: "Create Multiple Lo-Fi Concepts",
+    phase: "Design",
+    context: ["Solo", "Team"],
+    whenToUse: "When you need to explore multiple design directions before committing — generating divergent concepts to compare and evaluate with the team.",
+    description:
+      "Creating multiple lo-fi concepts forces you past your first idea and explores the solution space more broadly. By generating 3-5 distinct approaches, you can compare tradeoffs, combine the best elements, and make more informed design decisions. Rough is the point — it invites critique and iteration.",
+    effort: "Low",
+    timeEstimate: "2–4 days",
+    steps: [
+      "Review the IA, interaction model, and key design constraints",
+      "Generate 3-5 distinct concept directions — each taking a different approach",
+      "Keep fidelity low: wireframes, sketches, or rough mockups",
+      "Document the design rationale for each concept: what tradeoffs does it make?",
+      "Present concepts to the team for structured feedback",
+      "Select the strongest direction or combine elements from multiple concepts",
+    ],
+    artifacts: [
+      "3-5 lo-fi concept directions with design rationale",
+      "Comparison matrix showing tradeoffs between concepts",
+      "Selected direction with rationale for the decision",
+    ],
+    relatedMethods: ["lofi-vibe-coding", "design-critique", "define-interaction-model"],
+    aiTools: [
+      { name: "Midjourney / DALL-E", description: "Rapidly visualize concept directions as mood references", type: "ai" },
+      { name: "Lovable", description: "Generate distinct functional concept prototypes from descriptions", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Create wireframe concept variations", type: "traditional" },
+      { name: "Paper & pen", description: "Quick sketching for early concept exploration", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Parallel Design", url: "https://www.nngroup.com/articles/parallel-and-iterative-design/" },
+    ],
+  },
+  {
+    id: "design-critique",
+    title: "Design Critique",
+    phase: "Design",
+    context: ["Team"],
+    whenToUse: "Throughout the design process — when you need structured, constructive peer feedback on work in progress.",
+    description:
+      "Design critiques are structured feedback sessions where the team evaluates designs against stated objectives and principles. Unlike 'design reviews' (approval gates), critiques are collaborative learning moments. The goal is to improve the work, not approve or reject it.",
+    effort: "Low",
+    timeEstimate: "1–2 hours",
+    steps: [
+      "Presenter shares context: objectives, constraints, specific questions for the group",
+      "Team silently reviews the design (2-3 minutes)",
+      "Each person writes feedback organized as: what's working, what's not, suggestions",
+      "Go around the room — each person shares their top feedback points",
+      "Discuss and debate the most impactful feedback",
+      "Presenter summarizes takeaways and next steps",
+    ],
+    artifacts: [
+      "Critique notes organized by theme",
+      "Action items with owners and timelines",
+      "Updated design rationale documentation",
+    ],
+    relatedMethods: ["create-lofi-concepts", "design-system-review", "hifi-designs"],
+    aiTools: [
+      { name: "ChatGPT", description: "Pre-review designs for common UX heuristic violations", type: "ai" },
+      { name: "Claude", description: "Generate structured feedback questions based on design objectives", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Comment directly on designs during critique", type: "traditional" },
+      { name: "Miro / FigJam", description: "Structured feedback templates for remote critiques", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Design Critiques", url: "https://www.nngroup.com/articles/design-critiques/" },
+    ],
+  },
+  {
+    id: "design-system-review",
+    title: "Design System Review",
+    phase: "Design",
+    context: ["Team", "Cross-functional"],
+    whenToUse: "When scaling design across the product — reviewing and evolving the design system to ensure consistency, efficiency, and quality.",
+    description:
+      "A design system review evaluates the current state of your component library, design tokens, and patterns against actual product needs. It identifies gaps, inconsistencies, and opportunities for new shared components. Regular reviews keep the design system alive and relevant rather than becoming shelfware.",
+    effort: "Medium",
+    timeEstimate: "2–3 days",
+    steps: [
+      "Audit existing UI patterns: catalog every component and pattern in active use",
+      "Identify inconsistencies, duplications, and one-off patterns",
+      "Compare current components against design needs for upcoming work",
+      "Evaluate design tokens: colors, typography, spacing, elevation",
+      "Review component documentation and usage guidelines",
+      "Propose additions, updates, or deprecations to the system",
+      "Plan implementation with engineering partners",
+    ],
+    artifacts: [
+      "Design system audit report with findings",
+      "Component gap analysis for upcoming needs",
+      "Proposed system updates with rationale",
+      "Updated design tokens and pattern documentation",
+    ],
+    relatedMethods: ["design-critique", "accessibility-review", "hifi-designs"],
+    aiTools: [
+      { name: "Figma AI", description: "Auto-detect inconsistencies and generate component variants", type: "ai" },
+      { name: "ChatGPT", description: "Draft component usage guidelines and documentation", type: "ai" },
     ],
     traditionalTools: [
       { name: "Figma", description: "Build and maintain the component library with variants", type: "traditional" },
@@ -996,126 +739,128 @@ export const methods: Method[] = [
       { title: "NNG: Design Systems 101", url: "https://www.nngroup.com/articles/design-systems-101/" },
     ],
   },
-
-  // ── Additional VALIDATE methods ──
   {
-    id: "heuristic-evaluation",
-    title: "Heuristic Evaluation",
-    phase: "Validate",
-    context: ["Solo", "Team"],
-    whenToUse: "When you need a fast, expert-driven assessment of usability issues — useful when there's no time or budget for user testing.",
-    description:
-      "Heuristic evaluation is an expert review method where evaluators examine a UI against a set of established usability principles (heuristics). It's fast, cheap, and effective at catching common issues. Best when done by 3-5 evaluators independently, then combined. Not a substitute for user testing, but a powerful complement.",
-    effort: "Low",
-    timeEstimate: "1–3 days",
-    steps: [
-      "Select a heuristic framework (Nielsen's 10, Shneiderman's 8, or custom)",
-      "Define the scope: which flows, screens, or features to evaluate",
-      "Each evaluator independently reviews the UI against each heuristic",
-      "Rate each finding by severity: cosmetic, minor, major, catastrophic",
-      "Consolidate findings across evaluators — note agreement and disagreements",
-      "Prioritize findings and create actionable recommendations",
-    ],
-    artifacts: [
-      "Heuristic evaluation report with severity-rated findings",
-      "Annotated screenshots showing specific violations",
-      "Prioritized action plan for addressing issues",
-    ],
-    relatedMethods: ["usability-testing", "design-critique", "accessibility-audit"],
-    aiTools: [
-      { name: "ChatGPT", description: "Pre-scan screenshots against heuristic checklists to surface potential issues", type: "ai" },
-      { name: "Claude", description: "Generate detailed heuristic evaluation reports from UI descriptions", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Figma", description: "Annotate designs with heuristic violation markers", type: "traditional" },
-      { name: "Spreadsheets", description: "Track and score heuristic findings systematically", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: How to Conduct a Heuristic Evaluation", url: "https://www.nngroup.com/articles/how-to-conduct-a-heuristic-evaluation/" },
-    ],
-  },
-  {
-    id: "accessibility-audit",
-    title: "Accessibility Audit",
-    phase: "Validate",
+    id: "accessibility-review",
+    title: "Accessibility and Inclusive Design Review",
+    phase: "Design",
     context: ["Solo", "Team", "Cross-functional"],
-    whenToUse: "When ensuring your product is usable by people with disabilities — both for ethical reasons and legal compliance (WCAG, ADA, EAA).",
+    whenToUse: "Before finalizing designs — ensuring the product is usable by people with disabilities and follows inclusive design principles.",
     description:
-      "An accessibility audit systematically evaluates your product against WCAG guidelines across perceivable, operable, understandable, and robust criteria. For senior designers, accessibility isn't a checklist — it's a design constraint that improves the experience for everyone.",
+      "An accessibility and inclusive design review evaluates designs against WCAG guidelines and inclusive design principles. For senior designers, accessibility isn't a checklist at the end — it's a design constraint integrated throughout the process that improves the experience for everyone.",
     effort: "Medium",
-    timeEstimate: "1–2 weeks",
+    timeEstimate: "2–3 days",
     steps: [
-      "Define scope: which pages, flows, and states to audit",
-      "Run automated scans (axe, Lighthouse) to catch low-hanging fruit",
-      "Manual keyboard navigation testing: can every action be completed without a mouse?",
-      "Screen reader testing: does the experience make sense auditorily?",
-      "Color contrast and text sizing evaluation",
-      "Test with assistive technology users if possible",
-      "Document findings with WCAG criteria references and severity",
-      "Create a remediation roadmap with priorities",
+      "Review designs for color contrast compliance (WCAG AA minimum)",
+      "Evaluate text sizing, spacing, and readability across contexts",
+      "Check that all interactive elements have clear focus states and are keyboard accessible",
+      "Verify information isn't conveyed through color alone",
+      "Review content for plain language and cognitive accessibility",
+      "Test designs with assistive technology considerations in mind",
+      "Document accessibility specifications for development",
     ],
     artifacts: [
-      "Accessibility audit report with WCAG criteria mapping",
-      "Automated scan results from axe/Lighthouse",
-      "Remediation roadmap with severity and effort estimates",
-      "Accessible design patterns documentation for the team",
+      "Accessibility review report with WCAG criteria mapping",
+      "Annotated designs with accessibility specifications",
+      "Inclusive design recommendations",
+      "Accessibility documentation for developer handoff",
     ],
-    relatedMethods: ["heuristic-evaluation", "usability-testing", "design-system"],
+    relatedMethods: ["design-system-review", "design-critique", "hifi-designs"],
     aiTools: [
       { name: "ChatGPT", description: "Generate WCAG-compliant alternatives for inaccessible patterns", type: "ai" },
-      { name: "axe AI", description: "AI-enhanced automated accessibility scanning", type: "ai" },
+      { name: "axe AI", description: "AI-enhanced accessibility evaluation of design patterns", type: "ai" },
     ],
     traditionalTools: [
-      { name: "axe DevTools", description: "Browser-based automated accessibility testing", type: "traditional" },
       { name: "Figma", description: "Use accessibility plugins to check contrast and reading order", type: "traditional" },
+      { name: "axe DevTools", description: "Browser-based automated accessibility testing", type: "traditional" },
     ],
     resources: [
       { title: "W3C: WCAG 2.2 Quick Reference", url: "https://www.w3.org/WAI/WCAG22/quickref/" },
     ],
   },
   {
-    id: "ab-testing",
-    title: "A/B Testing",
-    phase: "Validate",
-    context: ["Team", "Cross-functional"],
-    whenToUse: "When you have enough traffic to statistically compare design variations — making data-driven decisions about which design performs better.",
+    id: "hifi-designs",
+    title: "Create High-Fidelity Designs",
+    phase: "Design",
+    context: ["Solo", "Team"],
+    whenToUse: "When the concept direction is validated and it's time to apply final visual design, content, and interaction details before development.",
     description:
-      "A/B testing compares two or more design variations with real users in production. It provides statistical evidence for design decisions, reducing reliance on opinions and HiPPO (Highest Paid Person's Opinion). Senior designers use it strategically — testing high-impact hypotheses, not random button colors.",
-    effort: "Medium",
-    timeEstimate: "1–4 weeks (including analysis)",
+      "High-fidelity designs are the definitive reference for what gets built. They apply the visual design system, real content, micro-interactions, and edge case handling to validated concepts. AI coding tools now make it possible to generate functional high-fi prototypes for testing at unprecedented speed.",
+    effort: "High",
+    timeEstimate: "1–2 weeks",
     steps: [
-      "Formulate a clear hypothesis: changing [X] will improve [metric] because [reason]",
-      "Define primary and secondary metrics with statistical significance thresholds",
-      "Design the variations with minimal differences to isolate the variable",
-      "Calculate required sample size for statistical power",
-      "Run the test until reaching significance — don't peek and stop early",
-      "Analyze results: primary metric, secondary metrics, and segment breakdowns",
-      "Document learnings and apply to future design decisions",
+      "Apply the visual design system to validated wireframes and concepts",
+      "Replace placeholder content with real or realistic content",
+      "Design micro-interactions, transitions, and loading states",
+      "Handle edge cases: empty states, errors, long content, offline scenarios",
+      "Design for responsive behavior across key breakpoints",
+      "Create interaction specifications and redlines for development",
+      "Conduct a final design review before handoff",
     ],
     artifacts: [
-      "Test hypothesis document with metrics and success criteria",
-      "Design variations with documented differences",
-      "Results report with statistical analysis and recommendations",
-      "Learning repository entry for organizational knowledge",
+      "High-fidelity design files with complete user flows",
+      "Responsive designs across key breakpoints",
+      "Interaction and animation specifications",
+      "Edge case designs: empty, error, loading, and extreme content states",
     ],
-    relatedMethods: ["usability-testing", "concept-testing", "okr-alignment"],
+    relatedMethods: ["design-system-review", "accessibility-review", "design-qa"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate test hypotheses and help calculate sample sizes", type: "ai" },
+      { name: "Lovable", description: "Generate full functional prototypes from designs or descriptions", type: "ai" },
+      { name: "Cursor / Copilot", description: "AI-assisted coding for interactive prototype features", type: "ai" },
     ],
     traditionalTools: [
-      { name: "Optimizely / LaunchDarkly", description: "Feature flagging and A/B test infrastructure", type: "traditional" },
-      { name: "Amplitude / Mixpanel", description: "Analyze test results with statistical rigor", type: "traditional" },
+      { name: "Figma", description: "Advanced design with variables, auto-layout, and prototyping", type: "traditional" },
+      { name: "Framer", description: "Code-backed prototypes with real data and interactions", type: "traditional" },
     ],
     resources: [
-      { title: "NNG: A/B Testing", url: "https://www.nngroup.com/articles/putting-ab-testing-in-its-place/" },
+      { title: "NNG: Prototyping", url: "https://www.nngroup.com/articles/prototyping/" },
     ],
   },
 
-  // ── Additional ALIGN methods ──
+  // ── VALIDATE ──
+  {
+    id: "concept-testing",
+    title: "Conduct Concept Testing",
+    phase: "Validate",
+    context: ["Team", "Stakeholder"],
+    whenToUse: "When evaluating design concepts with real users — do they understand it, want it, and see value in it?",
+    description:
+      "Concept testing evaluates whether your design resonates with users before investing in full development. It tests comprehension, appeal, and perceived value through moderated or unmoderated sessions. Present prototypes or concepts and measure user reactions, task success, and feedback to validate your direction.",
+    effort: "Medium",
+    timeEstimate: "3–5 days",
+    steps: [
+      "Define what you're testing: comprehension, appeal, usability, or all three",
+      "Prepare test stimuli: prototypes, storyboards, or interactive demos",
+      "Write a test script with realistic task scenarios and discussion questions",
+      "Recruit 5-8 representative participants",
+      "Conduct sessions — observe behavior first, then ask questions",
+      "Use both qualitative (reactions, quotes) and quantitative (task success, ratings) measures",
+      "Analyze findings and create a go/iterate/stop recommendation",
+    ],
+    artifacts: [
+      "Concept test results with task success rates and satisfaction scores",
+      "Qualitative feedback themes and key quotes",
+      "Usability issues with severity ratings",
+      "Go/iterate/stop recommendation with rationale",
+    ],
+    relatedMethods: ["lofi-vibe-coding", "hifi-designs", "define-success-metrics"],
+    aiTools: [
+      { name: "Otter.ai", description: "Transcribe testing sessions in real time", type: "ai" },
+      { name: "Claude", description: "Analyze session transcripts and generate usability finding reports", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Maze", description: "Run unmoderated concept and usability tests at scale", type: "traditional" },
+      { name: "Lookback / UserTesting", description: "Conduct moderated remote testing sessions", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Concept Testing", url: "https://www.nngroup.com/articles/concept-testing/" },
+    ],
+  },
+
+  // ── HANDOFF ──
   {
     id: "design-qa",
     title: "Design QA & Handoff",
-    phase: "Align",
+    phase: "Handoff",
     context: ["Team", "Cross-functional"],
     whenToUse: "When ensuring the built product matches the designed intent — bridging the gap between design files and production code.",
     description:
@@ -1137,7 +882,7 @@ export const methods: Method[] = [
       "Design-dev feedback loop documentation",
       "Handoff spec template for future features",
     ],
-    relatedMethods: ["hifi-prototyping", "design-system", "accessibility-audit"],
+    relatedMethods: ["component-documentation", "design-specs", "hifi-designs"],
     aiTools: [
       { name: "Figma AI", description: "Auto-generate dev-ready specs and interaction documentation", type: "ai" },
       { name: "ChatGPT", description: "Generate comprehensive QA checklists from design specs", type: "ai" },
@@ -1151,9 +896,123 @@ export const methods: Method[] = [
     ],
   },
   {
-    id: "retrospective",
+    id: "component-documentation",
+    title: "Create Component Documentation",
+    phase: "Handoff",
+    context: ["Solo", "Team"],
+    whenToUse: "When developers need clear specifications for building design system components — documenting behavior, states, variants, and usage guidelines.",
+    description:
+      "Component documentation bridges design and development by providing detailed specifications for every component: behavior, states, variants, accessibility requirements, and usage guidelines. Well-documented components reduce implementation questions and ensure consistency across the product.",
+    effort: "Medium",
+    timeEstimate: "1–2 weeks",
+    steps: [
+      "Inventory all components that need documentation",
+      "For each component, document: purpose, variants, states, and responsive behavior",
+      "Specify interaction behavior: click, hover, focus, keyboard navigation",
+      "Define accessibility requirements: ARIA labels, roles, keyboard support",
+      "Include dos and don'ts with visual examples",
+      "Add code-ready design tokens: spacing, colors, typography references",
+      "Review documentation with engineering leads for completeness",
+    ],
+    artifacts: [
+      "Component specification sheets with all variants and states",
+      "Usage guidelines with dos and don'ts",
+      "Accessibility specification per component",
+      "Design token mapping for development",
+    ],
+    relatedMethods: ["design-qa", "design-system-review", "design-specs"],
+    aiTools: [
+      { name: "ChatGPT", description: "Generate component documentation drafts from design files", type: "ai" },
+      { name: "Figma AI", description: "Auto-generate component specs and variant documentation", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Create component documentation pages with annotations", type: "traditional" },
+      { name: "Storybook", description: "Interactive component documentation with live examples", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Design Systems Documentation", url: "https://www.nngroup.com/articles/design-systems-101/" },
+    ],
+  },
+  {
+    id: "design-specs",
+    title: "Finalize Design Specifications",
+    phase: "Handoff",
+    context: ["Solo", "Team"],
+    whenToUse: "Before development begins — creating comprehensive, unambiguous specifications that answer every question developers will have.",
+    description:
+      "Final design specifications are the definitive reference for development. They include pixel-perfect redlines, interaction behaviors, animation timing, responsive rules, and edge case handling. Great specs prevent implementation misinterpretation and reduce design-dev ping-pong during build.",
+    effort: "Medium",
+    timeEstimate: "3–5 days",
+    steps: [
+      "Review all designs for completeness: every state, every edge case, every breakpoint",
+      "Create redline annotations for spacing, sizing, and alignment",
+      "Document all interaction behaviors with timing and easing specifications",
+      "Specify responsive behavior rules: what adapts, what reflows, what hides",
+      "Include content guidelines: character limits, truncation rules, fallback content",
+      "Create a developer walkthrough document for complex flows",
+      "Handoff via Figma dev mode or dedicated specification tool",
+    ],
+    artifacts: [
+      "Annotated design files with redlines and specifications",
+      "Interaction specification document with timing and easing",
+      "Responsive behavior rules per component and layout",
+      "Developer walkthrough for complex features",
+    ],
+    relatedMethods: ["design-qa", "component-documentation", "hifi-designs"],
+    aiTools: [
+      { name: "Figma AI", description: "Auto-generate redlines and responsive specifications", type: "ai" },
+      { name: "ChatGPT", description: "Draft developer walkthrough documents from design descriptions", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Dev mode for precise specification inspection", type: "traditional" },
+      { name: "Zeplin", description: "Design handoff with auto-generated specs and style guides", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Design Handoff", url: "https://www.nngroup.com/articles/design-handoff/" },
+    ],
+  },
+  {
+    id: "post-launch-performance",
+    title: "Evaluate Post-Launch Performance",
+    phase: "Handoff",
+    context: ["Team", "Cross-functional"],
+    whenToUse: "After launch — measuring whether the design achieved its intended outcomes and identifying opportunities for iteration.",
+    description:
+      "Post-launch evaluation closes the design loop by measuring actual outcomes against the success metrics and hypotheses defined earlier. It validates whether design decisions had the intended impact, identifies unexpected consequences, and surfaces insights for the next iteration cycle.",
+    effort: "Medium",
+    timeEstimate: "1–2 weeks",
+    steps: [
+      "Review the success metrics and hypotheses defined during the Define phase",
+      "Gather quantitative data: analytics, conversion rates, task completion rates",
+      "Gather qualitative data: user feedback, support tickets, session recordings",
+      "Compare actual results against targets and hypotheses",
+      "Identify what worked as expected, what surprised you, and what underperformed",
+      "Document learnings and recommendations for the next iteration",
+      "Present findings to stakeholders with clear next steps",
+    ],
+    artifacts: [
+      "Post-launch performance report with metrics vs. targets",
+      "Hypothesis validation summary: confirmed, invalidated, or inconclusive",
+      "Qualitative feedback synthesis",
+      "Recommendations for next iteration priorities",
+    ],
+    relatedMethods: ["define-success-metrics", "design-retrospective", "okr-alignment"],
+    aiTools: [
+      { name: "ChatGPT", description: "Analyze user feedback at scale and identify sentiment patterns", type: "ai" },
+      { name: "Claude", description: "Generate comprehensive performance reports from analytics data", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Amplitude / Mixpanel", description: "Analyze user behavior and conversion funnels", type: "traditional" },
+      { name: "Hotjar / FullStory", description: "Session recordings and heatmaps for qualitative insights", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: UX Metrics", url: "https://www.nngroup.com/articles/usability-metrics/" },
+    ],
+  },
+  {
+    id: "design-retrospective",
     title: "Design Retrospective",
-    phase: "Align",
+    phase: "Handoff",
     context: ["Team", "Cross-functional"],
     whenToUse: "After a major release, sprint, or project — reflecting on what worked, what didn't, and how to improve the design process.",
     description:
@@ -1173,7 +1032,7 @@ export const methods: Method[] = [
       "Process improvement backlog",
       "Updated team working agreements",
     ],
-    relatedMethods: ["design-critique", "okr-alignment", "design-principles-workshop"],
+    relatedMethods: ["post-launch-performance", "design-qa", "okr-alignment"],
     aiTools: [
       { name: "ChatGPT", description: "Generate retro prompts and help synthesize themes from team input", type: "ai" },
     ],
