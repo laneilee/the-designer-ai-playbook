@@ -9,7 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Bot, Users, MessageSquare, ArrowRight, Compass, Target,
-  Lightbulb, PenTool, FlaskConical, Handshake, Menu, X,
+  Lightbulb, PenTool, FlaskConical, Handshake, Menu, X, Search,
 } from "lucide-react";
 
 type ViewMode = "methods" | "tools";
