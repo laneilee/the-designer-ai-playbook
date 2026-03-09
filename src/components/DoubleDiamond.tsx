@@ -50,7 +50,7 @@ export default function DoubleDiamond() {
         <div className="flex items-center bg-background rounded-xl p-1 border border-border">
           <button
             onClick={() => setMode("traditional")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-body font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-body font-medium transition-all ${
               mode === "traditional"
                 ? "bg-foreground text-background shadow-sm"
                 : "text-muted-foreground/50 hover:text-muted-foreground"
