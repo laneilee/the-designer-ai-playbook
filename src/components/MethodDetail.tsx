@@ -29,7 +29,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
       {/* Phase pill + context */}
       <div className="flex items-center gap-2.5 mb-5 flex-wrap">
         <span
-          className="text-[10px] font-body font-semibold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full"
+          className="text-xs font-body font-semibold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full"
           style={{ background: colors.accentBg, color: colors.accent, border: `1px solid ${colors.accentBorder}` }}
         >
           {method.phase}
