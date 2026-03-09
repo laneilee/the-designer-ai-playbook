@@ -206,8 +206,8 @@ function ToolColumn({ label, icon, tools }: { label: string; icon: React.ReactNo
               <ToolLogo name={tool.name} type={tool.type} size="md" />
             </div>
             <div className="min-w-0">
-              <div className="text-[13px] font-medium text-foreground font-body">{tool.name}</div>
-              <div className="text-[11px] text-muted-foreground/60 leading-relaxed font-body mt-0.5">{tool.description}</div>
+              <div className="text-sm font-medium text-foreground font-body">{tool.name}</div>
+              <div className="text-xs text-muted-foreground leading-relaxed font-body mt-0.5">{tool.description}</div>
             </div>
           </div>
         ))}
