@@ -267,10 +267,10 @@ function ToolsSidebarList() {
       {toolCategories.map(({ category, tools }) => (
         <div key={category} className="mb-1">
           <div className="flex items-center gap-2 px-5 pt-5 pb-2">
-            <span className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground/50">
+             <span className="text-xs font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground">
               {category}
             </span>
-            <span className="text-[9px] text-muted-foreground/30 font-body ml-auto">{tools.length}</span>
+            <span className="text-[11px] text-muted-foreground/50 font-body ml-auto">{tools.length}</span>
           </div>
           {tools.map((tool) => (
             <div
