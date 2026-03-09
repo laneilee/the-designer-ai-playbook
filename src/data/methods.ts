@@ -33,41 +33,6 @@ export const contexts: Context[] = ["Solo", "Team", "Stakeholder", "Cross-functi
 export const methods: Method[] = [
   // ── ALIGN ──
   {
-    id: "prioritization-matrix",
-    title: "Prioritization Matrix",
-    phase: "Align",
-    context: ["Team", "Stakeholder", "Cross-functional"],
-    whenToUse: "When you have more ideas than capacity — systematically evaluating options against multiple criteria to make defensible tradeoff decisions.",
-    description:
-      "Prioritization matrices help teams make objective tradeoff decisions by evaluating options against explicit criteria. Common frameworks include Impact/Effort, RICE (Reach, Impact, Confidence, Effort), and MoSCoW. The value isn't in the math — it's in the conversation about what matters.",
-    effort: "Low",
-    timeEstimate: "2–4 hours",
-    steps: [
-      "List all candidates for prioritization (features, fixes, research questions)",
-      "Choose your framework: Impact/Effort 2×2, RICE scoring, or custom criteria",
-      "Define what each criterion means specifically for your context",
-      "Score each candidate independently, then discuss disagreements",
-      "Plot results and identify quick wins (high impact, low effort)",
-      "Document rationale for top priorities and items deliberately deprioritized",
-    ],
-    artifacts: [
-      "Scored prioritization matrix with all candidates",
-      "Prioritized roadmap or backlog",
-      "Decision log with rationale for key tradeoffs",
-    ],
-    relatedMethods: ["okr-alignment"],
-    aiTools: [
-      { name: "ChatGPT", description: "Generate scoring criteria and help estimate impact/effort for candidates", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Spreadsheets", description: "Build scoring models with weighted criteria", type: "traditional" },
-      { name: "Miro / FigJam", description: "2×2 matrix plotting in collaborative sessions", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Prioritization Methods", url: "https://www.nngroup.com/articles/prioritization-methods/" },
-    ],
-  },
-  {
     id: "okr-alignment",
     title: "OKR Alignment Workshop",
     phase: "Align",
