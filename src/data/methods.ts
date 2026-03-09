@@ -106,6 +106,43 @@ export const methods: Method[] = [
     ],
   },
   {
+    id: "review-competitive-analysis",
+    title: "Review Competitive Analysis",
+    phase: "Discovery",
+    context: ["Solo", "Team"],
+    whenToUse: "When entering a market, redesigning a product, or looking for differentiation opportunities against existing solutions.",
+    description:
+      "Systematically evaluate competitor products to understand market patterns, UX conventions, and opportunities for differentiation. Go beyond feature checklists — analyze the experience quality, positioning, and unmet needs competitors leave open.",
+    effort: "Medium",
+    timeEstimate: "3–5 days",
+    steps: [
+      "Define your competitive landscape: direct, indirect, and aspirational competitors",
+      "Create a feature/experience comparison matrix",
+      "Evaluate each competitor hands-on — sign up, complete key flows, note friction",
+      "Analyze their positioning, messaging, and target audience",
+      "Identify patterns, conventions, and gaps across the landscape",
+      "Synthesize findings into opportunity areas for differentiation",
+    ],
+    artifacts: [
+      "Competitive landscape map with positioning",
+      "Feature/experience comparison matrix with scoring",
+      "UX strengths and weaknesses per competitor",
+      "Opportunity areas for differentiation",
+    ],
+    relatedMethods: ["review-previous-research", "audit-experiences"],
+    aiTools: [
+      { name: "ChatGPT", description: "Research competitors and generate comparison matrices", type: "ai" },
+      { name: "Perplexity", description: "Deep research on competitor features, positioning, and reviews", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Figma", description: "Screenshot and annotate competitor UIs for comparison", type: "traditional" },
+      { name: "Spreadsheets", description: "Build feature comparison matrices and scoring rubrics", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Competitive UX Benchmarking", url: "https://www.nngroup.com/articles/competitive-usability-evaluations/" },
+    ],
+  },
+  {
     id: "conduct-stakeholder-interviews",
     title: "Conduct Stakeholder Interviews",
     phase: "Discovery",
@@ -252,43 +289,6 @@ export const methods: Method[] = [
     ],
     resources: [
       { title: "NNG: Diary Studies", url: "https://www.nngroup.com/articles/diary-studies/" },
-    ],
-  },
-  {
-    id: "review-competitive-analysis",
-    title: "Review Competitive Analysis",
-    phase: "Discovery",
-    context: ["Solo", "Team"],
-    whenToUse: "When entering a market, redesigning a product, or looking for differentiation opportunities against existing solutions.",
-    description:
-      "Systematically evaluate competitor products to understand market patterns, UX conventions, and opportunities for differentiation. Go beyond feature checklists — analyze the experience quality, positioning, and unmet needs competitors leave open.",
-    effort: "Medium",
-    timeEstimate: "3–5 days",
-    steps: [
-      "Define your competitive landscape: direct, indirect, and aspirational competitors",
-      "Create a feature/experience comparison matrix",
-      "Evaluate each competitor hands-on — sign up, complete key flows, note friction",
-      "Analyze their positioning, messaging, and target audience",
-      "Identify patterns, conventions, and gaps across the landscape",
-      "Synthesize findings into opportunity areas for differentiation",
-    ],
-    artifacts: [
-      "Competitive landscape map with positioning",
-      "Feature/experience comparison matrix with scoring",
-      "UX strengths and weaknesses per competitor",
-      "Opportunity areas for differentiation",
-    ],
-    relatedMethods: ["review-previous-research", "audit-experiences"],
-    aiTools: [
-      { name: "ChatGPT", description: "Research competitors and generate comparison matrices", type: "ai" },
-      { name: "Perplexity", description: "Deep research on competitor features, positioning, and reviews", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Figma", description: "Screenshot and annotate competitor UIs for comparison", type: "traditional" },
-      { name: "Spreadsheets", description: "Build feature comparison matrices and scoring rubrics", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: Competitive UX Benchmarking", url: "https://www.nngroup.com/articles/competitive-usability-evaluations/" },
     ],
   },
 
