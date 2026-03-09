@@ -5,7 +5,7 @@ import MethodDetail from "@/components/MethodDetail";
 import ToolsView, { getToolsByCategory } from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
 import DoubleDiamond from "@/components/DoubleDiamond";
-import AIAdvisor from "@/components/AIAdvisor";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -234,9 +234,6 @@ const Index = () => {
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </header>
-
-      {/* AI Advisor */}
-      <AIAdvisor onMethodClick={handleMethodClick} />
 
       {/* Process Diagram */}
       <div className="px-5 sm:px-8 lg:px-10 pb-5">
