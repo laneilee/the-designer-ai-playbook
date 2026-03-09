@@ -199,6 +199,32 @@ const Index = () => {
           <p className="text-xs sm:text-sm text-muted-foreground/60 mt-1.5 max-w-xl font-body leading-relaxed">
             {methods.length} actionable methods to elevate every phase of your UX process with AI.
           </p>
+          {/* Quick nav pills */}
+          <div className="flex items-center gap-2 mt-3">
+            <button
+              onClick={() => setViewMode("methods")}
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-body font-medium border transition-all ${
+                viewMode === "methods"
+                  ? "bg-foreground text-background border-foreground"
+                  : "bg-card/60 text-muted-foreground border-border hover:text-foreground hover:border-foreground/30"
+              }`}
+            >
+              <Lightbulb className="w-3 h-3" />
+              Methods
+              <span className="text-[10px] opacity-60">{methods.length}</span>
+            </button>
+            <button
+              onClick={() => setViewMode("tools")}
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-body font-medium border transition-all ${
+                viewMode === "tools"
+                  ? "bg-foreground text-background border-foreground"
+                  : "bg-card/60 text-muted-foreground border-border hover:text-foreground hover:border-foreground/30"
+              }`}
+            >
+              <Bot className="w-3 h-3" />
+              Tools
+            </button>
+          </div>
         </div>
         {/* Mobile menu button */}
         <button
