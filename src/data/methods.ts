@@ -473,8 +473,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["lofi-vibe-coding", "create-lofi-concepts"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate IA structure suggestions from content inventories", type: "ai" },
-      { name: "Claude", description: "Analyze user flows for complexity and suggest simplifications", type: "ai" },
+      { name: "ChatGPT", description: "Generate IA structure suggestions from content inventories", type: "ai", promptGuide: "Here's a content inventory for our [product type]: [list features/content]. Suggest 3 different information architecture structures. For each: show the hierarchy, explain the organizing principle (task-based, audience-based, topic-based), and identify potential navigation challenges." },
+      { name: "Claude", description: "Analyze user flows for complexity and suggest simplifications", type: "ai", promptGuide: "Here's a user flow for [task]: [describe steps]. Analyze it for: (1) Unnecessary steps that could be removed, (2) Decision points that could be simplified, (3) Points where users might get lost. Suggest a simplified alternative flow." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Create sitemaps, flow diagrams, and IA documentation", type: "traditional" },
