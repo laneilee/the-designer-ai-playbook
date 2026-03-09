@@ -243,7 +243,7 @@ export const methods: Method[] = [
     relatedMethods: ["review-previous-research", "synthesize-research", "diary-study"],
     aiTools: [
       { name: "Otter.ai", description: "Real-time transcription of user interviews", type: "ai" },
-      { name: "Claude", description: "Analyze interview transcripts to extract themes and patterns", type: "ai" },
+      { name: "Claude", description: "Analyze interview transcripts to extract themes and patterns", type: "ai", promptGuide: "Here is a transcript from a user interview about [topic]. Extract: (1) Key pain points with direct quotes, (2) Workarounds the user currently uses, (3) Unmet needs (stated and implied), (4) Emotional moments — where did they express frustration or delight? Format each finding as an insight statement." },
     ],
     traditionalTools: [
       { name: "Dovetail", description: "Tag and organize qualitative interview data", type: "traditional" },
