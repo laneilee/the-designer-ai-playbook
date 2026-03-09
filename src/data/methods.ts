@@ -470,7 +470,7 @@ export const methods: Method[] = [
       "User flow diagrams for key tasks",
       "Interaction pattern library for the product",
     ],
-    relatedMethods: ["lofi-vibe-coding", "create-lofi-concepts", "audit-experiences"],
+    relatedMethods: ["lofi-vibe-coding", "create-lofi-concepts"],
     aiTools: [
       { name: "ChatGPT", description: "Generate IA structure suggestions from content inventories", type: "ai" },
       { name: "Claude", description: "Analyze user flows for complexity and suggest simplifications", type: "ai" },
