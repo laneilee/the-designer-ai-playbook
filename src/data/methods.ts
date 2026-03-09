@@ -511,7 +511,6 @@ export const methods: Method[] = [
     ],
     traditionalTools: [
       { name: "Figma", description: "Build clickable wireframe prototypes with linking", type: "traditional" },
-      { name: "Paper & pen", description: "Fastest medium for initial layout exploration", type: "traditional" },
     ],
     resources: [
       { title: "NNG: Prototyping", url: "https://www.nngroup.com/articles/prototyping/" },
