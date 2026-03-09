@@ -7,30 +7,30 @@ import { Sparkles, User } from "lucide-react";
 type Mode = "traditional" | "ai";
 
 const diamondPhases: { phase: Phase; label: string; column: string }[] = [
-  { phase: "Discover", label: "Discover", column: "Diverge" },
-  { phase: "Define", label: "Define", column: "Converge" },
-  { phase: "Ideate", label: "Ideate", column: "Diverge" },
-  { phase: "Prototype", label: "Prototype", column: "Converge" },
-  { phase: "Validate", label: "Validate", column: "Converge" },
   { phase: "Align", label: "Align", column: "Converge" },
+  { phase: "Discovery", label: "Discovery", column: "Diverge" },
+  { phase: "Define", label: "Define", column: "Converge" },
+  { phase: "Design", label: "Design", column: "Diverge" },
+  { phase: "Validate", label: "Validate", column: "Converge" },
+  { phase: "Handoff", label: "Handoff", column: "Converge" },
 ];
 
 const traditionalDesc: Record<Phase, string> = {
-  Discover: "Weeks of field research, interviews, and observation to understand the problem space broadly.",
-  Define: "Manual synthesis — sticky notes, affinity mapping, persona creation over days of workshops.",
-  Ideate: "Brainstorms, sketching sessions, design studios — all requiring co-located team time.",
-  Prototype: "Days to weeks building wireframes and prototypes by hand in design tools.",
+  Align: "Lengthy alignment meetings, stakeholder presentations, and manual prioritization exercises.",
+  Discovery: "Weeks of field research, interviews, and observation to understand the problem space broadly.",
+  Define: "Manual synthesis — sticky notes, affinity mapping, and problem framing over days of workshops.",
+  Design: "Days to weeks building wireframes and prototypes by hand in design tools.",
   Validate: "Recruiting participants, scheduling sessions, manually analyzing hours of recordings.",
-  Align: "Lengthy handoff documents, stakeholder presentations, and alignment meetings.",
+  Handoff: "Lengthy handoff documents, spec reviews, and back-and-forth with engineering.",
 };
 
 const aiDesc: Record<Phase, string> = {
-  Discover: "AI transcribes interviews in real-time, analyzes survey data at scale, and surfaces patterns humans miss.",
-  Define: "LLMs synthesize research into personas, problem frames, and HMW questions in minutes — you curate and refine.",
-  Ideate: "AI generates concept variations, challenges assumptions, and explores the solution space beyond human cognitive limits.",
-  Prototype: "AI-powered tools generate interactive prototypes from descriptions — test ideas in hours, not weeks.",
-  Validate: "Automated transcription, AI-powered analysis of usability sessions, and instant heuristic evaluations.",
-  Align: "AI drafts specs, generates QA checklists, and keeps design-dev handoff tight and comprehensive.",
+  Align: "AI helps generate prioritization frameworks, analyze OKR alignment, and surface strategic opportunities faster.",
+  Discovery: "AI transcribes interviews in real-time, analyzes data at scale, and surfaces patterns humans miss.",
+  Define: "LLMs synthesize research into insights, problem frames, and success metrics in minutes — you curate and refine.",
+  Design: "AI-powered tools generate interactive prototypes from descriptions — test ideas in hours, not weeks.",
+  Validate: "Automated transcription, AI-powered analysis of testing sessions, and instant usability reports.",
+  Handoff: "AI drafts specs, generates QA checklists, and keeps design-dev handoff tight and comprehensive.",
 };
 
 export default function DoubleDiamond() {
@@ -42,7 +42,7 @@ export default function DoubleDiamond() {
       {/* Header with toggle */}
       <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-border">
         <div>
-          <h3 className="text-lg font-display text-foreground">The Double Diamond — Reimagined</h3>
+          <h3 className="text-lg font-display text-foreground">The Design Process — Reimagined</h3>
           <p className="text-xs text-muted-foreground font-body mt-0.5">
             How AI transforms each phase of the design process
           </p>
@@ -73,69 +73,55 @@ export default function DoubleDiamond() {
         </div>
       </div>
 
-      {/* Diamond visualization */}
+      {/* Phase visualization */}
       <div className="px-5 sm:px-6 py-6">
-        {/* Diamond shape — SVG */}
+        {/* Linear process flow */}
         <div className="relative mb-6">
-          <svg viewBox="0 0 800 180" className="w-full h-auto" preserveAspectRatio="xMidYMid meet">
-            {/* Diamond 1: Discover + Define */}
-            <motion.path
-              d="M 30,90 L 210,20 L 390,90 L 210,160 Z"
-              fill={`${phaseColors.Discover.accent}${mode === "ai" ? "18" : "0a"}`}
-              stroke={phaseColors.Discover.accent}
-              strokeWidth="1.5"
-              strokeOpacity={0.3}
-              animate={{ fillOpacity: mode === "ai" ? 0.15 : 0.05 }}
-              transition={{ duration: 0.5 }}
-            />
-            {/* Diamond 2: Ideate + Prototype */}
-            <motion.path
-              d="M 390,90 L 570,20 L 770,90 L 570,160 Z"
-              fill={`${phaseColors.Ideate.accent}${mode === "ai" ? "18" : "0a"}`}
-              stroke={phaseColors.Ideate.accent}
-              strokeWidth="1.5"
-              strokeOpacity={0.3}
-              animate={{ fillOpacity: mode === "ai" ? 0.15 : 0.05 }}
-              transition={{ duration: 0.5 }}
-            />
-
-            {/* Phase labels on diamond */}
-            <text x="130" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Discover</text>
-            <text x="300" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Define</text>
-            <text x="480" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Ideate</text>
-            <text x="640" y="86" textAnchor="middle" className="fill-foreground/80" fontSize="13" fontFamily="var(--font-body)" fontWeight="500">Prototype</text>
-
-            {/* Diverge/Converge labels */}
-            <text x="130" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Diverge</text>
-            <text x="300" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Converge</text>
-            <text x="480" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Diverge</text>
-            <text x="640" y="105" textAnchor="middle" className="fill-muted-foreground/50" fontSize="11" fontFamily="var(--font-body)">Converge</text>
-
-            {/* AI sparkle indicators */}
-            <AnimatePresence>
-              {mode === "ai" && (
-                <>
-                  {[120, 290, 470, 630].map((x, i) => (
-                    <motion.circle
-                      key={x}
-                      cx={x}
-                      cy={62}
-                      r="3"
-                      fill={i < 2 ? phaseColors.Discover.accent : phaseColors.Ideate.accent}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: [0.4, 1, 0.4], scale: [0.8, 1.2, 0.8] }}
-                      exit={{ opacity: 0, scale: 0 }}
-                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-                    />
-                  ))}
-                </>
-              )}
-            </AnimatePresence>
-
-            {/* Center dots at meeting points */}
-            <circle cx="30" cy="90" r="4" className="fill-muted-foreground/20" />
-            <circle cx="390" cy="90" r="5" className="fill-foreground/30" />
-            <circle cx="770" cy="90" r="4" className="fill-muted-foreground/20" />
+          <svg viewBox="0 0 800 80" className="w-full h-auto" preserveAspectRatio="xMidYMid meet">
+            {/* Process line */}
+            <line x1="30" y1="40" x2="770" y2="40" stroke="hsl(var(--border))" strokeWidth="2" />
+            
+            {/* Phase nodes */}
+            {diamondPhases.map(({ phase, label }, i) => {
+              const x = 30 + (i * 148);
+              const colors = phaseColors[phase];
+              return (
+                <g key={phase}>
+                  <motion.circle
+                    cx={x}
+                    cy={40}
+                    r={12}
+                    fill={`${colors.accent}${mode === "ai" ? "30" : "15"}`}
+                    stroke={colors.accent}
+                    strokeWidth="2"
+                    animate={{ r: mode === "ai" ? 14 : 12 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <circle cx={x} cy={40} r={4} fill={colors.accent} />
+                  <text x={x} y={20} textAnchor="middle" className="fill-foreground/80" fontSize="11" fontFamily="var(--font-body)" fontWeight="500">
+                    {label}
+                  </text>
+                  <text x={x} y={65} textAnchor="middle" className="fill-muted-foreground/50" fontSize="9" fontFamily="var(--font-body)">
+                    {diamondPhases[i].column}
+                  </text>
+                  {/* AI sparkle */}
+                  <AnimatePresence>
+                    {mode === "ai" && (
+                      <motion.circle
+                        cx={x + 10}
+                        cy={28}
+                        r="2.5"
+                        fill={colors.accent}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: [0.4, 1, 0.4], scale: [0.8, 1.2, 0.8] }}
+                        exit={{ opacity: 0, scale: 0 }}
+                        transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+                      />
+                    )}
+                  </AnimatePresence>
+                </g>
+              );
+            })}
           </svg>
         </div>
 
