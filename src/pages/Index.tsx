@@ -292,23 +292,26 @@ function ToolsSidebarList({ searchQuery = "" }: { searchQuery?: string }) {
       {toolCategories.map(({ category, tools: catTools }) => {
         const filtered = catTools.filter((t) => t.name.toLowerCase().includes(searchQuery.toLowerCase()));
         if (searchQuery && filtered.length === 0) return null;
-          <div className="flex items-center gap-2 px-5 pt-5 pb-2">
-             <span className="text-xs font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-              {category}
-            </span>
-            <span className="text-[11px] text-muted-foreground/50 font-body ml-auto">{tools.length}</span>
-          </div>
-          {tools.map((tool) => (
-            <div
-              key={tool.name}
-              className="flex items-center gap-2.5 px-5 py-2 mx-2 rounded-lg hover:bg-foreground/[0.03] transition-colors cursor-default"
-            >
-              <ToolLogo name={tool.name} type={tool.type} size="sm" />
-              <span className="text-sm font-body text-muted-foreground truncate">{tool.name}</span>
+        return (
+          <div key={category} className="mb-1">
+            <div className="flex items-center gap-2 px-5 pt-5 pb-2">
+              <span className="text-xs font-body font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                {category}
+              </span>
+              <span className="text-[11px] text-muted-foreground/50 font-body ml-auto">{filtered.length}</span>
             </div>
-          ))}
-        </div>
-      ))}
+            {filtered.map((tool) => (
+              <div
+                key={tool.name}
+                className="flex items-center gap-2.5 px-5 py-2 mx-2 rounded-lg hover:bg-foreground/[0.03] transition-colors cursor-default"
+              >
+                <ToolLogo name={tool.name} type={tool.type} size="sm" />
+                <span className="text-sm font-body text-muted-foreground truncate">{tool.name}</span>
+              </div>
+            ))}
+          </div>
+        );
+      })}
     </div>
   );
 }
