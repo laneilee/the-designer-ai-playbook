@@ -854,7 +854,7 @@ export const methods: Method[] = [
     relatedMethods: ["design-qa", "component-documentation", "hifi-designs"],
     aiTools: [
       { name: "Figma AI", description: "Auto-generate redlines and responsive specifications", type: "ai" },
-      { name: "ChatGPT", description: "Draft developer walkthrough documents from design descriptions", type: "ai" },
+      { name: "ChatGPT", description: "Draft developer walkthrough documents from design descriptions", type: "ai", promptGuide: "Write a developer walkthrough for [feature]. Describe: (1) The user flow step by step, (2) Key interaction behaviors with timing, (3) Responsive rules per breakpoint, (4) Content rules (character limits, truncation, fallbacks), (5) Edge cases to handle. Write for a frontend developer audience." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Dev mode for precise specification inspection", type: "traditional" },
