@@ -278,7 +278,7 @@ function ToolsSidebarList() {
               className="flex items-center gap-2.5 px-5 py-2 mx-2 rounded-lg hover:bg-foreground/[0.03] transition-colors cursor-default"
             >
               <ToolLogo name={tool.name} type={tool.type} size="sm" />
-              <span className="text-[13px] font-body text-muted-foreground/70 truncate">{tool.name}</span>
+              <span className="text-sm font-body text-muted-foreground truncate">{tool.name}</span>
             </div>
           ))}
         </div>

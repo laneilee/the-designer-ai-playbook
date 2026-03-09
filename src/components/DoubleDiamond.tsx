@@ -192,7 +192,7 @@ export default function DoubleDiamond() {
             transition={{ duration: 0.3 }}
             className="mt-5 px-4 py-3 rounded-xl bg-foreground/[0.03] border border-foreground/[0.05]"
           >
-            <p className="text-[12px] text-foreground/60 font-body leading-relaxed text-center">
+            <p className="text-sm text-foreground/70 font-body leading-relaxed text-center">
               {mode === "ai" ? (
                 <>
                   <span className="font-medium text-foreground/80">AI amplifies every phase</span> — from research synthesis to prototype generation. The designer's role shifts from execution to curation, judgment, and strategic decision-making.

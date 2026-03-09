@@ -168,7 +168,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
                 href={r.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[13px] text-foreground/60 hover:text-clay font-body transition-colors group"
+                className="flex items-center gap-2 text-sm text-foreground/70 hover:text-clay font-body transition-colors group"
               >
                 <ExternalLink className="w-3.5 h-3.5 group-hover:text-clay transition-colors" />
                 {r.title}
