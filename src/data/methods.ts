@@ -697,8 +697,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["design-system-review", "accessibility-review", "design-qa"],
     aiTools: [
-      { name: "Lovable", description: "Generate full functional prototypes from designs or descriptions", type: "ai" },
-      { name: "Cursor / Copilot", description: "AI-assisted coding for interactive prototype features", type: "ai" },
+      { name: "Lovable", description: "Generate full functional prototypes from designs or descriptions", type: "ai", promptGuide: "Build a high-fidelity version of [feature/flow]. Use this design system: [describe tokens, colors, typography]. Include these states: default, loading, empty, error, and success. Make it responsive for desktop and mobile." },
+      { name: "Cursor / Copilot", description: "AI-assisted coding for interactive prototype features", type: "ai", promptGuide: "Add [interaction type] to this component. It should: [describe behavior]. Include transitions with [timing] easing. Handle edge cases: [list edge cases]. Follow the existing code patterns." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Advanced design with variables, auto-layout, and prototyping", type: "traditional" },
