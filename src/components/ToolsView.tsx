@@ -40,7 +40,7 @@ const toolCategoryMap: Record<string, ToolCategory> = {
   "axe DevTools": "Accessibility",
   "Notion / Confluence": "Documentation",
   "Google Docs": "Documentation",
-  "Spreadsheets": "Documentation",
+  
   "Storybook": "Documentation",
   "Zeplin": "Documentation",
   "Amplitude / Mixpanel": "Analytics",

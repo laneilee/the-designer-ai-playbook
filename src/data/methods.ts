@@ -546,7 +546,6 @@ export const methods: Method[] = [
     ],
     traditionalTools: [
       { name: "Figma", description: "Create wireframe concept variations", type: "traditional" },
-      { name: "Paper & pen", description: "Quick sketching for early concept exploration", type: "traditional" },
     ],
     resources: [
       { title: "NNG: Parallel Design", url: "https://www.nngroup.com/articles/parallel-and-iterative-design/" },
