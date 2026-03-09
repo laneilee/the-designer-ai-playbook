@@ -203,7 +203,7 @@ function ToolCard({ tool, onOpenPrompts }: { tool: ToolInfo; onOpenPrompts: (too
               onClick={() => onOpenPrompts(tool)}
               className="text-[11px] font-body font-medium text-clay hover:text-clay/80 transition-colors"
             >
-              {tool.prompts.length} prompt{tool.prompts.length > 1 ? "s" : ""} →
+              {tool.prompts.length} guidance prompt{tool.prompts.length > 1 ? "s" : ""} →
             </button>
           )}
         </div>
