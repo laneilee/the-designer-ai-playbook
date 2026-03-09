@@ -224,14 +224,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 function ToolColumn({ label, icon, tools }: { label: string; icon: React.ReactNode; tools: Method["aiTools"] }) {
-  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
-
-  const handleCopy = (text: string, idx: number) => {
-    navigator.clipboard.writeText(text);
-    setCopiedIdx(idx);
-    setTimeout(() => setCopiedIdx(null), 2000);
-  };
-
   return (
     <div>
       <div className="flex items-center gap-1.5 mb-3">
@@ -239,48 +231,18 @@ function ToolColumn({ label, icon, tools }: { label: string; icon: React.ReactNo
         <span className="text-xs font-body font-medium uppercase tracking-widest text-muted-foreground">{label}</span>
       </div>
       <div className="space-y-2">
-        {tools.map((tool, idx) => (
+        {tools.map((tool) => (
           <div
             key={tool.name}
-            className="rounded-xl bg-card border border-border/50 hover:border-border transition-colors overflow-hidden"
+            className="flex items-start gap-3 p-3 rounded-xl bg-card border border-border/50 hover:border-border transition-colors"
           >
-            <div className="flex items-start gap-3 p-3">
-              <div className="w-8 h-8 rounded-lg overflow-hidden shrink-0 flex items-center justify-center bg-accent">
-                <ToolLogo name={tool.name} type={tool.type} size="md" />
-              </div>
-              <div className="min-w-0">
-                <div className="text-sm font-medium text-foreground font-body">{tool.name}</div>
-                <div className="text-xs text-muted-foreground leading-relaxed font-body mt-0.5">{tool.description}</div>
-              </div>
+            <div className="w-8 h-8 rounded-lg overflow-hidden shrink-0 flex items-center justify-center bg-accent">
+              <ToolLogo name={tool.name} type={tool.type} size="md" />
             </div>
-            {tool.promptGuide && (
-              <div className="mx-3 mb-3 rounded-lg bg-foreground/[0.03] border border-foreground/[0.06] p-3">
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-[10px] font-body font-semibold uppercase tracking-widest text-muted-foreground/50">
-                    Prompt guide
-                  </span>
-                  <button
-                    onClick={() => handleCopy(tool.promptGuide!, idx)}
-                    className="flex items-center gap-1 text-[10px] font-body text-muted-foreground/40 hover:text-foreground/60 transition-colors"
-                  >
-                    {copiedIdx === idx ? (
-                      <>
-                        <Check className="w-3 h-3" />
-                        Copied
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3 h-3" />
-                        Copy
-                      </>
-                    )}
-                  </button>
-                </div>
-                <p className="text-xs font-body text-foreground/60 leading-relaxed">
-                  {tool.promptGuide}
-                </p>
-              </div>
-            )}
+            <div className="min-w-0">
+              <div className="text-sm font-medium text-foreground font-body">{tool.name}</div>
+              <div className="text-xs text-muted-foreground leading-relaxed font-body mt-0.5">{tool.description}</div>
+            </div>
           </div>
         ))}
       </div>
