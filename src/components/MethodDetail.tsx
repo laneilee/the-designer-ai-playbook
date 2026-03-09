@@ -3,7 +3,7 @@ import { type Method } from "@/data/methods";
 import { phaseColors } from "@/data/phaseColors";
 import {
   Bot, ExternalLink, Clock, Zap, Users,
-  CheckCircle2, Wrench, ArrowDown,
+  CheckCircle2, Wrench, ArrowDown, Copy, Check,
 } from "lucide-react";
 import ToolLogo from "@/components/ToolLogo";
 
