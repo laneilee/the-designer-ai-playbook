@@ -622,7 +622,7 @@ export const methods: Method[] = [
     relatedMethods: ["design-critique", "accessibility-review", "hifi-designs"],
     aiTools: [
       { name: "Figma AI", description: "Auto-detect inconsistencies and generate component variants", type: "ai" },
-      { name: "ChatGPT", description: "Draft component usage guidelines and documentation", type: "ai" },
+      { name: "ChatGPT", description: "Draft component usage guidelines and documentation", type: "ai", promptGuide: "I have a [component name] with these variants: [list variants]. Write usage guidelines covering: when to use each variant, dos and don'ts, accessibility requirements, and content guidelines. Format for a design system documentation page." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Build and maintain the component library with variants", type: "traditional" },
