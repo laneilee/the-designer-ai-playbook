@@ -42,8 +42,8 @@ export default function DoubleDiamond() {
       {/* Header with toggle */}
       <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-border">
         <div>
-          <h3 className="text-base font-display text-foreground">The Double Diamond — Reimagined</h3>
-          <p className="text-[11px] text-muted-foreground/50 font-body mt-0.5">
+          <h3 className="text-lg font-display text-foreground">The Double Diamond — Reimagined</h3>
+          <p className="text-xs text-muted-foreground font-body mt-0.5">
             How AI transforms each phase of the design process
           </p>
         </div>
