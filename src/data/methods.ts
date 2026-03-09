@@ -129,7 +129,7 @@ export const methods: Method[] = [
       "UX strengths and weaknesses per competitor",
       "Opportunity areas for differentiation",
     ],
-    relatedMethods: ["review-previous-research", "audit-experiences"],
+    relatedMethods: ["review-previous-research"],
     aiTools: [
       { name: "ChatGPT", description: "Research competitors and generate comparison matrices", type: "ai" },
       { name: "Perplexity", description: "Deep research on competitor features, positioning, and reviews", type: "ai" },
@@ -294,43 +294,6 @@ export const methods: Method[] = [
 
   // ── DEFINE ──
   {
-    id: "ideation",
-    title: "Ideation",
-    phase: "Define",
-    context: ["Team", "Cross-functional"],
-    whenToUse: "When transitioning from research insights to design opportunities — generating a wide range of possible solutions before converging on direction.",
-    description:
-      "Ideation is the structured generation of ideas to address defined problems. Using techniques like brainstorming, How Might We questions, Crazy 8s, and design studios, the team diverges widely before converging on the most promising directions. The goal is quantity and variety — evaluation comes later.",
-    effort: "Low",
-    timeEstimate: "2–4 hours",
-    steps: [
-      "Review research insights and problem statements as a team",
-      "Frame the challenge with How Might We questions",
-      "Use rapid ideation techniques (Crazy 8s, brainstorming, brainwriting)",
-      "Generate as many ideas as possible — no judgment during divergence",
-      "Cluster and theme the ideas using affinity mapping",
-      "Vote on the most promising directions",
-      "Select 2-3 concepts to carry forward for further development",
-    ],
-    artifacts: [
-      "Ideation output: sketches, sticky notes, concept descriptions",
-      "Clustered themes with voting results",
-      "Selected concept directions with rationale",
-    ],
-    relatedMethods: ["synthesize-research", "problem-framing", "lofi-vibe-coding"],
-    aiTools: [
-      { name: "ChatGPT", description: "Generate concept variations and 'what if' prompts to push thinking further", type: "ai" },
-      { name: "Claude", description: "Challenge assumptions and suggest alternative approaches", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Miro / FigJam", description: "Digital whiteboard for remote ideation and voting", type: "traditional" },
-      { name: "Sticky notes", description: "Physical or digital sticky notes for brainstorming", type: "traditional" },
-    ],
-    resources: [
-      { title: "IDEO: Brainstorming Rules", url: "https://www.ideou.com/pages/brainstorming-rules" },
-    ],
-  },
-  {
     id: "synthesize-research",
     title: "Synthesize Research",
     phase: "Define",
@@ -366,6 +329,43 @@ export const methods: Method[] = [
     ],
     resources: [
       { title: "NNG: Affinity Diagramming", url: "https://www.nngroup.com/articles/affinity-diagram/" },
+    ],
+  },
+  {
+    id: "ideation",
+    title: "Ideation",
+    phase: "Define",
+    context: ["Team", "Cross-functional"],
+    whenToUse: "When transitioning from research insights to design opportunities — generating a wide range of possible solutions before converging on direction.",
+    description:
+      "Ideation is the structured generation of ideas to address defined problems. Using techniques like brainstorming, How Might We questions, Crazy 8s, and design studios, the team diverges widely before converging on the most promising directions. The goal is quantity and variety — evaluation comes later.",
+    effort: "Low",
+    timeEstimate: "2–4 hours",
+    steps: [
+      "Review research insights and problem statements as a team",
+      "Frame the challenge with How Might We questions",
+      "Use rapid ideation techniques (Crazy 8s, brainstorming, brainwriting)",
+      "Generate as many ideas as possible — no judgment during divergence",
+      "Cluster and theme the ideas using affinity mapping",
+      "Vote on the most promising directions",
+      "Select 2-3 concepts to carry forward for further development",
+    ],
+    artifacts: [
+      "Ideation output: sketches, sticky notes, concept descriptions",
+      "Clustered themes with voting results",
+      "Selected concept directions with rationale",
+    ],
+    relatedMethods: ["synthesize-research", "problem-framing", "lofi-vibe-coding"],
+    aiTools: [
+      { name: "ChatGPT", description: "Generate concept variations and 'what if' prompts to push thinking further", type: "ai" },
+      { name: "Claude", description: "Challenge assumptions and suggest alternative approaches", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Miro / FigJam", description: "Digital whiteboard for remote ideation and voting", type: "traditional" },
+      { name: "Sticky notes", description: "Physical or digital sticky notes for brainstorming", type: "traditional" },
+    ],
+    resources: [
+      { title: "IDEO: Brainstorming Rules", url: "https://www.ideou.com/pages/brainstorming-rules" },
     ],
   },
   {
@@ -443,43 +443,6 @@ export const methods: Method[] = [
       { title: "NNG: UX Metrics", url: "https://www.nngroup.com/articles/usability-metrics/" },
     ],
   },
-  {
-    id: "audit-experiences",
-    title: "Audit Current and Comparable Experiences",
-    phase: "Define",
-    context: ["Solo", "Team"],
-    whenToUse: "When you need a clear picture of the current state — evaluating existing product experiences and comparable solutions to identify gaps and opportunities.",
-    description:
-      "An experience audit systematically evaluates your current product (and comparable experiences) against usability heuristics, design principles, and user needs. It reveals pain points, inconsistencies, and opportunities that inform the design direction. This goes beyond competitive analysis by deeply examining interaction quality.",
-    effort: "Medium",
-    timeEstimate: "3–5 days",
-    steps: [
-      "Define audit scope: which flows, screens, and comparable products to evaluate",
-      "Walk through each key user flow, documenting friction points and bright spots",
-      "Evaluate against established heuristics (Nielsen's 10, WCAG guidelines)",
-      "Screenshot and annotate specific issues with severity ratings",
-      "Compare patterns across your product and comparable experiences",
-      "Synthesize findings into opportunity areas ranked by impact",
-    ],
-    artifacts: [
-      "Experience audit report with annotated screenshots",
-      "Heuristic scorecard for current product vs. comparables",
-      "Opportunity map with severity-ranked findings",
-      "Bright spots inventory — patterns worth preserving",
-    ],
-    relatedMethods: ["review-competitive-analysis", "problem-framing", "define-interaction-model"],
-    aiTools: [
-      { name: "ChatGPT", description: "Pre-scan screenshots against heuristic checklists to surface potential issues", type: "ai" },
-      { name: "Claude", description: "Generate detailed audit reports from UI descriptions and screenshots", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Figma", description: "Annotate designs with audit findings and severity markers", type: "traditional" },
-      { name: "Spreadsheets", description: "Track and score audit findings systematically", type: "traditional" },
-    ],
-    resources: [
-      { title: "NNG: How to Conduct a Heuristic Evaluation", url: "https://www.nngroup.com/articles/how-to-conduct-a-heuristic-evaluation/" },
-    ],
-  },
 
   // ── DESIGN ──
   {
@@ -507,7 +470,7 @@ export const methods: Method[] = [
       "User flow diagrams for key tasks",
       "Interaction pattern library for the product",
     ],
-    relatedMethods: ["lofi-vibe-coding", "create-lofi-concepts", "audit-experiences"],
+    relatedMethods: ["lofi-vibe-coding", "create-lofi-concepts"],
     aiTools: [
       { name: "ChatGPT", description: "Generate IA structure suggestions from content inventories", type: "ai" },
       { name: "Claude", description: "Analyze user flows for complexity and suggest simplifications", type: "ai" },
