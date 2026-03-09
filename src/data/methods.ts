@@ -547,8 +547,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["lofi-vibe-coding", "design-critique", "define-interaction-model"],
     aiTools: [
-      { name: "Midjourney / DALL-E", description: "Rapidly visualize concept directions as mood references", type: "ai" },
-      { name: "Lovable", description: "Generate distinct functional concept prototypes from descriptions", type: "ai" },
+      { name: "Midjourney / DALL-E", description: "Rapidly visualize concept directions as mood references", type: "ai", promptGuide: "Generate a UI concept for a [product type] that feels [tone/mood]. Show [key screen or feature]. Style: [design direction, e.g., minimal, bold, playful]. Use as mood reference, not final design." },
+      { name: "Lovable", description: "Generate distinct functional concept prototypes from descriptions", type: "ai", promptGuide: "Create concept [A/B/C] for [product]. This version takes the approach of [describe approach]. Key differentiator from other concepts: [what makes this direction unique]. Include [key screens]." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Create wireframe concept variations", type: "traditional" },
