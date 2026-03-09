@@ -171,7 +171,6 @@ export const methods: Method[] = [
       { name: "ChatGPT", description: "Generate interview guides and synthesize notes into themes", type: "ai", promptGuide: "I'm interviewing [role] stakeholders for a [project type]. Generate a 45-min interview guide covering: their definition of success, biggest concerns, key constraints, and how they'll measure impact. Include follow-up probes for each question." },
     ],
     traditionalTools: [
-      { name: "Google Docs", description: "Collaborative note-taking during interviews", type: "traditional" },
       { name: "Miro / FigJam", description: "Map stakeholder perspectives and themes visually", type: "traditional" },
     ],
     resources: [
