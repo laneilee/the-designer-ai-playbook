@@ -132,8 +132,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["review-previous-research"],
     aiTools: [
-      { name: "ChatGPT", description: "Research competitors and generate comparison matrices", type: "ai" },
-      { name: "Perplexity", description: "Deep research on competitor features, positioning, and reviews", type: "ai" },
+      { name: "ChatGPT", description: "Research competitors and generate comparison matrices", type: "ai", promptGuide: "I'm designing a [product type] in the [industry] space. Identify 5 direct competitors and 3 aspirational competitors. For each, analyze: (1) Core value proposition, (2) Key UX patterns they use, (3) Strengths and weaknesses, (4) Unmet user needs they leave open. Present as a comparison matrix." },
+      { name: "Perplexity", description: "Deep research on competitor features, positioning, and reviews", type: "ai", promptGuide: "Research [competitor name] product. Find: recent feature launches, user reviews (positive and negative), pricing model, target audience, and any public UX case studies. Include sources." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Screenshot and annotate competitor UIs for comparison", type: "traditional" },
