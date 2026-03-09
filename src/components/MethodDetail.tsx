@@ -141,7 +141,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
               className="flex items-start gap-2.5 p-3 rounded-xl bg-foreground/[0.02] border border-foreground/[0.04]"
             >
               <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" style={{ color: colors.accent }} />
-              <span className="text-[13px] text-foreground/70 font-body leading-relaxed">{artifact}</span>
+              <span className="text-sm text-foreground/80 font-body leading-relaxed">{artifact}</span>
             </div>
           ))}
         </div>
