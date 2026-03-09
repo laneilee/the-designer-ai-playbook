@@ -205,7 +205,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["conduct-stakeholder-interviews", "okr-alignment"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate interview guides and synthesize stakeholder notes into profiles", type: "ai" },
+      { name: "ChatGPT", description: "Generate interview guides and synthesize stakeholder notes into profiles", type: "ai", promptGuide: "Based on these stakeholder interview notes [paste notes], create a stakeholder profile for each person including: their role, goals, concerns, influence level, and preferred communication style. Then suggest a RACI matrix for key design decisions." },
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Collaborative stakeholder mapping and relationship diagrams", type: "traditional" },
