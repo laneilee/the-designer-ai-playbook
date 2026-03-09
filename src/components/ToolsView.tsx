@@ -27,7 +27,7 @@ const toolCategoryMap: Record<string, ToolCategory> = {
   "Figma": "Design",
   "Figma AI": "Design",
   "Midjourney / DALL-E": "Design",
-  "Paper & pen": "Design",
+  
   "Lovable": "Prototyping",
   "v0 by Vercel": "Prototyping",
   "Cursor / Copilot": "Prototyping",
