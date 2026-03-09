@@ -396,8 +396,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["synthesize-research", "define-success-metrics", "ideation"],
     aiTools: [
-      { name: "Claude", description: "Challenge problem framing by generating alternative perspectives and reframes", type: "ai" },
-      { name: "ChatGPT", description: "Apply '5 Whys' analysis and generate problem statement variations", type: "ai" },
+      { name: "Claude", description: "Challenge problem framing by generating alternative perspectives and reframes", type: "ai", promptGuide: "Here's our current problem statement: [statement]. Challenge this framing: (1) What if we're solving the wrong problem? Suggest 3 alternative framings. (2) Apply the '5 Whys' to find the root cause. (3) Rewrite the problem from the user's, business's, and engineer's perspective." },
+      { name: "ChatGPT", description: "Apply '5 Whys' analysis and generate problem statement variations", type: "ai", promptGuide: "Our design problem is: [describe problem]. Apply the 5 Whys technique to dig deeper. Then generate 5 different problem statement variations using the format: '[User type] needs [need] because [insight]. We'll know we've succeeded when [measurable outcome].'" },
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Collaborative problem framing workshop facilitation", type: "traditional" },
