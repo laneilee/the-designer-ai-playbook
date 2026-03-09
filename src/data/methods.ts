@@ -129,7 +129,7 @@ export const methods: Method[] = [
       "Constraint inventory — technical, business, and organizational",
       "Conflicting perspectives map for resolution",
     ],
-    relatedMethods: ["review-stakeholder-mapping", "north-star-framing", "okr-alignment"],
+    relatedMethods: ["review-stakeholder-mapping", "okr-alignment"],
     aiTools: [
       { name: "Otter.ai", description: "Transcribe stakeholder interviews in real time", type: "ai" },
       { name: "ChatGPT", description: "Generate interview guides and synthesize notes into themes", type: "ai" },
@@ -165,7 +165,7 @@ export const methods: Method[] = [
       "Stakeholder profiles with goals, concerns, and communication preferences",
       "RACI chart for design decisions",
     ],
-    relatedMethods: ["conduct-stakeholder-interviews", "north-star-framing", "okr-alignment"],
+    relatedMethods: ["conduct-stakeholder-interviews", "okr-alignment"],
     aiTools: [
       { name: "ChatGPT", description: "Generate interview guides and synthesize stakeholder notes into profiles", type: "ai" },
     ],
@@ -175,42 +175,6 @@ export const methods: Method[] = [
     ],
     resources: [
       { title: "NNG: Stakeholder Maps", url: "https://www.nngroup.com/articles/stakeholder-interviews/" },
-    ],
-  },
-  {
-    id: "north-star-framing",
-    title: "North Star Vision Framing",
-    phase: "Discovery",
-    context: ["Team", "Stakeholder"],
-    whenToUse: "When the team needs a shared, inspiring vision of the future state to guide design decisions and align stakeholders.",
-    description:
-      "Define a compelling vision of the ideal user experience 12–18 months out. The North Star isn't a feature spec — it's an aspirational narrative that describes how life is better for users. It gives the team a decision-making compass and helps stakeholders understand the 'why' behind design choices.",
-    effort: "Medium",
-    timeEstimate: "2–3 days",
-    steps: [
-      "Synthesize research insights and identify the biggest opportunity areas",
-      "Draft a future-state narrative: describe a day in the user's life with the ideal experience",
-      "Define the key experience principles that guide toward this vision",
-      "Create a visual concept or storyboard of the North Star experience",
-      "Pressure-test with stakeholders: is it inspiring? Is it achievable? Does it align with business goals?",
-      "Distill into a one-page North Star document the team can reference",
-    ],
-    artifacts: [
-      "North Star narrative document with vision statement",
-      "Future-state storyboard or concept visualization",
-      "Experience principles derived from the vision",
-    ],
-    relatedMethods: ["conduct-stakeholder-interviews", "review-stakeholder-mapping", "okr-alignment"],
-    aiTools: [
-      { name: "ChatGPT", description: "Draft narrative scenarios and vision statements from research insights", type: "ai" },
-      { name: "Midjourney / DALL-E", description: "Generate visual concept explorations for the future state", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Figma", description: "Create storyboards and visual concepts for the North Star", type: "traditional" },
-      { name: "Google Docs", description: "Collaboratively draft and refine the vision narrative", type: "traditional" },
-    ],
-    resources: [
-      { title: "Amplitude: North Star Metric", url: "https://amplitude.com/blog/north-star-metric" },
     ],
   },
   {
@@ -314,7 +278,7 @@ export const methods: Method[] = [
       "UX strengths and weaknesses per competitor",
       "Opportunity areas for differentiation",
     ],
-    relatedMethods: ["review-previous-research", "audit-experiences", "north-star-framing"],
+    relatedMethods: ["review-previous-research", "audit-experiences"],
     aiTools: [
       { name: "ChatGPT", description: "Research competitors and generate comparison matrices", type: "ai" },
       { name: "Perplexity", description: "Deep research on competitor features, positioning, and reviews", type: "ai" },
