@@ -197,7 +197,7 @@ const Index = () => {
             The AI Design Playbook
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground/60 mt-1.5 max-w-xl font-body leading-relaxed">
-            {methods.length} actionable methods to elevate every phase of your UX process with AI.
+            Practical methods and AI tools to elevate every phase of your UX process.
           </p>
           {/* Quick nav cards */}
           <div className="flex flex-col sm:flex-row items-stretch gap-3 mt-4">
@@ -217,7 +217,6 @@ const Index = () => {
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-display font-medium text-foreground">Methods</span>
-                  <span className="text-[10px] font-body text-muted-foreground/50 bg-foreground/5 px-1.5 py-0.5 rounded-full">{methods.length}</span>
                 </div>
                 <p className="text-xs font-body text-muted-foreground/60 mt-0.5 leading-relaxed">
                   Step-by-step UX techniques powered by AI — from research to handoff.
