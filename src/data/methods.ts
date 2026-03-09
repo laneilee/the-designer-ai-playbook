@@ -58,7 +58,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["prioritization-matrix", "define-success-metrics"],
     aiTools: [
-      { name: "ChatGPT", description: "Suggest design metrics that correlate with business OKRs", type: "ai" },
+      { name: "ChatGPT", description: "Suggest design metrics that correlate with business OKRs", type: "ai", promptGuide: "Here are our company OKRs: [paste OKRs]. For each, suggest 2-3 design-specific leading metrics that would indicate progress. Format as a table with OKR → Design Metric → How to Measure." },
     ],
     traditionalTools: [
       { name: "Spreadsheets", description: "Track OKR progress and design metrics", type: "traditional" },
