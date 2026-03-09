@@ -135,10 +135,10 @@ const Index = () => {
                           }`}
                         >
                           <span
-                            className={`text-[13px] font-body transition-colors truncate ${
-                              isActive
-                                ? "text-foreground font-medium"
-                                : "text-muted-foreground/70 group-hover:text-foreground/80"
+                           className={`text-sm font-body transition-colors truncate ${
+                            isActive
+                              ? "text-foreground font-medium"
+                              : "text-muted-foreground group-hover:text-foreground/80"
                             }`}
                           >
                             {method.title}
