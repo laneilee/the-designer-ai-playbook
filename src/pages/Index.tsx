@@ -104,7 +104,7 @@ const Index = () => {
                     >
                       {phase}
                     </span>
-                    <span className="text-[9px] text-muted-foreground/30 font-body ml-auto">
+                     <span className="text-[11px] text-muted-foreground/50 font-body ml-auto">
                       {phaseMethods.length}
                     </span>
                   </div>
