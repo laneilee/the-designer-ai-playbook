@@ -15,12 +15,12 @@ import {
 type ViewMode = "methods" | "tools";
 
 const phaseIcons: Record<Phase, React.ElementType> = {
-  Discover: Compass,
-  Define: Target,
-  Ideate: Lightbulb,
-  Prototype: PenTool,
-  Validate: FlaskConical,
   Align: Handshake,
+  Discovery: Compass,
+  Define: Target,
+  Design: PenTool,
+  Validate: FlaskConical,
+  Handoff: ArrowRight,
 };
 
 const Index = () => {
