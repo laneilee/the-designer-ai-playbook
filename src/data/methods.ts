@@ -778,7 +778,7 @@ export const methods: Method[] = [
     relatedMethods: ["component-documentation", "design-specs", "hifi-designs"],
     aiTools: [
       { name: "Figma AI", description: "Auto-generate dev-ready specs and interaction documentation", type: "ai" },
-      { name: "ChatGPT", description: "Generate comprehensive QA checklists from design specs", type: "ai" },
+      { name: "ChatGPT", description: "Generate comprehensive QA checklists from design specs", type: "ai", promptGuide: "Generate a design QA checklist for [feature name]. Include checks for: visual accuracy, interaction states (hover, focus, active, disabled, loading, error, empty), responsive behavior, content edge cases (long text, missing data), and accessibility. Format as a checkable list." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Dev mode for inspecting designs and extracting specs", type: "traditional" },
