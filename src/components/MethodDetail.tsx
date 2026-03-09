@@ -52,18 +52,18 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
       {/* Meta bar */}
       <div className="flex items-center gap-4 mb-8">
         <div
-          className="flex items-center gap-1.5 text-[11px] font-body font-medium px-2.5 py-1 rounded-lg"
+          className="flex items-center gap-1.5 text-xs font-body font-medium px-2.5 py-1 rounded-lg"
           style={{ background: effort.bg, color: effort.color }}
         >
-          <Zap className="w-3 h-3" />
+          <Zap className="w-3.5 h-3.5" />
           {effort.label}
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] font-body text-muted-foreground/50">
-          <Clock className="w-3 h-3" />
+        <div className="flex items-center gap-1.5 text-xs font-body text-muted-foreground">
+          <Clock className="w-3.5 h-3.5" />
           {method.timeEstimate}
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] font-body text-muted-foreground/50">
-          <Users className="w-3 h-3" />
+        <div className="flex items-center gap-1.5 text-xs font-body text-muted-foreground">
+          <Users className="w-3.5 h-3.5" />
           {method.context.join(", ")}
         </div>
       </div>
