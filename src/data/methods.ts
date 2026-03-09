@@ -283,7 +283,6 @@ export const methods: Method[] = [
       { name: "Claude", description: "Generate thematic analysis from hundreds of diary entries", type: "ai", promptGuide: "Perform a thematic analysis of these diary entries. For each theme: provide a theme name, description, frequency across participants, representative quotes, and design implications. Highlight any longitudinal trends." },
     ],
     traditionalTools: [
-      { name: "dscout", description: "Purpose-built diary study platform with mobile capture", type: "traditional" },
       { name: "Dovetail", description: "Organize and analyze qualitative diary data", type: "traditional" },
     ],
     resources: [
