@@ -69,7 +69,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
       </div>
 
       {/* Description */}
-      <p className="text-sm leading-[1.7] text-foreground/70 font-body mb-8">
+      <p className="text-base leading-[1.8] text-foreground/80 font-body mb-8">
         {method.description}
       </p>
 
