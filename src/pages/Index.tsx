@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { methods, phases, type Phase } from "@/data/methods";
 import { phaseColors } from "@/data/phaseColors";
 import MethodDetail from "@/components/MethodDetail";
-import ToolsView from "@/components/ToolsView";
+import ToolsView, { getToolsByCategory } from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
 import DoubleDiamond from "@/components/DoubleDiamond";
 import { ScrollArea } from "@/components/ui/scroll-area";
