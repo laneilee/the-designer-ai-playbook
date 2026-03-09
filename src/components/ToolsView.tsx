@@ -21,7 +21,7 @@ const toolCategoryMap: Record<string, ToolCategory> = {
   "Perplexity": "Research",
   "Otter.ai": "Research",
   "Dovetail": "Research",
-  "dscout": "Research",
+  
   "Zoom / Teams": "Research",
   "Optimal Workshop": "Research",
   "Figma": "Design",
