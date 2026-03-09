@@ -240,7 +240,7 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
             <div>
               <h2 className="text-base font-display font-medium text-foreground">{tool.name}</h2>
               <p className="text-xs font-body text-muted-foreground">
-                {tool.prompts.length} prompt guide{tool.prompts.length > 1 ? "s" : ""}
+                {tool.prompts.length} guidance prompt{tool.prompts.length > 1 ? "s" : ""}
               </p>
             </div>
           </div>
