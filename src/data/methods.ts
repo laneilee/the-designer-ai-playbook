@@ -738,7 +738,7 @@ export const methods: Method[] = [
     relatedMethods: ["lofi-vibe-coding", "hifi-designs", "define-success-metrics"],
     aiTools: [
       { name: "Otter.ai", description: "Transcribe testing sessions in real time", type: "ai" },
-      { name: "Claude", description: "Analyze session transcripts and generate usability finding reports", type: "ai" },
+      { name: "Claude", description: "Analyze session transcripts and generate usability finding reports", type: "ai", promptGuide: "Here is a transcript from a concept test session. The user was testing [describe concept] with tasks: [list tasks]. Extract: (1) Task success/failure with reasoning, (2) Comprehension issues, (3) Moments of delight or confusion with quotes, (4) Suggested design changes. Rate each finding by severity." },
     ],
     traditionalTools: [
       { name: "Maze", description: "Run unmoderated concept and usability tests at scale", type: "traditional" },
