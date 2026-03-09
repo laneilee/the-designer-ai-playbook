@@ -178,42 +178,6 @@ export const methods: Method[] = [
     ],
   },
   {
-    id: "north-star-framing",
-    title: "North Star Vision Framing",
-    phase: "Discovery",
-    context: ["Team", "Stakeholder"],
-    whenToUse: "When the team needs a shared, inspiring vision of the future state to guide design decisions and align stakeholders.",
-    description:
-      "Define a compelling vision of the ideal user experience 12–18 months out. The North Star isn't a feature spec — it's an aspirational narrative that describes how life is better for users. It gives the team a decision-making compass and helps stakeholders understand the 'why' behind design choices.",
-    effort: "Medium",
-    timeEstimate: "2–3 days",
-    steps: [
-      "Synthesize research insights and identify the biggest opportunity areas",
-      "Draft a future-state narrative: describe a day in the user's life with the ideal experience",
-      "Define the key experience principles that guide toward this vision",
-      "Create a visual concept or storyboard of the North Star experience",
-      "Pressure-test with stakeholders: is it inspiring? Is it achievable? Does it align with business goals?",
-      "Distill into a one-page North Star document the team can reference",
-    ],
-    artifacts: [
-      "North Star narrative document with vision statement",
-      "Future-state storyboard or concept visualization",
-      "Experience principles derived from the vision",
-    ],
-    relatedMethods: ["conduct-stakeholder-interviews", "review-stakeholder-mapping", "okr-alignment"],
-    aiTools: [
-      { name: "ChatGPT", description: "Draft narrative scenarios and vision statements from research insights", type: "ai" },
-      { name: "Midjourney / DALL-E", description: "Generate visual concept explorations for the future state", type: "ai" },
-    ],
-    traditionalTools: [
-      { name: "Figma", description: "Create storyboards and visual concepts for the North Star", type: "traditional" },
-      { name: "Google Docs", description: "Collaboratively draft and refine the vision narrative", type: "traditional" },
-    ],
-    resources: [
-      { title: "Amplitude: North Star Metric", url: "https://amplitude.com/blog/north-star-metric" },
-    ],
-  },
-  {
     id: "conduct-user-interviews",
     title: "Conduct User Interviews",
     phase: "Discovery",
