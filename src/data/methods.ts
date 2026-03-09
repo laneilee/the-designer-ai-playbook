@@ -434,7 +434,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["problem-framing", "okr-alignment", "concept-testing"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate hypothesis variations and suggest relevant metrics for design outcomes", type: "ai" },
+      { name: "ChatGPT", description: "Generate hypothesis variations and suggest relevant metrics for design outcomes", type: "ai", promptGuide: "Our design problem is [problem] and our proposed solution is [solution]. Generate 5 testable design hypotheses in the format: 'We believe [change] will [outcome] for [user segment] because [evidence].' For each, suggest a primary metric, a leading indicator, and a guardrail metric." },
     ],
     traditionalTools: [
       { name: "Spreadsheets", description: "Build metrics tracking frameworks", type: "traditional" },
