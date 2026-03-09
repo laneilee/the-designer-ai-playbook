@@ -129,7 +129,7 @@ export const methods: Method[] = [
       "Constraint inventory — technical, business, and organizational",
       "Conflicting perspectives map for resolution",
     ],
-    relatedMethods: ["review-stakeholder-mapping", "north-star-framing", "okr-alignment"],
+    relatedMethods: ["review-stakeholder-mapping", "okr-alignment"],
     aiTools: [
       { name: "Otter.ai", description: "Transcribe stakeholder interviews in real time", type: "ai" },
       { name: "ChatGPT", description: "Generate interview guides and synthesize notes into themes", type: "ai" },
