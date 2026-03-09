@@ -360,7 +360,6 @@ export const methods: Method[] = [
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Digital whiteboard for remote ideation and voting", type: "traditional" },
-      { name: "Sticky notes", description: "Physical or digital sticky notes for brainstorming", type: "traditional" },
     ],
     resources: [
       { title: "IDEO: Brainstorming Rules", url: "https://www.ideou.com/pages/brainstorming-rules" },
