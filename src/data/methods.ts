@@ -583,8 +583,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["create-lofi-concepts", "design-system-review", "hifi-designs"],
     aiTools: [
-      { name: "ChatGPT", description: "Pre-review designs for common UX heuristic violations", type: "ai" },
-      { name: "Claude", description: "Generate structured feedback questions based on design objectives", type: "ai" },
+      { name: "ChatGPT", description: "Pre-review designs for common UX heuristic violations", type: "ai", promptGuide: "Review this design [describe or attach screenshot] against Nielsen's 10 usability heuristics. For each heuristic: rate compliance (pass/warning/fail), explain your reasoning, and suggest a fix for any issues found." },
+      { name: "Claude", description: "Generate structured feedback questions based on design objectives", type: "ai", promptGuide: "We're critiquing a design for [feature]. The design objectives are: [list objectives]. Generate 10 specific critique questions that will surface the most valuable feedback. Organize by: effectiveness, usability, visual design, and edge cases." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Comment directly on designs during critique", type: "traditional" },
