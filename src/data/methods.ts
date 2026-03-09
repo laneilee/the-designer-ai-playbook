@@ -136,7 +136,6 @@ export const methods: Method[] = [
     ],
     traditionalTools: [
       { name: "Figma", description: "Screenshot and annotate competitor UIs for comparison", type: "traditional" },
-      { name: "Spreadsheets", description: "Build feature comparison matrices and scoring rubrics", type: "traditional" },
     ],
     resources: [
       { title: "NNG: Competitive UX Benchmarking", url: "https://www.nngroup.com/articles/competitive-usability-evaluations/" },
