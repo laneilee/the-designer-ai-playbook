@@ -281,8 +281,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["conduct-user-interviews", "review-previous-research", "synthesize-research"],
     aiTools: [
-      { name: "ChatGPT", description: "Analyze diary entries at scale to find patterns across participants", type: "ai" },
-      { name: "Claude", description: "Generate thematic analysis from hundreds of diary entries", type: "ai" },
+      { name: "ChatGPT", description: "Analyze diary entries at scale to find patterns across participants", type: "ai", promptGuide: "Here are diary entries from [X] participants over [Y] weeks about [topic]. Analyze for: (1) Behavioral patterns that repeat across participants, (2) Changes in behavior over time, (3) Context-dependent variations, (4) Emotional peaks and valleys. Group findings by theme." },
+      { name: "Claude", description: "Generate thematic analysis from hundreds of diary entries", type: "ai", promptGuide: "Perform a thematic analysis of these diary entries. For each theme: provide a theme name, description, frequency across participants, representative quotes, and design implications. Highlight any longitudinal trends." },
     ],
     traditionalTools: [
       { name: "dscout", description: "Purpose-built diary study platform with mobile capture", type: "traditional" },
