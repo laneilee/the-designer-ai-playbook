@@ -927,7 +927,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["post-launch-performance", "design-qa", "okr-alignment"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate retro prompts and help synthesize themes from team input", type: "ai" },
+      { name: "ChatGPT", description: "Generate retro prompts and help synthesize themes from team input", type: "ai", promptGuide: "We just shipped [feature/project]. Generate 8 retrospective prompts that go beyond 'what went well / what didn't.' Focus on: design process, cross-functional collaboration, decision quality, and craft. Then after the retro, help us synthesize [paste team input] into themes and concrete action items." },
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Retro board templates with voting and action tracking", type: "traditional" },
