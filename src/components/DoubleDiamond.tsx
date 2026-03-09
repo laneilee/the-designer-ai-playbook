@@ -75,53 +75,74 @@ export default function DoubleDiamond() {
 
       {/* Phase visualization */}
       <div className="px-5 sm:px-6 py-6">
-        {/* Linear process flow */}
+        {/* Double Diamond SVG */}
         <div className="relative mb-6">
-          <svg viewBox="0 0 800 80" className="w-full h-auto" preserveAspectRatio="xMidYMid meet">
-            {/* Process line */}
-            <line x1="30" y1="40" x2="770" y2="40" stroke="hsl(var(--border))" strokeWidth="2" />
-            
-            {/* Phase nodes */}
-            {diamondPhases.map(({ phase, label }, i) => {
-              const x = 30 + (i * 148);
-              const colors = phaseColors[phase];
-              return (
-                <g key={phase}>
-                  <motion.circle
-                    cx={x}
-                    cy={40}
-                    r={12}
-                    fill={`${colors.accent}${mode === "ai" ? "30" : "15"}`}
-                    stroke={colors.accent}
-                    strokeWidth="2"
-                    animate={{ r: mode === "ai" ? 14 : 12 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <circle cx={x} cy={40} r={4} fill={colors.accent} />
-                  <text x={x} y={20} textAnchor="middle" className="fill-foreground/80" fontSize="11" fontFamily="var(--font-body)" fontWeight="500">
-                    {label}
-                  </text>
-                  <text x={x} y={65} textAnchor="middle" className="fill-muted-foreground/50" fontSize="9" fontFamily="var(--font-body)">
-                    {diamondPhases[i].column}
-                  </text>
-                  {/* AI sparkle */}
-                  <AnimatePresence>
-                    {mode === "ai" && (
-                      <motion.circle
-                        cx={x + 10}
-                        cy={28}
-                        r="2.5"
-                        fill={colors.accent}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: [0.4, 1, 0.4], scale: [0.8, 1.2, 0.8] }}
-                        exit={{ opacity: 0, scale: 0 }}
-                        transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
-                      />
-                    )}
-                  </AnimatePresence>
-                </g>
-              );
-            })}
+          <svg viewBox="0 0 900 200" className="w-full h-auto" preserveAspectRatio="xMidYMid meet">
+            {/* Diamond 1: Align → Discovery → Define */}
+            <motion.path
+              d="M 50,100 L 250,25 L 450,100 L 250,175 Z"
+              fill={`${phaseColors.Discovery.accent}${mode === "ai" ? "18" : "0a"}`}
+              stroke={phaseColors.Discovery.accent}
+              strokeWidth="1.5"
+              strokeOpacity={0.3}
+              animate={{ fillOpacity: mode === "ai" ? 0.15 : 0.05 }}
+              transition={{ duration: 0.5 }}
+            />
+            {/* Diamond 2: Define → Design → Validate → Handoff */}
+            <motion.path
+              d="M 450,100 L 650,25 L 850,100 L 650,175 Z"
+              fill={`${phaseColors.Design.accent}${mode === "ai" ? "18" : "0a"}`}
+              stroke={phaseColors.Design.accent}
+              strokeWidth="1.5"
+              strokeOpacity={0.3}
+              animate={{ fillOpacity: mode === "ai" ? 0.15 : 0.05 }}
+              transition={{ duration: 0.5 }}
+            />
+
+            {/* Phase labels on diamond */}
+            <text x="50" y="96" textAnchor="middle" className="fill-foreground/80" fontSize="12" fontFamily="var(--font-body)" fontWeight="500">Align</text>
+            <text x="50" y="112" textAnchor="middle" className="fill-muted-foreground/40" fontSize="10" fontFamily="var(--font-body)">Start</text>
+
+            <text x="250" y="96" textAnchor="middle" className="fill-foreground/80" fontSize="12" fontFamily="var(--font-body)" fontWeight="500">Discovery</text>
+            <text x="250" y="112" textAnchor="middle" className="fill-muted-foreground/40" fontSize="10" fontFamily="var(--font-body)">Diverge</text>
+
+            <text x="450" y="96" textAnchor="middle" className="fill-foreground/80" fontSize="12" fontFamily="var(--font-body)" fontWeight="500">Define</text>
+            <text x="450" y="112" textAnchor="middle" className="fill-muted-foreground/40" fontSize="10" fontFamily="var(--font-body)">Converge</text>
+
+            <text x="650" y="96" textAnchor="middle" className="fill-foreground/80" fontSize="12" fontFamily="var(--font-body)" fontWeight="500">Design</text>
+            <text x="650" y="112" textAnchor="middle" className="fill-muted-foreground/40" fontSize="10" fontFamily="var(--font-body)">Diverge</text>
+
+            <text x="850" y="96" textAnchor="middle" className="fill-foreground/80" fontSize="12" fontFamily="var(--font-body)" fontWeight="500">Validate</text>
+            <text x="850" y="112" textAnchor="middle" className="fill-muted-foreground/40" fontSize="10" fontFamily="var(--font-body)">Converge</text>
+
+            {/* Handoff label below second diamond */}
+            <text x="750" y="186" textAnchor="middle" className="fill-foreground/60" fontSize="11" fontFamily="var(--font-body)" fontWeight="500">→ Handoff</text>
+
+            {/* AI sparkle indicators */}
+            <AnimatePresence>
+              {mode === "ai" && (
+                <>
+                  {[{ x: 150, c: phaseColors.Discovery.accent }, { x: 350, c: phaseColors.Define.accent }, { x: 550, c: phaseColors.Design.accent }, { x: 750, c: phaseColors.Validate.accent }].map(({ x, c }, i) => (
+                    <motion.circle
+                      key={x}
+                      cx={x}
+                      cy={55}
+                      r="3"
+                      fill={c}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: [0.4, 1, 0.4], scale: [0.8, 1.2, 0.8] }}
+                      exit={{ opacity: 0, scale: 0 }}
+                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                    />
+                  ))}
+                </>
+              )}
+            </AnimatePresence>
+
+            {/* Junction dots */}
+            <circle cx="50" cy="100" r="4" className="fill-muted-foreground/20" />
+            <circle cx="450" cy="100" r="5" className="fill-foreground/30" />
+            <circle cx="850" cy="100" r="4" className="fill-muted-foreground/20" />
           </svg>
         </div>
 
