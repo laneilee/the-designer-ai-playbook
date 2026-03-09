@@ -161,7 +161,7 @@ export default function DoubleDiamond() {
                     className="w-2 h-2 rounded-full"
                     style={{ background: colors.accent }}
                   />
-                  <span className="text-[10px] font-body font-semibold uppercase tracking-wider" style={{ color: colors.accent }}>
+                  <span className="text-xs font-body font-semibold uppercase tracking-wider" style={{ color: colors.accent }}>
                     {label}
                   </span>
                 </div>
@@ -172,7 +172,7 @@ export default function DoubleDiamond() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
                     transition={{ duration: 0.2 }}
-                    className="text-[11px] text-foreground/60 font-body leading-relaxed"
+                    className="text-xs text-foreground/70 font-body leading-relaxed"
                   >
                     {mode === "ai" ? aiDesc[phase] : traditionalDesc[phase]}
                   </motion.p>
