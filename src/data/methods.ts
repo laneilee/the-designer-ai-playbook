@@ -7,6 +7,7 @@ export interface Tool {
   name: string;
   description: string;
   type: ToolType;
+  promptGuide?: string;
 }
 
 export interface Method {
@@ -57,7 +58,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["prioritization-matrix", "define-success-metrics"],
     aiTools: [
-      { name: "ChatGPT", description: "Suggest design metrics that correlate with business OKRs", type: "ai" },
+      { name: "ChatGPT", description: "Suggest design metrics that correlate with business OKRs", type: "ai", promptGuide: "Here are our company OKRs: [paste OKRs]. For each, suggest 2-3 design-specific leading metrics that would indicate progress. Format as a table with OKR → Design Metric → How to Measure." },
     ],
     traditionalTools: [
       { name: "Spreadsheets", description: "Track OKR progress and design metrics", type: "traditional" },
@@ -94,8 +95,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["conduct-stakeholder-interviews", "review-competitive-analysis"],
     aiTools: [
-      { name: "ChatGPT", description: "Summarize and cross-reference large volumes of past research documents", type: "ai" },
-      { name: "Claude", description: "Analyze and synthesize findings across multiple research reports", type: "ai" },
+      { name: "ChatGPT", description: "Summarize and cross-reference large volumes of past research documents", type: "ai", promptGuide: "I'm uploading [X] past research documents. For each, extract: (1) Key findings, (2) Methodology used, (3) Date conducted, (4) Open questions. Then cross-reference findings across all documents and highlight contradictions or knowledge gaps." },
+      { name: "Claude", description: "Analyze and synthesize findings across multiple research reports", type: "ai", promptGuide: "Here are findings from [X] previous research studies. Identify: (1) Recurring themes across studies, (2) Findings that contradict each other, (3) Questions that remain unanswered, (4) Areas where research is outdated (>2 years old)." },
     ],
     traditionalTools: [
       { name: "Notion / Confluence", description: "Central repository for organizing past research", type: "traditional" },
@@ -131,8 +132,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["review-previous-research"],
     aiTools: [
-      { name: "ChatGPT", description: "Research competitors and generate comparison matrices", type: "ai" },
-      { name: "Perplexity", description: "Deep research on competitor features, positioning, and reviews", type: "ai" },
+      { name: "ChatGPT", description: "Research competitors and generate comparison matrices", type: "ai", promptGuide: "I'm designing a [product type] in the [industry] space. Identify 5 direct competitors and 3 aspirational competitors. For each, analyze: (1) Core value proposition, (2) Key UX patterns they use, (3) Strengths and weaknesses, (4) Unmet user needs they leave open. Present as a comparison matrix." },
+      { name: "Perplexity", description: "Deep research on competitor features, positioning, and reviews", type: "ai", promptGuide: "Research [competitor name] product. Find: recent feature launches, user reviews (positive and negative), pricing model, target audience, and any public UX case studies. Include sources." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Screenshot and annotate competitor UIs for comparison", type: "traditional" },
@@ -169,7 +170,7 @@ export const methods: Method[] = [
     relatedMethods: ["review-stakeholder-mapping", "okr-alignment"],
     aiTools: [
       { name: "Otter.ai", description: "Transcribe stakeholder interviews in real time", type: "ai" },
-      { name: "ChatGPT", description: "Generate interview guides and synthesize notes into themes", type: "ai" },
+      { name: "ChatGPT", description: "Generate interview guides and synthesize notes into themes", type: "ai", promptGuide: "I'm interviewing [role] stakeholders for a [project type]. Generate a 45-min interview guide covering: their definition of success, biggest concerns, key constraints, and how they'll measure impact. Include follow-up probes for each question." },
     ],
     traditionalTools: [
       { name: "Google Docs", description: "Collaborative note-taking during interviews", type: "traditional" },
@@ -204,7 +205,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["conduct-stakeholder-interviews", "okr-alignment"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate interview guides and synthesize stakeholder notes into profiles", type: "ai" },
+      { name: "ChatGPT", description: "Generate interview guides and synthesize stakeholder notes into profiles", type: "ai", promptGuide: "Based on these stakeholder interview notes [paste notes], create a stakeholder profile for each person including: their role, goals, concerns, influence level, and preferred communication style. Then suggest a RACI matrix for key design decisions." },
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Collaborative stakeholder mapping and relationship diagrams", type: "traditional" },
@@ -242,7 +243,7 @@ export const methods: Method[] = [
     relatedMethods: ["review-previous-research", "synthesize-research", "diary-study"],
     aiTools: [
       { name: "Otter.ai", description: "Real-time transcription of user interviews", type: "ai" },
-      { name: "Claude", description: "Analyze interview transcripts to extract themes and patterns", type: "ai" },
+      { name: "Claude", description: "Analyze interview transcripts to extract themes and patterns", type: "ai", promptGuide: "Here is a transcript from a user interview about [topic]. Extract: (1) Key pain points with direct quotes, (2) Workarounds the user currently uses, (3) Unmet needs (stated and implied), (4) Emotional moments — where did they express frustration or delight? Format each finding as an insight statement." },
     ],
     traditionalTools: [
       { name: "Dovetail", description: "Tag and organize qualitative interview data", type: "traditional" },
@@ -280,8 +281,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["conduct-user-interviews", "review-previous-research", "synthesize-research"],
     aiTools: [
-      { name: "ChatGPT", description: "Analyze diary entries at scale to find patterns across participants", type: "ai" },
-      { name: "Claude", description: "Generate thematic analysis from hundreds of diary entries", type: "ai" },
+      { name: "ChatGPT", description: "Analyze diary entries at scale to find patterns across participants", type: "ai", promptGuide: "Here are diary entries from [X] participants over [Y] weeks about [topic]. Analyze for: (1) Behavioral patterns that repeat across participants, (2) Changes in behavior over time, (3) Context-dependent variations, (4) Emotional peaks and valleys. Group findings by theme." },
+      { name: "Claude", description: "Generate thematic analysis from hundreds of diary entries", type: "ai", promptGuide: "Perform a thematic analysis of these diary entries. For each theme: provide a theme name, description, frequency across participants, representative quotes, and design implications. Highlight any longitudinal trends." },
     ],
     traditionalTools: [
       { name: "dscout", description: "Purpose-built diary study platform with mobile capture", type: "traditional" },
@@ -320,8 +321,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["conduct-user-interviews", "problem-framing", "define-success-metrics"],
     aiTools: [
-      { name: "ChatGPT", description: "Pre-cluster large datasets and suggest theme labels for review", type: "ai" },
-      { name: "Claude", description: "Analyze and cross-reference data to find non-obvious connections", type: "ai" },
+      { name: "ChatGPT", description: "Pre-cluster large datasets and suggest theme labels for review", type: "ai", promptGuide: "Here are [X] research observations from user interviews. Group them into natural clusters by affinity. For each cluster: suggest a descriptive theme name, list the observations that belong to it, and write an insight statement in the format: 'We learned that [observation] because [reason], which means [implication].'" },
+      { name: "Claude", description: "Analyze and cross-reference data to find non-obvious connections", type: "ai", promptGuide: "Review these research findings from [interviews/surveys/analytics]. Identify connections that aren't immediately obvious — contradictions between what users say vs. do, patterns that span multiple data sources, and minority findings that might signal emerging needs." },
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Digital sticky notes for affinity mapping", type: "traditional" },
@@ -357,8 +358,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["synthesize-research", "problem-framing", "lofi-vibe-coding"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate concept variations and 'what if' prompts to push thinking further", type: "ai" },
-      { name: "Claude", description: "Challenge assumptions and suggest alternative approaches", type: "ai" },
+      { name: "ChatGPT", description: "Generate concept variations and 'what if' prompts to push thinking further", type: "ai", promptGuide: "We're ideating solutions for this problem: [problem statement]. Generate 10 'How Might We' questions that reframe the problem from different angles. Then for each HMW, suggest 3 wildly different solution concepts — one conventional, one ambitious, and one that breaks assumptions." },
+      { name: "Claude", description: "Challenge assumptions and suggest alternative approaches", type: "ai", promptGuide: "Here are our current solution concepts for [problem]: [list concepts]. For each, identify the underlying assumptions. Then suggest 3 alternative approaches we haven't considered — specifically ones that challenge our biggest assumptions." },
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Digital whiteboard for remote ideation and voting", type: "traditional" },
@@ -395,8 +396,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["synthesize-research", "define-success-metrics", "ideation"],
     aiTools: [
-      { name: "Claude", description: "Challenge problem framing by generating alternative perspectives and reframes", type: "ai" },
-      { name: "ChatGPT", description: "Apply '5 Whys' analysis and generate problem statement variations", type: "ai" },
+      { name: "Claude", description: "Challenge problem framing by generating alternative perspectives and reframes", type: "ai", promptGuide: "Here's our current problem statement: [statement]. Challenge this framing: (1) What if we're solving the wrong problem? Suggest 3 alternative framings. (2) Apply the '5 Whys' to find the root cause. (3) Rewrite the problem from the user's, business's, and engineer's perspective." },
+      { name: "ChatGPT", description: "Apply '5 Whys' analysis and generate problem statement variations", type: "ai", promptGuide: "Our design problem is: [describe problem]. Apply the 5 Whys technique to dig deeper. Then generate 5 different problem statement variations using the format: '[User type] needs [need] because [insight]. We'll know we've succeeded when [measurable outcome].'" },
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Collaborative problem framing workshop facilitation", type: "traditional" },
@@ -433,7 +434,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["problem-framing", "okr-alignment", "concept-testing"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate hypothesis variations and suggest relevant metrics for design outcomes", type: "ai" },
+      { name: "ChatGPT", description: "Generate hypothesis variations and suggest relevant metrics for design outcomes", type: "ai", promptGuide: "Our design problem is [problem] and our proposed solution is [solution]. Generate 5 testable design hypotheses in the format: 'We believe [change] will [outcome] for [user segment] because [evidence].' For each, suggest a primary metric, a leading indicator, and a guardrail metric." },
     ],
     traditionalTools: [
       { name: "Spreadsheets", description: "Build metrics tracking frameworks", type: "traditional" },
@@ -472,8 +473,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["lofi-vibe-coding", "create-lofi-concepts"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate IA structure suggestions from content inventories", type: "ai" },
-      { name: "Claude", description: "Analyze user flows for complexity and suggest simplifications", type: "ai" },
+      { name: "ChatGPT", description: "Generate IA structure suggestions from content inventories", type: "ai", promptGuide: "Here's a content inventory for our [product type]: [list features/content]. Suggest 3 different information architecture structures. For each: show the hierarchy, explain the organizing principle (task-based, audience-based, topic-based), and identify potential navigation challenges." },
+      { name: "Claude", description: "Analyze user flows for complexity and suggest simplifications", type: "ai", promptGuide: "Here's a user flow for [task]: [describe steps]. Analyze it for: (1) Unnecessary steps that could be removed, (2) Decision points that could be simplified, (3) Points where users might get lost. Suggest a simplified alternative flow." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Create sitemaps, flow diagrams, and IA documentation", type: "traditional" },
@@ -509,9 +510,9 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["define-interaction-model", "create-lofi-concepts", "concept-testing"],
     aiTools: [
-      { name: "Lovable", description: "Build interactive prototypes from natural language descriptions", type: "ai" },
-      { name: "v0 by Vercel", description: "Generate UI components and pages from text descriptions", type: "ai" },
-      { name: "Cursor / Copilot", description: "AI-assisted coding for rapid prototype iteration", type: "ai" },
+      { name: "Lovable", description: "Build interactive prototypes from natural language descriptions", type: "ai", promptGuide: "Build a low-fidelity prototype for [product type]. The main flow is: [describe user journey]. Include these screens: [list screens]. Keep the design minimal — focus on layout and flow, not visual polish. Use placeholder content." },
+      { name: "v0 by Vercel", description: "Generate UI components and pages from text descriptions", type: "ai", promptGuide: "Create a [component type] that [describe functionality]. It should have [list key elements]. Style it minimally — this is for concept validation, not production." },
+      { name: "Cursor / Copilot", description: "AI-assisted coding for rapid prototype iteration", type: "ai", promptGuide: "I have a prototype with [describe current state]. Modify it to: [describe changes]. Keep the code simple — this is a throwaway prototype for user testing, not production code." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Build clickable wireframe prototypes with linking", type: "traditional" },
@@ -546,8 +547,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["lofi-vibe-coding", "design-critique", "define-interaction-model"],
     aiTools: [
-      { name: "Midjourney / DALL-E", description: "Rapidly visualize concept directions as mood references", type: "ai" },
-      { name: "Lovable", description: "Generate distinct functional concept prototypes from descriptions", type: "ai" },
+      { name: "Midjourney / DALL-E", description: "Rapidly visualize concept directions as mood references", type: "ai", promptGuide: "Generate a UI concept for a [product type] that feels [tone/mood]. Show [key screen or feature]. Style: [design direction, e.g., minimal, bold, playful]. Use as mood reference, not final design." },
+      { name: "Lovable", description: "Generate distinct functional concept prototypes from descriptions", type: "ai", promptGuide: "Create concept [A/B/C] for [product]. This version takes the approach of [describe approach]. Key differentiator from other concepts: [what makes this direction unique]. Include [key screens]." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Create wireframe concept variations", type: "traditional" },
@@ -582,8 +583,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["create-lofi-concepts", "design-system-review", "hifi-designs"],
     aiTools: [
-      { name: "ChatGPT", description: "Pre-review designs for common UX heuristic violations", type: "ai" },
-      { name: "Claude", description: "Generate structured feedback questions based on design objectives", type: "ai" },
+      { name: "ChatGPT", description: "Pre-review designs for common UX heuristic violations", type: "ai", promptGuide: "Review this design [describe or attach screenshot] against Nielsen's 10 usability heuristics. For each heuristic: rate compliance (pass/warning/fail), explain your reasoning, and suggest a fix for any issues found." },
+      { name: "Claude", description: "Generate structured feedback questions based on design objectives", type: "ai", promptGuide: "We're critiquing a design for [feature]. The design objectives are: [list objectives]. Generate 10 specific critique questions that will surface the most valuable feedback. Organize by: effectiveness, usability, visual design, and edge cases." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Comment directly on designs during critique", type: "traditional" },
@@ -621,7 +622,7 @@ export const methods: Method[] = [
     relatedMethods: ["design-critique", "accessibility-review", "hifi-designs"],
     aiTools: [
       { name: "Figma AI", description: "Auto-detect inconsistencies and generate component variants", type: "ai" },
-      { name: "ChatGPT", description: "Draft component usage guidelines and documentation", type: "ai" },
+      { name: "ChatGPT", description: "Draft component usage guidelines and documentation", type: "ai", promptGuide: "I have a [component name] with these variants: [list variants]. Write usage guidelines covering: when to use each variant, dos and don'ts, accessibility requirements, and content guidelines. Format for a design system documentation page." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Build and maintain the component library with variants", type: "traditional" },
@@ -658,7 +659,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["design-system-review", "design-critique", "hifi-designs"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate WCAG-compliant alternatives for inaccessible patterns", type: "ai" },
+      { name: "ChatGPT", description: "Generate WCAG-compliant alternatives for inaccessible patterns", type: "ai", promptGuide: "This UI pattern [describe pattern] fails WCAG [criterion]. Suggest 3 alternative implementations that meet WCAG AA compliance while preserving the design intent. Include: the fix, why it works, and any tradeoffs." },
       { name: "axe AI", description: "AI-enhanced accessibility evaluation of design patterns", type: "ai" },
     ],
     traditionalTools: [
@@ -696,8 +697,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["design-system-review", "accessibility-review", "design-qa"],
     aiTools: [
-      { name: "Lovable", description: "Generate full functional prototypes from designs or descriptions", type: "ai" },
-      { name: "Cursor / Copilot", description: "AI-assisted coding for interactive prototype features", type: "ai" },
+      { name: "Lovable", description: "Generate full functional prototypes from designs or descriptions", type: "ai", promptGuide: "Build a high-fidelity version of [feature/flow]. Use this design system: [describe tokens, colors, typography]. Include these states: default, loading, empty, error, and success. Make it responsive for desktop and mobile." },
+      { name: "Cursor / Copilot", description: "AI-assisted coding for interactive prototype features", type: "ai", promptGuide: "Add [interaction type] to this component. It should: [describe behavior]. Include transitions with [timing] easing. Handle edge cases: [list edge cases]. Follow the existing code patterns." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Advanced design with variables, auto-layout, and prototyping", type: "traditional" },
@@ -737,7 +738,7 @@ export const methods: Method[] = [
     relatedMethods: ["lofi-vibe-coding", "hifi-designs", "define-success-metrics"],
     aiTools: [
       { name: "Otter.ai", description: "Transcribe testing sessions in real time", type: "ai" },
-      { name: "Claude", description: "Analyze session transcripts and generate usability finding reports", type: "ai" },
+      { name: "Claude", description: "Analyze session transcripts and generate usability finding reports", type: "ai", promptGuide: "Here is a transcript from a concept test session. The user was testing [describe concept] with tasks: [list tasks]. Extract: (1) Task success/failure with reasoning, (2) Comprehension issues, (3) Moments of delight or confusion with quotes, (4) Suggested design changes. Rate each finding by severity." },
     ],
     traditionalTools: [
       { name: "Maze", description: "Run unmoderated concept and usability tests at scale", type: "traditional" },
@@ -777,7 +778,7 @@ export const methods: Method[] = [
     relatedMethods: ["component-documentation", "design-specs", "hifi-designs"],
     aiTools: [
       { name: "Figma AI", description: "Auto-generate dev-ready specs and interaction documentation", type: "ai" },
-      { name: "ChatGPT", description: "Generate comprehensive QA checklists from design specs", type: "ai" },
+      { name: "ChatGPT", description: "Generate comprehensive QA checklists from design specs", type: "ai", promptGuide: "Generate a design QA checklist for [feature name]. Include checks for: visual accuracy, interaction states (hover, focus, active, disabled, loading, error, empty), responsive behavior, content edge cases (long text, missing data), and accessibility. Format as a checkable list." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Dev mode for inspecting designs and extracting specs", type: "traditional" },
@@ -814,7 +815,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["design-qa", "design-system-review", "design-specs"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate component documentation drafts from design files", type: "ai" },
+      { name: "ChatGPT", description: "Generate component documentation drafts from design files", type: "ai", promptGuide: "Document this component: [component name]. It has these variants: [list]. For each variant, describe: purpose, visual appearance, interaction behavior, states, accessibility requirements (ARIA labels, keyboard), and usage dos/don'ts. Include design token references." },
       { name: "Figma AI", description: "Auto-generate component specs and variant documentation", type: "ai" },
     ],
     traditionalTools: [
@@ -853,7 +854,7 @@ export const methods: Method[] = [
     relatedMethods: ["design-qa", "component-documentation", "hifi-designs"],
     aiTools: [
       { name: "Figma AI", description: "Auto-generate redlines and responsive specifications", type: "ai" },
-      { name: "ChatGPT", description: "Draft developer walkthrough documents from design descriptions", type: "ai" },
+      { name: "ChatGPT", description: "Draft developer walkthrough documents from design descriptions", type: "ai", promptGuide: "Write a developer walkthrough for [feature]. Describe: (1) The user flow step by step, (2) Key interaction behaviors with timing, (3) Responsive rules per breakpoint, (4) Content rules (character limits, truncation, fallbacks), (5) Edge cases to handle. Write for a frontend developer audience." },
     ],
     traditionalTools: [
       { name: "Figma", description: "Dev mode for precise specification inspection", type: "traditional" },
@@ -890,8 +891,8 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["define-success-metrics", "design-retrospective", "okr-alignment"],
     aiTools: [
-      { name: "ChatGPT", description: "Analyze user feedback at scale and identify sentiment patterns", type: "ai" },
-      { name: "Claude", description: "Generate comprehensive performance reports from analytics data", type: "ai" },
+      { name: "ChatGPT", description: "Analyze user feedback at scale and identify sentiment patterns", type: "ai", promptGuide: "Analyze these [X] pieces of user feedback collected after launching [feature]. Categorize by: sentiment (positive/negative/neutral), theme, and frequency. Highlight the top 5 issues and top 3 praise points. Suggest which findings warrant immediate action vs. next iteration." },
+      { name: "Claude", description: "Generate comprehensive performance reports from analytics data", type: "ai", promptGuide: "Here are our post-launch metrics for [feature]: [paste data]. Our targets were: [list targets]. Generate a performance report covering: metrics vs. targets, hypothesis validation, unexpected findings, and recommended next steps. Include a summary suitable for stakeholder presentation." },
     ],
     traditionalTools: [
       { name: "Amplitude / Mixpanel", description: "Analyze user behavior and conversion funnels", type: "traditional" },
@@ -926,7 +927,7 @@ export const methods: Method[] = [
     ],
     relatedMethods: ["post-launch-performance", "design-qa", "okr-alignment"],
     aiTools: [
-      { name: "ChatGPT", description: "Generate retro prompts and help synthesize themes from team input", type: "ai" },
+      { name: "ChatGPT", description: "Generate retro prompts and help synthesize themes from team input", type: "ai", promptGuide: "We just shipped [feature/project]. Generate 8 retrospective prompts that go beyond 'what went well / what didn't.' Focus on: design process, cross-functional collaboration, decision quality, and craft. Then after the retro, help us synthesize [paste team input] into themes and concrete action items." },
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Retro board templates with voting and action tracking", type: "traditional" },
