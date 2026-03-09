@@ -203,7 +203,7 @@ function ToolCard({ tool, onOpenPrompts }: { tool: ToolInfo; onOpenPrompts: (too
               onClick={() => onOpenPrompts(tool)}
               className="text-[11px] font-body font-medium text-clay hover:text-clay/80 transition-colors"
             >
-              {tool.prompts.length} prompt{tool.prompts.length > 1 ? "s" : ""} →
+              {tool.prompts.length} guidance prompt{tool.prompts.length > 1 ? "s" : ""} →
             </button>
           )}
         </div>
@@ -240,7 +240,7 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
             <div>
               <h2 className="text-base font-display font-medium text-foreground">{tool.name}</h2>
               <p className="text-xs font-body text-muted-foreground">
-                {tool.prompts.length} prompt guide{tool.prompts.length > 1 ? "s" : ""}
+                {tool.prompts.length} guidance prompt{tool.prompts.length > 1 ? "s" : ""}
               </p>
             </div>
           </div>
@@ -255,7 +255,7 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
         {/* Prompts */}
         <div className="p-6 space-y-4">
           <p className="text-xs font-body text-muted-foreground">
-            Copy these prompts to use {tool.name} effectively in different design workflows.
+            Copy these guidance prompts to use {tool.name} effectively in different design workflows.
           </p>
           {tool.prompts.map((entry, idx) => (
             <PromptCard key={idx} entry={entry} />
