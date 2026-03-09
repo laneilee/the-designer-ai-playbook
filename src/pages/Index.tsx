@@ -193,10 +193,10 @@ const Index = () => {
       <header className="px-5 sm:px-8 lg:px-10 pt-8 pb-5 sm:pt-12 sm:pb-6 flex items-start justify-between">
         <div>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-display text-foreground leading-tight">
-            AI × UX Design Framework
+            The AI Design Playbook
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground/60 mt-1.5 max-w-xl font-body leading-relaxed">
-            Your go-to playbook for weaving AI into research, design, and delivery — {methods.length} proven methods, one streamlined workflow.
+            {methods.length} actionable methods to supercharge every phase of your UX process with AI.
           </p>
         </div>
         {/* Mobile menu button */}
