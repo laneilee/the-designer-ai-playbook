@@ -61,7 +61,6 @@ export const methods: Method[] = [
       { name: "ChatGPT", description: "Suggest design metrics that correlate with business OKRs", type: "ai", promptGuide: "Here are our company OKRs: [paste OKRs]. For each, suggest 2-3 design-specific leading metrics that would indicate progress. Format as a table with OKR → Design Metric → How to Measure." },
     ],
     traditionalTools: [
-      { name: "Spreadsheets", description: "Track OKR progress and design metrics", type: "traditional" },
       { name: "Notion / Confluence", description: "Document OKR alignment and tracking cadence", type: "traditional" },
     ],
     resources: [
@@ -137,7 +136,6 @@ export const methods: Method[] = [
     ],
     traditionalTools: [
       { name: "Figma", description: "Screenshot and annotate competitor UIs for comparison", type: "traditional" },
-      { name: "Spreadsheets", description: "Build feature comparison matrices and scoring rubrics", type: "traditional" },
     ],
     resources: [
       { title: "NNG: Competitive UX Benchmarking", url: "https://www.nngroup.com/articles/competitive-usability-evaluations/" },
@@ -285,7 +283,6 @@ export const methods: Method[] = [
       { name: "Claude", description: "Generate thematic analysis from hundreds of diary entries", type: "ai", promptGuide: "Perform a thematic analysis of these diary entries. For each theme: provide a theme name, description, frequency across participants, representative quotes, and design implications. Highlight any longitudinal trends." },
     ],
     traditionalTools: [
-      { name: "dscout", description: "Purpose-built diary study platform with mobile capture", type: "traditional" },
       { name: "Dovetail", description: "Organize and analyze qualitative diary data", type: "traditional" },
     ],
     resources: [
@@ -363,7 +360,6 @@ export const methods: Method[] = [
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Digital whiteboard for remote ideation and voting", type: "traditional" },
-      { name: "Sticky notes", description: "Physical or digital sticky notes for brainstorming", type: "traditional" },
     ],
     resources: [
       { title: "IDEO: Brainstorming Rules", url: "https://www.ideou.com/pages/brainstorming-rules" },
@@ -437,7 +433,6 @@ export const methods: Method[] = [
       { name: "ChatGPT", description: "Generate hypothesis variations and suggest relevant metrics for design outcomes", type: "ai", promptGuide: "Our design problem is [problem] and our proposed solution is [solution]. Generate 5 testable design hypotheses in the format: 'We believe [change] will [outcome] for [user segment] because [evidence].' For each, suggest a primary metric, a leading indicator, and a guardrail metric." },
     ],
     traditionalTools: [
-      { name: "Spreadsheets", description: "Build metrics tracking frameworks", type: "traditional" },
       { name: "Notion / Confluence", description: "Document hypotheses and measurement plans", type: "traditional" },
     ],
     resources: [
@@ -516,7 +511,6 @@ export const methods: Method[] = [
     ],
     traditionalTools: [
       { name: "Figma", description: "Build clickable wireframe prototypes with linking", type: "traditional" },
-      { name: "Paper & pen", description: "Fastest medium for initial layout exploration", type: "traditional" },
     ],
     resources: [
       { title: "NNG: Prototyping", url: "https://www.nngroup.com/articles/prototyping/" },
@@ -552,7 +546,6 @@ export const methods: Method[] = [
     ],
     traditionalTools: [
       { name: "Figma", description: "Create wireframe concept variations", type: "traditional" },
-      { name: "Paper & pen", description: "Quick sketching for early concept exploration", type: "traditional" },
     ],
     resources: [
       { title: "NNG: Parallel Design", url: "https://www.nngroup.com/articles/parallel-and-iterative-design/" },
