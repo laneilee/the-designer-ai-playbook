@@ -174,7 +174,7 @@ function ToolCard({ tool, onOpenPrompts }: { tool: ToolInfo; onOpenPrompts: (too
         <div className="pt-3 border-t border-border/50 flex items-center justify-between gap-2">
           <div className="flex flex-wrap gap-1.5 min-w-0">
             {tool.usedIn.slice(0, 2).map((m) => (
-              <span key={m} className="text-[10px] font-body px-2 py-0.5 rounded-md bg-secondary text-muted-foreground truncate max-w-[120px]">
+              <span key={m} className="text-[10px] font-body px-2 py-0.5 rounded-md bg-secondary text-secondary-foreground truncate max-w-[120px]">
                 {m}
               </span>
             ))}
