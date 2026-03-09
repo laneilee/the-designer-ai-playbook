@@ -396,7 +396,6 @@ export const methods: Method[] = [
     ],
     traditionalTools: [
       { name: "Miro / FigJam", description: "Collaborative problem framing workshop facilitation", type: "traditional" },
-      { name: "Google Docs", description: "Draft and iterate on problem statements with stakeholders", type: "traditional" },
     ],
     resources: [
       { title: "NNG: Problem Statements", url: "https://www.nngroup.com/articles/problem-statements/" },
