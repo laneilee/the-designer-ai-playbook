@@ -37,7 +37,7 @@ export default function MethodDetail({ method, onMethodClick }: MethodDetailProp
         {method.context.map((ctx) => (
           <span
             key={ctx}
-            className="text-[10px] px-2 py-0.5 rounded-full bg-foreground/5 text-muted-foreground/60 font-body border border-foreground/5"
+            className="text-xs px-2 py-0.5 rounded-full bg-foreground/5 text-muted-foreground font-body border border-foreground/5"
           >
             {ctx}
           </span>
