@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { methods } from "@/data/methods";
+import { getPromptsForTool, type PersonaPrompt } from "@/data/personaPrompts";
 import ToolLogo from "@/components/ToolLogo";
 import {
-  Copy, Check, X, Sparkles, Wrench, Bot,
+  Copy, Check, X, Sparkles, Wrench, Bot, User,
   Layers, FlaskConical, PenTool, Users, FileText, BarChart3, Eye, Search as SearchIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -69,18 +70,13 @@ const categoryIcons: Record<ToolCategory, React.ElementType> = {
   "Analytics": BarChart3,
 };
 
-interface PromptEntry {
-  methodTitle: string;
-  prompt: string;
-}
-
 interface ToolInfo {
   name: string;
   description: string;
   type: "ai" | "traditional";
   usedIn: string[];
   category: ToolCategory;
-  prompts: PromptEntry[];
+  personaPrompts: PersonaPrompt[];
 }
 
 function getUniqueTools(): ToolInfo[] {
@@ -90,7 +86,6 @@ function getUniqueTools(): ToolInfo[] {
       const existing = toolMap.get(tool.name);
       if (existing) {
         if (!existing.usedIn.includes(method.title)) existing.usedIn.push(method.title);
-        if (tool.promptGuide) existing.prompts.push({ methodTitle: method.title, prompt: tool.promptGuide });
       } else {
         toolMap.set(tool.name, {
           name: tool.name,
@@ -98,7 +93,7 @@ function getUniqueTools(): ToolInfo[] {
           type: tool.type,
           usedIn: [method.title],
           category: toolCategoryMap[tool.name] || "Documentation",
-          prompts: tool.promptGuide ? [{ methodTitle: method.title, prompt: tool.promptGuide }] : [],
+          personaPrompts: getPromptsForTool(tool.name),
         });
       }
     });
@@ -116,36 +111,60 @@ export function getToolsByCategory() {
     .filter((g) => g.tools.length > 0);
 }
 
-function PromptCard({ entry }: { entry: PromptEntry }) {
+/* ── Persona Prompt Card ── */
+function PersonaPromptCard({ prompt }: { prompt: PersonaPrompt }) {
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
-    navigator.clipboard.writeText(entry.prompt);
+    navigator.clipboard.writeText(prompt.prompt);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
   return (
-    <div className="rounded-xl border border-border bg-background p-5">
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <span className="text-[11px] font-body font-semibold text-muted-foreground uppercase tracking-widest leading-tight">
-          {entry.methodTitle}
-        </span>
+    <div className="rounded-xl border border-border bg-background p-5 space-y-4">
+      {/* Persona header */}
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-3 min-w-0">
+          <div className="w-9 h-9 rounded-full bg-clay/10 flex items-center justify-center shrink-0 mt-0.5">
+            <User className="w-4 h-4 text-clay" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm font-display font-semibold text-foreground leading-snug">{prompt.persona}</p>
+            <p className="text-xs font-body text-muted-foreground mt-0.5">{prompt.subtitle}</p>
+          </div>
+        </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 shrink-0 text-xs font-body text-muted-foreground hover:text-foreground transition-colors px-2.5 py-1 rounded-lg border border-border hover:border-foreground/20 bg-secondary/50"
+          className="flex items-center gap-1.5 shrink-0 text-xs font-body text-muted-foreground hover:text-foreground transition-colors px-2.5 py-1.5 rounded-lg border border-border hover:border-foreground/20 bg-secondary/50"
         >
           {copied ? <><Check className="w-3 h-3" />Copied</> : <><Copy className="w-3 h-3" />Copy</>}
         </button>
       </div>
-      <p className="text-sm font-body text-foreground/70 leading-relaxed">{entry.prompt}</p>
+
+      {/* Description */}
+      <p className="text-xs font-body text-muted-foreground/80 leading-relaxed">{prompt.description}</p>
+
+      {/* Prompt body */}
+      <div className="rounded-lg bg-foreground/[0.03] border border-border/50 p-4">
+        <p className="text-sm font-body text-foreground/80 leading-relaxed whitespace-pre-line">{prompt.prompt}</p>
+      </div>
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-1.5">
+        {prompt.tags.map((tag) => (
+          <span key={tag} className="text-[10px] font-body font-medium px-2 py-0.5 rounded-full bg-clay/10 text-clay">
+            {tag}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
 
+/* ── Tool Card ── */
 function ToolCard({ tool, onOpenPrompts }: { tool: ToolInfo; onOpenPrompts: (tool: ToolInfo) => void }) {
-  const hasPrompts = tool.prompts.length > 0;
+  const promptCount = tool.personaPrompts.length;
   return (
     <div className="flex flex-col rounded-xl border border-border bg-card hover:border-foreground/15 hover:shadow-sm transition-all duration-200">
-      {/* Card top */}
       <div className="flex items-start gap-4 p-5">
         <div className="w-12 h-12 rounded-xl shrink-0 flex items-center justify-center bg-background border border-border/60 overflow-hidden">
           <ToolLogo name={tool.name} type={tool.type} size="md" />
@@ -169,7 +188,6 @@ function ToolCard({ tool, onOpenPrompts }: { tool: ToolInfo; onOpenPrompts: (too
         </div>
       </div>
 
-      {/* Card footer */}
       <div className="px-5 pb-4 mt-auto">
         <div className="pt-3 border-t border-border/50 flex items-center justify-between gap-2">
           <div className="flex flex-wrap gap-1.5 min-w-0">
@@ -182,12 +200,12 @@ function ToolCard({ tool, onOpenPrompts }: { tool: ToolInfo; onOpenPrompts: (too
               <span className="text-[10px] font-body text-muted-foreground/60">+{tool.usedIn.length - 2}</span>
             )}
           </div>
-          {hasPrompts && (
+          {promptCount > 0 && (
             <button
               onClick={() => onOpenPrompts(tool)}
               className="shrink-0 text-[11px] font-body font-semibold text-clay hover:text-clay/70 transition-colors whitespace-nowrap"
             >
-              {tool.prompts.length} guidance prompt{tool.prompts.length > 1 ? "s" : ""} →
+              {promptCount} persona{promptCount > 1 ? "s" : ""} →
             </button>
           )}
         </div>
@@ -196,7 +214,11 @@ function ToolCard({ tool, onOpenPrompts }: { tool: ToolInfo; onOpenPrompts: (too
   );
 }
 
+/* ── Prompt Slide-out Panel (Persona-based) ── */
 function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void }) {
+  const prompts = tool.personaPrompts;
+  const uniquePersonas = [...new Set(prompts.map((p) => p.persona))];
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -210,8 +232,9 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
         transition={{ type: "spring", damping: 30, stiffness: 300 }}
-        className="relative w-full max-w-xl bg-card border-l border-border shadow-xl overflow-y-auto"
+        className="relative w-full max-w-2xl bg-card border-l border-border shadow-xl overflow-y-auto"
       >
+        {/* Header */}
         <div className="sticky top-0 bg-card border-b border-border px-6 py-5 flex items-center justify-between z-10">
           <div className="flex items-center gap-4">
             <div className="w-11 h-11 rounded-xl overflow-hidden flex items-center justify-center bg-background border border-border/60">
@@ -220,7 +243,7 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
             <div>
               <h2 className="text-base font-display font-medium text-foreground">{tool.name}</h2>
               <p className="text-xs font-body text-muted-foreground mt-0.5">
-                {tool.prompts.length} guidance prompt{tool.prompts.length > 1 ? "s" : ""}
+                {uniquePersonas.length} persona{uniquePersonas.length > 1 ? "s" : ""} · {prompts.length} guidance prompt{prompts.length > 1 ? "s" : ""}
               </p>
             </div>
           </div>
@@ -228,12 +251,15 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
             <X className="w-5 h-5 text-muted-foreground" />
           </button>
         </div>
-        <div className="p-6 space-y-4">
+
+        {/* Content */}
+        <div className="p-6 space-y-6">
           <p className="text-sm font-body text-muted-foreground leading-relaxed">
-            Copy these guidance prompts to use <span className="text-foreground font-medium">{tool.name}</span> effectively across different design workflows.
+            Each persona represents a <span className="text-foreground font-medium">jobs-to-be-done</span> outcome — copy these prompts to unlock expert-level workflows with <span className="text-foreground font-medium">{tool.name}</span>.
           </p>
-          {tool.prompts.map((entry, idx) => (
-            <PromptCard key={idx} entry={entry} />
+
+          {prompts.map((prompt) => (
+            <PersonaPromptCard key={prompt.id} prompt={prompt} />
           ))}
         </div>
       </motion.div>
@@ -241,6 +267,7 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
   );
 }
 
+/* ── Main View ── */
 export default function ToolsView() {
   const grouped = getToolsByCategory();
   const allTools = grouped.flatMap((g) => g.tools);
@@ -292,7 +319,6 @@ export default function ToolsView() {
 
           return (
             <section key={category}>
-              {/* Section header */}
               <div className="flex items-center gap-2.5 mb-4">
                 <div className="w-7 h-7 rounded-lg bg-foreground/[0.06] flex items-center justify-center">
                   <CategoryIcon className="w-3.5 h-3.5 text-foreground/50" />
@@ -302,7 +328,6 @@ export default function ToolsView() {
                 <span className="text-xs font-body text-muted-foreground">{filtered.length}</span>
               </div>
 
-              {/* Grid — 2 cols max so cards breathe */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {filtered.map((tool) => (
                   <ToolCard key={tool.name} tool={tool} onOpenPrompts={setSelectedTool} />
