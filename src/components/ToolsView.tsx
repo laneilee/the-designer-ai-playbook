@@ -255,9 +255,12 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
 
         {/* Content */}
         <div className="p-6 space-y-6">
-          <p className="text-sm font-body text-muted-foreground leading-relaxed">
-            Each persona represents a <span className="text-foreground font-medium">jobs-to-be-done</span> outcome — copy these prompts to unlock expert-level workflows with <span className="text-foreground font-medium">{tool.name}</span>.
-          </p>
+          <div className="rounded-xl bg-clay/5 border border-clay/15 p-4 space-y-2">
+            <p className="text-sm font-body text-foreground font-medium">🎯 Ready-to-use prompt guides for {tool.name}</p>
+            <p className="text-xs font-body text-muted-foreground leading-relaxed">
+              Whether you're just starting out or a seasoned pro — each guide gives you an expert-level prompt you can copy and paste directly. Just fill in the <span className="text-foreground font-medium">[bracketed fields]</span> with your project details.
+            </p>
+          </div>
 
           {prompts.map((prompt) => (
             <PersonaPromptCard key={prompt.id} prompt={prompt} />
