@@ -437,6 +437,89 @@ export const methods: Method[] = [
       { title: "NNG: UX Metrics", url: "https://www.nngroup.com/articles/usability-metrics/" },
     ],
   },
+  {
+    id: "jobs-to-be-done",
+    title: "Jobs-to-Be-Done (JTBD) Framework",
+    phase: "Define",
+    context: ["Solo", "Team", "Cross-functional"],
+    whenToUse: "When you need to reframe the problem space around what users are actually trying to accomplish — moving beyond feature requests to understand the underlying job and desired outcome.",
+    description:
+      "Jobs-to-Be-Done helps teams move past surface-level feature requests to understand the deeper motivations driving user behavior. By framing needs as 'jobs' users hire products to do, you uncover opportunities competitors miss and build solutions that align with real human progress. JTBD bridges research and strategy by giving the team a shared language for user needs.",
+    effort: "Medium",
+    timeEstimate: "2–4 days",
+    steps: [
+      "Identify the core functional job: what is the user trying to accomplish?",
+      "Map the emotional job: how do they want to feel during and after?",
+      "Map the social job: how do they want to be perceived?",
+      "Document the job statement: 'When [situation], I want to [motivation], so I can [outcome]'",
+      "Identify competing solutions: what do users currently 'hire' to get the job done?",
+      "Map desired outcomes: the metrics users use to judge success",
+      "Prioritize underserved outcomes — high importance, low current satisfaction",
+      "Translate top outcomes into design opportunity areas",
+    ],
+    artifacts: [
+      "Job statements for primary and related jobs",
+      "Job map: the process users follow to get the job done",
+      "Outcome-driven innovation scorecard (importance vs. satisfaction)",
+      "Competing solutions landscape",
+      "Prioritized design opportunity areas",
+    ],
+    relatedMethods: ["synthesize-research", "problem-framing", "ideation"],
+    aiTools: [
+      { name: "ChatGPT", description: "Generate JTBD statements and outcome hypotheses from research data", type: "ai", promptGuide: "I'm applying the Jobs-to-Be-Done framework to [product/feature]. Based on these user research findings: [paste findings]. Help me: 1) Write the core job statement in the format 'When [situation], I want to [motivation], so I can [outcome]' 2) Identify 3 emotional jobs and 2 social jobs 3) List 5 desired outcomes users use to measure success 4) Suggest which outcomes are likely underserved." },
+      { name: "Claude", description: "Analyze interview transcripts through a JTBD lens to extract job statements", type: "ai", promptGuide: "Analyze these user interview transcripts through a JTBD lens: [paste transcripts]. For each participant, extract: the core functional job, emotional jobs, social jobs, current hired solutions, and switching triggers. Then synthesize across participants to identify the dominant job pattern." },
+    ],
+    traditionalTools: [
+      { name: "Miro / FigJam", description: "Map job stories and outcome priorities collaboratively", type: "traditional" },
+      { name: "Notion / Confluence", description: "Document job statements and outcome scorecards", type: "traditional" },
+    ],
+    resources: [
+      { title: "HBR: Know Your Customers' Jobs to Be Done", url: "https://hbr.org/2016/09/know-your-customers-jobs-to-be-done" },
+      { title: "JTBD Toolkit by Jim Kalbach", url: "https://jtbd-toolkit.com/" },
+    ],
+  },
+  {
+    id: "service-blueprint",
+    title: "Service Blueprint",
+    phase: "Define",
+    context: ["Team", "Cross-functional"],
+    whenToUse: "When you need to map the full end-to-end service experience — connecting frontstage user touchpoints to backstage processes, systems, and support structures that enable them.",
+    description:
+      "A service blueprint extends the customer journey map by adding the organizational layer beneath it. It visualizes not just what the user experiences, but also the employee actions, support processes, and technical systems that make each touchpoint possible. This is essential for designing holistic experiences where the front-end design depends on back-end capabilities.",
+    effort: "High",
+    timeEstimate: "3–5 days",
+    steps: [
+      "Define the scope: which service or journey are you blueprinting?",
+      "Map the customer actions across the journey (the top layer)",
+      "Identify all frontstage touchpoints: what does the user directly interact with?",
+      "Map onstage employee actions: what do staff do that the user can see?",
+      "Map backstage actions: what happens behind the scenes to support each step?",
+      "Document support processes: systems, tools, APIs, and policies involved",
+      "Draw the lines of visibility and interaction between layers",
+      "Identify pain points, failure points, and wait times across all layers",
+      "Highlight moments of truth: where does the service succeed or fail?",
+      "Define improvement opportunities with ownership and priority",
+    ],
+    artifacts: [
+      "Complete service blueprint with all five layers",
+      "Failure point inventory with severity ratings",
+      "Moments of truth mapped to design opportunities",
+      "Cross-functional improvement roadmap with owners",
+    ],
+    relatedMethods: ["synthesize-research", "problem-framing", "define-success-metrics"],
+    aiTools: [
+      { name: "ChatGPT", description: "Generate blueprint layer content from journey descriptions", type: "ai", promptGuide: "I'm creating a service blueprint for [service/product]. Here's the customer journey: [describe steps]. For each customer action, help me fill in: 1) Frontstage touchpoints 2) Onstage employee actions 3) Backstage processes 4) Support systems/technology. Also identify likely failure points and moments of truth." },
+      { name: "Claude", description: "Analyze existing blueprints and suggest missing layers or gaps", type: "ai" },
+    ],
+    traditionalTools: [
+      { name: "Miro / FigJam", description: "Collaboratively map the service blueprint with cross-functional teams", type: "traditional" },
+      { name: "Figma", description: "Create polished service blueprint diagrams for stakeholder presentations", type: "traditional" },
+    ],
+    resources: [
+      { title: "NNG: Service Blueprints", url: "https://www.nngroup.com/articles/service-blueprints-definition/" },
+      { title: "Practical Service Blueprinting Guide", url: "https://servicedesigntools.org/tools/service-blueprint" },
+    ],
+  },
 
   // ── DESIGN ──
   {
