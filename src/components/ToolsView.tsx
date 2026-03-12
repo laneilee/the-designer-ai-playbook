@@ -200,12 +200,13 @@ function ToolCard({ tool, onOpenPrompts }: { tool: ToolInfo; onOpenPrompts: (too
               <span className="text-[10px] font-body text-muted-foreground/60">+{tool.usedIn.length - 2}</span>
             )}
           </div>
-          {promptCount > 0 && (
+      {promptCount > 0 && (
             <button
               onClick={() => onOpenPrompts(tool)}
-              className="shrink-0 text-[11px] font-body font-semibold text-clay hover:text-clay/70 transition-colors whitespace-nowrap"
+              className="shrink-0 inline-flex items-center gap-1.5 text-[11px] font-body font-semibold px-3 py-1.5 rounded-lg bg-clay/10 text-clay hover:bg-clay/20 border border-clay/20 transition-all whitespace-nowrap"
             >
-              {promptCount} persona{promptCount > 1 ? "s" : ""} →
+              <Sparkles className="w-3 h-3" />
+              {promptCount} Prompt Guide{promptCount > 1 ? "s" : ""}
             </button>
           )}
         </div>
