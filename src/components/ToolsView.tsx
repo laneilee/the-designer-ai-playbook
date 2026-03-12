@@ -215,7 +215,7 @@ function ToolCard({ tool, onOpenPrompts }: { tool: ToolInfo; onOpenPrompts: (too
   );
 }
 
-/* ── Prompt Slide-out Panel (Persona-based) ── */
+/* ── Prompt Guides Panel ── */
 function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void }) {
   const prompts = tool.personaPrompts;
   const uniquePersonas = [...new Set(prompts.map((p) => p.persona))];
