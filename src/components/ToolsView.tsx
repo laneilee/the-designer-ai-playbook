@@ -111,7 +111,7 @@ export function getToolsByCategory() {
     .filter((g) => g.tools.length > 0);
 }
 
-/* ── Persona Prompt Card ── */
+/* ── Prompt Guide Card ── */
 function PersonaPromptCard({ prompt }: { prompt: PersonaPrompt }) {
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
@@ -200,12 +200,13 @@ function ToolCard({ tool, onOpenPrompts }: { tool: ToolInfo; onOpenPrompts: (too
               <span className="text-[10px] font-body text-muted-foreground/60">+{tool.usedIn.length - 2}</span>
             )}
           </div>
-          {promptCount > 0 && (
+      {promptCount > 0 && (
             <button
               onClick={() => onOpenPrompts(tool)}
-              className="shrink-0 text-[11px] font-body font-semibold text-clay hover:text-clay/70 transition-colors whitespace-nowrap"
+              className="shrink-0 inline-flex items-center gap-1.5 text-[11px] font-body font-semibold px-3 py-1.5 rounded-lg bg-clay/10 text-clay hover:bg-clay/20 border border-clay/20 transition-all whitespace-nowrap"
             >
-              {promptCount} persona{promptCount > 1 ? "s" : ""} →
+              <Sparkles className="w-3 h-3" />
+              {promptCount} Prompt Guide{promptCount > 1 ? "s" : ""}
             </button>
           )}
         </div>
@@ -214,7 +215,7 @@ function ToolCard({ tool, onOpenPrompts }: { tool: ToolInfo; onOpenPrompts: (too
   );
 }
 
-/* ── Prompt Slide-out Panel (Persona-based) ── */
+/* ── Prompt Guides Panel ── */
 function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void }) {
   const prompts = tool.personaPrompts;
   const uniquePersonas = [...new Set(prompts.map((p) => p.persona))];
@@ -243,7 +244,7 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
             <div>
               <h2 className="text-base font-display font-medium text-foreground">{tool.name}</h2>
               <p className="text-xs font-body text-muted-foreground mt-0.5">
-                {uniquePersonas.length} persona{uniquePersonas.length > 1 ? "s" : ""} · {prompts.length} guidance prompt{prompts.length > 1 ? "s" : ""}
+                {uniquePersonas.length} expert role{uniquePersonas.length > 1 ? "s" : ""} · {prompts.length} prompt guide{prompts.length > 1 ? "s" : ""}
               </p>
             </div>
           </div>
@@ -254,9 +255,12 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
 
         {/* Content */}
         <div className="p-6 space-y-6">
-          <p className="text-sm font-body text-muted-foreground leading-relaxed">
-            Each persona represents a <span className="text-foreground font-medium">jobs-to-be-done</span> outcome — copy these prompts to unlock expert-level workflows with <span className="text-foreground font-medium">{tool.name}</span>.
-          </p>
+          <div className="rounded-xl bg-clay/5 border border-clay/15 p-4 space-y-2">
+            <p className="text-sm font-body text-foreground font-medium">🎯 Ready-to-use prompt guides for {tool.name}</p>
+            <p className="text-xs font-body text-muted-foreground leading-relaxed">
+              Whether you're just starting out or a seasoned pro — each guide gives you an expert-level prompt you can copy and paste directly. Just fill in the <span className="text-foreground font-medium">[bracketed fields]</span> with your project details.
+            </p>
+          </div>
 
           {prompts.map((prompt) => (
             <PersonaPromptCard key={prompt.id} prompt={prompt} />
