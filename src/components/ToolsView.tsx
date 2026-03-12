@@ -244,7 +244,7 @@ function PromptPanel({ tool, onClose }: { tool: ToolInfo; onClose: () => void })
             <div>
               <h2 className="text-base font-display font-medium text-foreground">{tool.name}</h2>
               <p className="text-xs font-body text-muted-foreground mt-0.5">
-                {uniquePersonas.length} persona{uniquePersonas.length > 1 ? "s" : ""} · {prompts.length} guidance prompt{prompts.length > 1 ? "s" : ""}
+                {uniquePersonas.length} expert role{uniquePersonas.length > 1 ? "s" : ""} · {prompts.length} prompt guide{prompts.length > 1 ? "s" : ""}
               </p>
             </div>
           </div>
