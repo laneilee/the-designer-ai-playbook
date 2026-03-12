@@ -111,7 +111,7 @@ export function getToolsByCategory() {
     .filter((g) => g.tools.length > 0);
 }
 
-/* ── Persona Prompt Card ── */
+/* ── Prompt Guide Card ── */
 function PersonaPromptCard({ prompt }: { prompt: PersonaPrompt }) {
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
