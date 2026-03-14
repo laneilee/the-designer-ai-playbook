@@ -215,6 +215,32 @@ const Index = () => {
           {/* Quick nav cards */}
           <div className="flex flex-col sm:flex-row items-stretch gap-3 mt-4">
             <button
+              onClick={() => setViewMode("foundations")}
+              className={`group flex items-start gap-3 px-4 py-3 rounded-xl border text-left transition-all w-full sm:w-auto ${
+                viewMode === "foundations"
+                  ? "bg-foreground/[0.06] border-foreground/20"
+                  : "bg-card/40 border-border hover:border-foreground/15 hover:bg-foreground/[0.03]"
+              }`}
+            >
+              <div className={`mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                viewMode === "foundations" ? "bg-foreground text-background" : "bg-foreground/10 text-foreground/60 group-hover:bg-foreground/15"
+              }`}>
+                <Shield className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <span className="text-sm font-display font-medium text-foreground">Foundations</span>
+                <p className="text-xs font-body text-muted-foreground/60 mt-0.5 leading-relaxed">
+                  Should you use AI? Evaluate fit, ethics, and readiness first.
+                </p>
+                <span className={`inline-flex items-center gap-1 text-[11px] font-body font-medium mt-1.5 transition-colors ${
+                  viewMode === "foundations" ? "text-foreground" : "text-muted-foreground/40 group-hover:text-foreground/60"
+                }`}>
+                  Start here <ArrowRight className="w-3 h-3" />
+                </span>
+              </div>
+            </button>
+
+            <button
               onClick={() => setViewMode("methods")}
               className={`group flex items-start gap-3 px-4 py-3 rounded-xl border text-left transition-all w-full sm:w-auto ${
                 viewMode === "methods"
@@ -228,9 +254,7 @@ const Index = () => {
                 <Lightbulb className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-display font-medium text-foreground">Methods</span>
-                </div>
+                <span className="text-sm font-display font-medium text-foreground">Methods</span>
                 <p className="text-xs font-body text-muted-foreground/60 mt-0.5 leading-relaxed">
                   Step-by-step UX techniques powered by AI — from research to handoff.
                 </p>
@@ -256,9 +280,7 @@ const Index = () => {
                 <Bot className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-display font-medium text-foreground">Tools</span>
-                </div>
+                <span className="text-sm font-display font-medium text-foreground">Tools</span>
                 <p className="text-xs font-body text-muted-foreground/60 mt-0.5 leading-relaxed">
                   AI and traditional tools curated for every design workflow.
                 </p>
