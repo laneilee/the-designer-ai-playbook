@@ -122,7 +122,7 @@ const responsibleAIChecklist = [
     title: "Trust, Safety & Reliability",
     icon: Shield,
     items: [
-      "Show AI confidence levels or uncertainty (e.g., "We're 60% sure…")",
+      'Show AI confidence levels or uncertainty (e.g., "We\'re 60% sure…")',
       "Design graceful failure states (e.g., fallback to human support)",
       "Use safety filters and guardrails in prompt design and UI",
       "Block or warn about harmful or sensitive output",
