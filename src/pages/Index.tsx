@@ -111,11 +111,53 @@ const Index = () => {
       </div>
 
       {viewMode === "foundations" ? (
-        <div className="px-5 py-6">
-          <p className="text-xs font-body text-muted-foreground/50 leading-relaxed">
-            Select <strong>Foundations</strong> above to explore guidance on when and how to use AI responsibly in your design process.
-          </p>
-        </div>
+        <ScrollArea className="flex-1">
+          <div className="pb-8">
+            <div className="flex items-center gap-2 px-5 pt-5 pb-2">
+              <Shield className="w-4 h-4 text-clay" />
+              <span className="text-xs font-body font-semibold uppercase tracking-[0.15em] text-clay">
+                Foundations
+              </span>
+            </div>
+            {foundationSections.map((section) => {
+              const isActive = activeFoundationSection === section.id;
+              const SectionIcon = section.icon;
+              return (
+                <button
+                  key={section.id}
+                  onClick={() => handleFoundationSectionClick(section.id)}
+                  className="w-full text-left group relative"
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeFoundation"
+                      className="absolute left-0 top-1 bottom-1 w-[3px] rounded-r-full bg-clay"
+                      transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                    />
+                  )}
+                  <div
+                    className={`flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-lg transition-all duration-150 ${
+                      isActive
+                        ? "bg-foreground/5"
+                        : "hover:bg-foreground/[0.03]"
+                    }`}
+                  >
+                    <SectionIcon className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-clay" : "text-muted-foreground/40"}`} />
+                    <span
+                      className={`text-sm font-body transition-colors ${
+                        isActive
+                          ? "text-foreground font-medium"
+                          : "text-muted-foreground group-hover:text-foreground/80"
+                      }`}
+                    >
+                      {section.label}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </ScrollArea>
       ) : (
         <>
           {/* Search input */}
