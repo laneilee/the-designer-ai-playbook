@@ -62,6 +62,17 @@ const Index = () => {
       {/* Methods / Tools toggle */}
       <div className="flex items-center gap-1 px-5 pt-5 pb-4">
         <button
+          onClick={() => setViewMode("foundations")}
+          className={`text-[15px] font-display transition-all duration-200 ${
+            viewMode === "foundations"
+              ? "text-foreground"
+              : "text-muted-foreground/30 hover:text-muted-foreground/60"
+          }`}
+        >
+          Foundations
+        </button>
+        <span className="text-muted-foreground/20 font-body mx-2">/</span>
+        <button
           onClick={() => setViewMode("methods")}
           className={`text-[15px] font-display transition-all duration-200 ${
             viewMode === "methods"
