@@ -33,7 +33,11 @@ const aiDesc: Record<Phase, string> = {
   Handoff: "AI drafts specs, generates QA checklists, and keeps design-dev handoff tight and comprehensive.",
 };
 
-export default function DoubleDiamond() {
+interface DoubleDiamondProps {
+  onPhaseClick?: (phase: Phase) => void;
+}
+
+export default function DoubleDiamond({ onPhaseClick }: DoubleDiamondProps) {
   const [mode, setMode] = useState<Mode>("ai");
   const [hoveredPhase, setHoveredPhase] = useState<Phase | null>(null);
 
