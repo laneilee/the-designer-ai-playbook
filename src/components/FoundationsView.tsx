@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import {
-  Brain, Shield, CheckSquare, HelpCircle, Sparkles,
+  Brain, Shield, HelpCircle,
   Users, Eye, Lock, Heart, MessageCircle, Scale,
   ChevronDown, ChevronUp, AlertTriangle, Lightbulb,
-  ArrowRight, Zap,
+  Zap, Download, Printer,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+
+/* ── Section IDs for sidebar nav ── */
+export const foundationSections = [
+  { id: "to-ai-or-not", label: "To AI or Not to AI", icon: Lightbulb },
+  { id: "decision-framework", label: "AI Decision Framework", icon: Brain },
+  { id: "simplicity-wins", label: "When Simplicity Wins", icon: Scale },
+  { id: "responsible-checklist", label: "Responsible AI Checklist", icon: Shield },
+] as const;
+
+export type FoundationSectionId = (typeof foundationSections)[number]["id"];
 
 /* ── AI Decision Criteria ── */
 const decisionCriteria = [
@@ -149,12 +159,85 @@ const responsibleAIChecklist = [
   },
 ];
 
+/* ── Print / Download Checklist ── */
+function generateChecklistHTML() {
+  const styles = `
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #1a1a2e; }
+    h1 { font-size: 24px; margin-bottom: 4px; }
+    .subtitle { color: #666; font-size: 13px; margin-bottom: 32px; }
+    .category { margin-bottom: 28px; page-break-inside: avoid; }
+    .category-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px; font-size: 13px; line-height: 1.5; }
+    .checkbox { width: 14px; height: 14px; border: 1.5px solid #999; border-radius: 3px; flex-shrink: 0; margin-top: 2px; }
+    .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 11px; color: #999; }
+    @media print { body { margin: 20px; } }
+  `;
+  
+  const categories = responsibleAIChecklist.map(cat => `
+    <div class="category">
+      <div class="category-title">☐ ${cat.title}</div>
+      ${cat.items.map(item => `
+        <div class="item">
+          <div class="checkbox"></div>
+          <span>${item}</span>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+
+  return `<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Responsible AI UX Design Checklist</title><style>${styles}</style></head>
+<body>
+  <h1>Responsible AI UX Design Checklist</h1>
+  <p class="subtitle">Use this checklist throughout your design process — from discovery to handoff.</p>
+  ${categories}
+  <div class="footer">The AI Design Playbook — Responsible AI UX Checklist</div>
+</body></html>`;
+}
+
+function handlePrintChecklist() {
+  const html = generateChecklistHTML();
+  const printWindow = window.open('', '_blank');
+  if (printWindow) {
+    printWindow.document.write(html);
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(() => printWindow.print(), 300);
+  }
+}
+
+function handleDownloadChecklist() {
+  const html = generateChecklistHTML();
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'responsible-ai-ux-checklist.html';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 /* ── Main Component ── */
-export default function FoundationsView() {
+interface FoundationsViewProps {
+  activeSection?: FoundationSectionId;
+}
+
+export default function FoundationsView({ activeSection }: FoundationsViewProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (activeSection && containerRef.current) {
+      const el = containerRef.current.querySelector(`#${activeSection}`);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, [activeSection]);
+
   return (
-    <div className="px-6 sm:px-8 lg:px-12 py-8 max-w-4xl space-y-16">
+    <div ref={containerRef} className="px-6 sm:px-8 lg:px-12 py-8 max-w-4xl space-y-16">
       {/* Intro */}
-      <section className="space-y-4">
+      <section id="to-ai-or-not" className="space-y-4 scroll-mt-8">
         <div className="flex items-center gap-2 text-xs font-body font-semibold uppercase tracking-[0.15em] text-clay">
           <Lightbulb className="w-4 h-4" />
           Before you begin
@@ -181,7 +264,7 @@ export default function FoundationsView() {
       </section>
 
       {/* Decision Framework */}
-      <section className="space-y-6">
+      <section id="decision-framework" className="space-y-6 scroll-mt-8">
         <div className="space-y-2">
           <h3 className="text-xl font-display text-foreground">
             Decide if a product or feature should be AI-driven
@@ -199,7 +282,7 @@ export default function FoundationsView() {
       </section>
 
       {/* When AI is unnecessary */}
-      <section className="space-y-4">
+      <section id="simplicity-wins" className="space-y-4 scroll-mt-8">
         <h3 className="text-xl font-display text-foreground">
           When AI is unnecessary: simplicity wins
         </h3>
@@ -239,11 +322,29 @@ export default function FoundationsView() {
       </section>
 
       {/* Responsible AI Checklist */}
-      <section className="space-y-6">
+      <section id="responsible-checklist" className="space-y-6 scroll-mt-8">
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-xs font-body font-semibold uppercase tracking-[0.15em] text-clay">
-            <Shield className="w-4 h-4" />
-            Responsible AI
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs font-body font-semibold uppercase tracking-[0.15em] text-clay">
+              <Shield className="w-4 h-4" />
+              Responsible AI
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handlePrintChecklist}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-body font-medium border border-border bg-card/60 text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors"
+              >
+                <Printer className="w-3 h-3" />
+                Print
+              </button>
+              <button
+                onClick={handleDownloadChecklist}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-body font-medium border border-border bg-card/60 text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors"
+              >
+                <Download className="w-3 h-3" />
+                Download
+              </button>
+            </div>
           </div>
           <h3 className="text-xl font-display text-foreground">
             Responsible AI UX Design Checklist

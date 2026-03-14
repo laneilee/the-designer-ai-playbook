@@ -33,7 +33,11 @@ const aiDesc: Record<Phase, string> = {
   Handoff: "AI drafts specs, generates QA checklists, and keeps design-dev handoff tight and comprehensive.",
 };
 
-export default function DoubleDiamond() {
+interface DoubleDiamondProps {
+  onPhaseClick?: (phase: Phase) => void;
+}
+
+export default function DoubleDiamond({ onPhaseClick }: DoubleDiamondProps) {
   const [mode, setMode] = useState<Mode>("ai");
   const [hoveredPhase, setHoveredPhase] = useState<Phase | null>(null);
 
@@ -232,7 +236,8 @@ export default function DoubleDiamond() {
                 key={phase}
                 onMouseEnter={() => setHoveredPhase(phase)}
                 onMouseLeave={() => setHoveredPhase(null)}
-                className="relative rounded-xl p-3 border cursor-default transition-all"
+                onClick={() => onPhaseClick?.(phase)}
+                className="relative rounded-xl p-3 border cursor-pointer transition-all"
                 style={{
                   borderColor: isHovered ? colors.accentBorder : "hsl(var(--border))",
                   background: isHovered ? colors.gradient : "transparent",
