@@ -236,7 +236,8 @@ export default function DoubleDiamond({ onPhaseClick }: DoubleDiamondProps) {
                 key={phase}
                 onMouseEnter={() => setHoveredPhase(phase)}
                 onMouseLeave={() => setHoveredPhase(null)}
-                className="relative rounded-xl p-3 border cursor-default transition-all"
+                onClick={() => onPhaseClick?.(phase)}
+                className="relative rounded-xl p-3 border cursor-pointer transition-all"
                 style={{
                   borderColor: isHovered ? colors.accentBorder : "hsl(var(--border))",
                   background: isHovered ? colors.gradient : "transparent",
