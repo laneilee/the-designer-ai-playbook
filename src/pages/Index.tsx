@@ -5,15 +5,17 @@ import MethodDetail from "@/components/MethodDetail";
 import ToolsView, { getToolsByCategory } from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
 import DoubleDiamond from "@/components/DoubleDiamond";
+import FoundationsView from "@/components/FoundationsView";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Bot, Users, MessageSquare, ArrowRight, Compass, Target,
   Lightbulb, PenTool, FlaskConical, Handshake, Menu, X, Search,
+  Shield,
 } from "lucide-react";
 
-type ViewMode = "methods" | "tools";
+type ViewMode = "foundations" | "methods" | "tools";
 
 const phaseIcons: Record<Phase, React.ElementType> = {
   Align: Handshake,
