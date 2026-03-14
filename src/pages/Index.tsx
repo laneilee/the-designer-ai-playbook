@@ -27,7 +27,7 @@ const phaseIcons: Record<Phase, React.ElementType> = {
 };
 
 const Index = () => {
-  const [viewMode, setViewMode] = useState<ViewMode>("methods");
+  const [viewMode, setViewMode] = useState<ViewMode>("foundations");
   const [activeMethodId, setActiveMethodId] = useState<string>("review-previous-research");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
