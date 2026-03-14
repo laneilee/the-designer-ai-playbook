@@ -347,7 +347,17 @@ const Index = () => {
         {/* ── Main Detail Panel ── */}
         <main className="flex-1 overflow-y-auto">
           <AnimatePresence mode="wait">
-            {viewMode === "methods" ? (
+            {viewMode === "foundations" ? (
+              <motion.div
+                key="foundations"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <FoundationsView />
+              </motion.div>
+            ) : viewMode === "methods" ? (
               <motion.div
                 key={activeMethodId}
                 initial={{ opacity: 0, y: 8 }}
