@@ -83,8 +83,8 @@ const responsibleAIChecklist = [
     icon: Eye,
     items: [
       "Indicate when users are interacting with AI",
-      "Explain AI decisions ("Why" or "How" it happened)",
-      "Disclose technical details progressively (e.g., a "Learn more" link)",
+      'Explain AI decisions ("Why" or "How" it happened)',
+      'Disclose technical details progressively (e.g., a "Learn more" link)',
       "Distinctly label prediction or fact",
     ],
   },
