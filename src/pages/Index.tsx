@@ -5,15 +5,17 @@ import MethodDetail from "@/components/MethodDetail";
 import ToolsView, { getToolsByCategory } from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
 import DoubleDiamond from "@/components/DoubleDiamond";
+import FoundationsView from "@/components/FoundationsView";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Bot, Users, MessageSquare, ArrowRight, Compass, Target,
   Lightbulb, PenTool, FlaskConical, Handshake, Menu, X, Search,
+  Shield,
 } from "lucide-react";
 
-type ViewMode = "methods" | "tools";
+type ViewMode = "foundations" | "methods" | "tools";
 
 const phaseIcons: Record<Phase, React.ElementType> = {
   Align: Handshake,
@@ -25,7 +27,7 @@ const phaseIcons: Record<Phase, React.ElementType> = {
 };
 
 const Index = () => {
-  const [viewMode, setViewMode] = useState<ViewMode>("methods");
+  const [viewMode, setViewMode] = useState<ViewMode>("foundations");
   const [activeMethodId, setActiveMethodId] = useState<string>("review-previous-research");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -60,6 +62,17 @@ const Index = () => {
       {/* Methods / Tools toggle */}
       <div className="flex items-center gap-1 px-5 pt-5 pb-4">
         <button
+          onClick={() => setViewMode("foundations")}
+          className={`text-[15px] font-display transition-all duration-200 ${
+            viewMode === "foundations"
+              ? "text-foreground"
+              : "text-muted-foreground/30 hover:text-muted-foreground/60"
+          }`}
+        >
+          Foundations
+        </button>
+        <span className="text-muted-foreground/20 font-body mx-2">/</span>
+        <button
           onClick={() => setViewMode("methods")}
           className={`text-[15px] font-display transition-all duration-200 ${
             viewMode === "methods"
@@ -82,109 +95,116 @@ const Index = () => {
         </button>
       </div>
 
-      {/* Search input */}
-      <div className="px-4 pb-3">
-        <div className="relative">
-          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground/40" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={viewMode === "methods" ? "Search methods…" : "Search tools…"}
-            className="w-full h-8 pl-8 pr-3 rounded-lg border border-border bg-background text-sm font-body text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-1 focus:ring-ring"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-0.5"
-            >
-              <X className="w-3 h-3 text-muted-foreground/50" />
-            </button>
-          )}
+      {viewMode === "foundations" ? (
+        <div className="px-5 py-6">
+          <p className="text-xs font-body text-muted-foreground/50 leading-relaxed">
+            Select <strong>Foundations</strong> above to explore guidance on when and how to use AI responsibly in your design process.
+          </p>
         </div>
-      </div>
-
-      <ScrollArea className="flex-1">
-        {viewMode === "methods" ? (
-          <div className="pb-8">
-            {phases.map((phase) => {
-              const phaseMethods = methods.filter((m) => m.phase === phase && m.title.toLowerCase().includes(searchQuery.toLowerCase()));
-              if (searchQuery && phaseMethods.length === 0) return null;
-              const colors = phaseColors[phase];
-              const PhaseIcon = phaseIcons[phase];
-
-              return (
-                <div key={phase} className="mb-1">
-                  {/* Phase header */}
-                  <div className="flex items-center gap-2 px-5 pt-5 pb-2">
-                    <div
-                      className="w-5 h-5 rounded-md flex items-center justify-center"
-                      style={{ background: colors.accentBg }}
-                    >
-                      <PhaseIcon className="w-3 h-3" style={{ color: colors.accent }} />
-                    </div>
-                    <span
-                      className="text-xs font-body font-semibold uppercase tracking-[0.15em]"
-                      style={{ color: colors.accent }}
-                    >
-                      {phase}
-                    </span>
-                     <span className="text-[11px] text-muted-foreground/50 font-body ml-auto">
-                      {phaseMethods.length}
-                    </span>
-                  </div>
-
-                  {/* Method items */}
-                  {phaseMethods.map((method) => {
-                    const isActive = activeMethodId === method.id && viewMode === "methods";
-                    return (
-                      <button
-                        key={method.id}
-                        onClick={() => handleMethodClick(method.id)}
-                        className="w-full text-left group relative"
-                      >
-                        {/* Active indicator bar */}
-                        {isActive && (
-                          <motion.div
-                            layoutId="activeMethod"
-                            className="absolute left-0 top-1 bottom-1 w-[3px] rounded-r-full"
-                            style={{ background: colors.accent }}
-                            transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                          />
-                        )}
-                        <div
-                          className={`flex items-center justify-between px-5 py-2.5 mx-2 rounded-lg transition-all duration-150 ${
-                            isActive
-                              ? "bg-foreground/5"
-                              : "hover:bg-foreground/[0.03]"
-                          }`}
-                        >
-                          <span
-                           className={`text-sm font-body transition-colors truncate ${
-                            isActive
-                              ? "text-foreground font-medium"
-                              : "text-muted-foreground group-hover:text-foreground/80"
-                            }`}
-                          >
-                            {method.title}
-                          </span>
-                          <div className="flex items-center gap-1 shrink-0 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            {method.aiTools.length > 0 && (
-                              <Bot className="w-3 h-3 text-clay/40" />
-                            )}
-                          </div>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              );
-            })}
+      ) : (
+        <>
+          {/* Search input */}
+          <div className="px-4 pb-3">
+            <div className="relative">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground/40" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={viewMode === "methods" ? "Search methods…" : "Search tools…"}
+                className="w-full h-8 pl-8 pr-3 rounded-lg border border-border bg-background text-sm font-body text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-1 focus:ring-ring"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-0.5"
+                >
+                  <X className="w-3 h-3 text-muted-foreground/50" />
+                </button>
+              )}
+            </div>
           </div>
-        ) : (
-          <ToolsSidebarList searchQuery={searchQuery} />
-        )}
-      </ScrollArea>
+
+          <ScrollArea className="flex-1">
+            {viewMode === "methods" ? (
+              <div className="pb-8">
+                {phases.map((phase) => {
+                  const phaseMethods = methods.filter((m) => m.phase === phase && m.title.toLowerCase().includes(searchQuery.toLowerCase()));
+                  if (searchQuery && phaseMethods.length === 0) return null;
+                  const colors = phaseColors[phase];
+                  const PhaseIcon = phaseIcons[phase];
+
+                  return (
+                    <div key={phase} className="mb-1">
+                      <div className="flex items-center gap-2 px-5 pt-5 pb-2">
+                        <div
+                          className="w-5 h-5 rounded-md flex items-center justify-center"
+                          style={{ background: colors.accentBg }}
+                        >
+                          <PhaseIcon className="w-3 h-3" style={{ color: colors.accent }} />
+                        </div>
+                        <span
+                          className="text-xs font-body font-semibold uppercase tracking-[0.15em]"
+                          style={{ color: colors.accent }}
+                        >
+                          {phase}
+                        </span>
+                        <span className="text-[11px] text-muted-foreground/50 font-body ml-auto">
+                          {phaseMethods.length}
+                        </span>
+                      </div>
+
+                      {phaseMethods.map((method) => {
+                        const isActive = activeMethodId === method.id && viewMode === "methods";
+                        return (
+                          <button
+                            key={method.id}
+                            onClick={() => handleMethodClick(method.id)}
+                            className="w-full text-left group relative"
+                          >
+                            {isActive && (
+                              <motion.div
+                                layoutId="activeMethod"
+                                className="absolute left-0 top-1 bottom-1 w-[3px] rounded-r-full"
+                                style={{ background: colors.accent }}
+                                transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                              />
+                            )}
+                            <div
+                              className={`flex items-center justify-between px-5 py-2.5 mx-2 rounded-lg transition-all duration-150 ${
+                                isActive
+                                  ? "bg-foreground/5"
+                                  : "hover:bg-foreground/[0.03]"
+                              }`}
+                            >
+                              <span
+                                className={`text-sm font-body transition-colors truncate ${
+                                  isActive
+                                    ? "text-foreground font-medium"
+                                    : "text-muted-foreground group-hover:text-foreground/80"
+                                }`}
+                              >
+                                {method.title}
+                              </span>
+                              <div className="flex items-center gap-1 shrink-0 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                {method.aiTools.length > 0 && (
+                                  <Bot className="w-3 h-3 text-clay/40" />
+                                )}
+                              </div>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <ToolsSidebarList searchQuery={searchQuery} />
+            )}
+          </ScrollArea>
+        </>
+      )}
     </>
   );
 
@@ -202,6 +222,32 @@ const Index = () => {
           {/* Quick nav cards */}
           <div className="flex flex-col sm:flex-row items-stretch gap-3 mt-4">
             <button
+              onClick={() => setViewMode("foundations")}
+              className={`group flex items-start gap-3 px-4 py-3 rounded-xl border text-left transition-all w-full sm:w-auto ${
+                viewMode === "foundations"
+                  ? "bg-foreground/[0.06] border-foreground/20"
+                  : "bg-card/40 border-border hover:border-foreground/15 hover:bg-foreground/[0.03]"
+              }`}
+            >
+              <div className={`mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                viewMode === "foundations" ? "bg-foreground text-background" : "bg-foreground/10 text-foreground/60 group-hover:bg-foreground/15"
+              }`}>
+                <Shield className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <span className="text-sm font-display font-medium text-foreground">Foundations</span>
+                <p className="text-xs font-body text-muted-foreground/60 mt-0.5 leading-relaxed">
+                  Should you use AI? Evaluate fit, ethics, and readiness first.
+                </p>
+                <span className={`inline-flex items-center gap-1 text-[11px] font-body font-medium mt-1.5 transition-colors ${
+                  viewMode === "foundations" ? "text-foreground" : "text-muted-foreground/40 group-hover:text-foreground/60"
+                }`}>
+                  Start here <ArrowRight className="w-3 h-3" />
+                </span>
+              </div>
+            </button>
+
+            <button
               onClick={() => setViewMode("methods")}
               className={`group flex items-start gap-3 px-4 py-3 rounded-xl border text-left transition-all w-full sm:w-auto ${
                 viewMode === "methods"
@@ -215,9 +261,7 @@ const Index = () => {
                 <Lightbulb className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-display font-medium text-foreground">Methods</span>
-                </div>
+                <span className="text-sm font-display font-medium text-foreground">Methods</span>
                 <p className="text-xs font-body text-muted-foreground/60 mt-0.5 leading-relaxed">
                   Step-by-step UX techniques powered by AI — from research to handoff.
                 </p>
@@ -243,9 +287,7 @@ const Index = () => {
                 <Bot className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-display font-medium text-foreground">Tools</span>
-                </div>
+                <span className="text-sm font-display font-medium text-foreground">Tools</span>
                 <p className="text-xs font-body text-muted-foreground/60 mt-0.5 leading-relaxed">
                   AI and traditional tools curated for every design workflow.
                 </p>
@@ -312,7 +354,17 @@ const Index = () => {
         {/* ── Main Detail Panel ── */}
         <main className="flex-1 overflow-y-auto">
           <AnimatePresence mode="wait">
-            {viewMode === "methods" ? (
+            {viewMode === "foundations" ? (
+              <motion.div
+                key="foundations"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <FoundationsView />
+              </motion.div>
+            ) : viewMode === "methods" ? (
               <motion.div
                 key={activeMethodId}
                 initial={{ opacity: 0, y: 8 }}
