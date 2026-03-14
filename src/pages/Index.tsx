@@ -31,6 +31,7 @@ const Index = () => {
   const [activeMethodId, setActiveMethodId] = useState<string>("review-previous-research");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeFoundationSection, setActiveFoundationSection] = useState<FoundationSectionId>("to-ai-or-not");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
