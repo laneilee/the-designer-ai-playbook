@@ -5,7 +5,7 @@ import MethodDetail from "@/components/MethodDetail";
 import ToolsView, { getToolsByCategory } from "@/components/ToolsView";
 import ToolLogo from "@/components/ToolLogo";
 import DoubleDiamond from "@/components/DoubleDiamond";
-import FoundationsView from "@/components/FoundationsView";
+import FoundationsView, { foundationSections, type FoundationSectionId } from "@/components/FoundationsView";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
