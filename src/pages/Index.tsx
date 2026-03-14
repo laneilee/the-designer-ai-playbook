@@ -58,6 +58,20 @@ const Index = () => {
     setMobileOpen(false);
   };
 
+  const handlePhaseClick = (phase: Phase) => {
+    const firstMethod = methods.find((m) => m.phase === phase);
+    if (firstMethod) {
+      setActiveMethodId(firstMethod.id);
+      setViewMode("methods");
+    }
+  };
+
+  const handleFoundationSectionClick = (sectionId: FoundationSectionId) => {
+    setActiveFoundationSection(sectionId);
+    setViewMode("foundations");
+    setMobileOpen(false);
+  };
+
   const sidebarContent = (
     <>
       {/* Methods / Tools toggle */}
