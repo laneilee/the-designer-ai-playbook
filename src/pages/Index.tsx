@@ -419,7 +419,7 @@ const Index = () => {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
               >
-                <FoundationsView />
+                <FoundationsView activeSection={activeFoundationSection} />
               </motion.div>
             ) : viewMode === "methods" ? (
               <motion.div
